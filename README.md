@@ -7,7 +7,7 @@ DB_URI='mongodb://localhost:27017/noCountry' => direccion para conectar a la bas
 SESSION_SECRET='algunsupersecreto' => clave para la session de usuario
 
 PATH_FRONT='https://auth.expo.io' => dirección URL del front
-PATH_BACK='' => direccion del deploy del back
+PATH_BACK='https://nocountry.onrender.com' => direccion del deploy del back
 
 # Rutas
 
