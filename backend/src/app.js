@@ -12,10 +12,10 @@ import LocalStrategy from "passport-local";
 // MODELOS
 import User from "./db/models/user.js";
 
-const { DB_URI, PATH_FRONT, SESSION_SECRET } = process.env;
-
 // IMPORTACION DE RUTAS
 import authRoutes from "./routes/authRoutes.js";
+
+const { DB_URI, PATH_FRONT, SESSION_SECRET } = process.env;
 
 const app = express();
 

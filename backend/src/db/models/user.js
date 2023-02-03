@@ -36,10 +36,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       // required: true,
     },
-    image: {
-      type: String,
-      lowercase: true,
-    },
+    // image: {
+    //   type: String,
+    //   lowercase: true,
+    // },
     birthday: {
       type: Date,
     },
@@ -75,9 +75,9 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.methods.extractPerfil = async function () {
-  const userPerfil = {
-    _id: this._id,
+userSchema.methods.extractProfile = async function () {
+  const userProfile = {
+    id: this._id,
     email: this.email,
     name: this.name,
     lastname: this.lastname,
@@ -88,7 +88,7 @@ userSchema.methods.extractPerfil = async function () {
     // virificated: this.virificated,
     // favorites: this.faforites
   };
-  return userPerfil;
+  return userProfile;
 };
 
 // userSchema.pre("extraerPerfil", async function (data) {
