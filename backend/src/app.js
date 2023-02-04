@@ -14,6 +14,8 @@ import User from "./db/models/user.js";
 
 // IMPORTACION DE RUTAS
 import authRoutes from "./routes/authRoutes.js";
+import categoryRouter from "./routes/categoryRoutes.js";
+import productsRouter from "./routes/productsRouter.js";
 
 const { DB_URI, PATH_FRONT, SESSION_SECRET } = process.env;
 
@@ -56,12 +58,14 @@ passport.deserializeUser(User.deserializeUser());
 
 // Rutas
 app.use("/auth", authRoutes);
+app.use("/categories", categoryRouter);
+app.use("/products", productsRouter);
 
 // Manejo errores
 app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || err;
-  console.log(message);
+  console.log("Manejo errores: ", message);
   res.status(status).send(message);
 });
 

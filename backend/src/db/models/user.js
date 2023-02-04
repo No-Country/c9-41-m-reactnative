@@ -8,33 +8,18 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
       unique: true,
-      required: "Email requerido",
-      // match: [
-      //   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      //   "Email invalido",
-      // ],
+      required: "A email is required",
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid email"],
     },
-    // password: {
-    //   type: String,
-    //   required: true,
-    // },
-    // username: {
-    //   type: String,
-    //   lowercase: true,
-    //   trim: true,
-    //   // required: true,
-    // },
+    // password: => generada por passport-local-mongoose
+    // username: => lo usa passport-local-mongoose para generar contraseña
     name: {
       type: String,
-      lowercase: true,
       trim: true,
-      // required: true,
     },
     lastname: {
       type: String,
-      lowercase: true,
       trim: true,
-      // required: true,
     },
     // image: {
     //   type: String,
@@ -48,7 +33,6 @@ const userSchema = new mongoose.Schema(
     },
     active: {
       type: Boolean,
-      // required: true,
       default: true,
     },
     role: {
@@ -57,18 +41,17 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin", "superadmin"],
       default: "user",
     },
-    // verificated: {
-    //   type: Boolean,
-    //   // required: true,
-    //   default: false,
-    // },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
     createdIn: {
       type: String,
       lowercase: true,
       enum: ["local", "google"],
       default: "local",
     },
-    // favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   },
   {
     timestamps: true,
@@ -84,16 +67,15 @@ userSchema.methods.extractProfile = async function () {
     phoneNumber: this.phoneNumber,
     birthday: this.birthday,
     role: this.role,
-    image: this.image,
-    // virificated: this.virificated,
-    // favorites: this.faforites
+    verified: this.verified,
+    favorites: this.favorites,
   };
   return userProfile;
 };
 
-// userSchema.pre("extraerPerfil", async function (data) {
-//   await this.populate("favorites");
-// });
+userSchema.pre("extractProfile", async function (data) {
+  await this.populate("favorites");
+});
 
 userSchema.plugin(passportLocalMongoose);
 

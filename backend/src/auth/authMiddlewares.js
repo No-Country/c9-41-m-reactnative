@@ -1,35 +1,36 @@
+import wrapAsync from "../../utils/wrapAsync.js";
 import User from "../db/models/user.js";
 
-export const verificateAdminRole = async (req, res, next) => {
+export const verificateAdminRole = wrapAsync(async (req, res, next) => {
   let user = await User.findOne({
     where: {
-      name: req.user.name,
+      email: req.user?.email,
     },
   });
-  if (user.role === "admin" || user.role === "superAdmin") {
+  if (user.role === "admin" || user.role === "superadmin") {
     next();
   } else {
-    res.status(403).send("Not authorized");
+    return res.status(403).send("Not authorized");
   }
-};
+});
 
-export const verificateSuperAdminRole = async (req, res, next) => {
+export const verificateSuperAdminRole = wrapAsync(async (req, res, next) => {
   let user = await User.findOne({
     where: {
-      name: req.user.name,
+      email: req.user?.username,
     },
   });
-  if (user.rol === "superAdmin") {
+  if (user.role === "superadmin") {
     next();
   } else {
-    res.status(403).send("Not authorized");
+    return res.status(403).send("Not authorized");
   }
-};
+});
 
-export const isLogIn = async (req, res, next) => {
+export const isLogIn = wrapAsync(async (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.status(403).send("Not authorized");
+    return res.status(403).send("Not authorized");
   }
-};
+});
