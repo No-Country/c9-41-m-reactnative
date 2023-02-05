@@ -21,10 +21,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    // image: {
-    //   type: String,
-    //   lowercase: true,
-    // },
     birthday: {
       type: Date,
     },
@@ -52,6 +48,7 @@ const userSchema = new mongoose.Schema(
       default: "local",
     },
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    cart: [],
   },
   {
     timestamps: true,
@@ -61,7 +58,7 @@ const userSchema = new mongoose.Schema(
 userSchema.methods.extractProfile = async function () {
   const userProfile = {
     id: this._id,
-    email: this.email,
+    username: this.username,
     name: this.name,
     lastname: this.lastname,
     phoneNumber: this.phoneNumber,

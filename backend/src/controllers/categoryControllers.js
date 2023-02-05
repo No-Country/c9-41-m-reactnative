@@ -2,7 +2,15 @@ import wrapAsync from "../../utils/wrapAsync.js";
 import Category from "../db/models/category.js";
 
 export const getCategories = wrapAsync(async (req, res, next) => {
-  const categories = await Category.find();
+  let categories = [];
+  req.user?.role === "admin" || req.user?.role === "superadmin"
+    ? (categories = await Category.find())
+    : (categories = await Category.find({}, [
+        "-createdAt",
+        "-updatedAt",
+        "-__v",
+      ]));
+
   return res.status(200).json({ categories });
 });
 

@@ -8,10 +8,10 @@ export async function createSuperAdmin() {
     }).exec();
     if (!superAdmin) {
       superAdmin = await User.register(
-        { email: "a@a.com", username: "a@a.com", role: "superAdmin" },
+        { email: "a@a.com", username: "a@a.com", role: "superadmin" },
         "Asd123"
       );
-      console.log("superAdmin creado", superAdmin);
+      console.log("superAdmin creado", superAdmin.email);
     }
   } catch (error) {
     console.log("error al crear super admin", error);

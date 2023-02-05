@@ -4,7 +4,7 @@
 
 PORT='3001' => puerto donde estara escuchando el back
 DB_URI='mongodb://localhost:27017/noCountry' => direccion para conectar a la base de datos local  
-SESSION_SECRET='algunsupersecreto' => clave para la session de usuario
+SESSION_SECRET='algunsupersecreto' => clave para las sessiones de usuario
 
 PATH_FRONT='https://auth.expo.io' => dirección URL del front
 PATH_BACK='https://nocountry.onrender.com' => direccion del deploy del back
@@ -21,7 +21,7 @@ body:
 
 ```js
 {
-  email: string, // obligatorio
+  email: string, // obligatorio => formato email
   password: string, // obligatorio
   name: string,
   lastname: string,
@@ -35,9 +35,10 @@ body:
 
 ```json
 {
+  "message": "User created",
   "user": {
     "id": "63dc425becbe4e167971cf3a",
-    "email": "b@a.a",
+    "email": "a@a.com",
     "role": "user"
   }
 }
@@ -45,6 +46,8 @@ body:
 
 cookies:
 name: sessionNoCountry / value: "token" => token de sesión
+
+Se envia un mail de verificacion al email registrado con un token de 1 hora de duración
 
 ### /auth/signin
 
@@ -54,7 +57,7 @@ body:
 
 ```js
 {
-  username: string, // obligatorio => el email del usuario
+  email: string, // obligatorio => el email del usuario
   password: string, // obligatorio
 }
 ```
@@ -77,8 +80,10 @@ name: sessionNoCountry / value: "token" => token de sesión
 
 ### /auth/logout
 
-METHOD: GET => deslogear usuario localmente (cerrar sesión)
+METHOD: GET => deslogear usuario local (cerrar sesión) a traves de cookies
 withCredentials: true,
+cookies:
+name: sessionNoCountry / value: "token" => token de sesión
 
 respuesta:
 body:
@@ -242,8 +247,6 @@ body:
 ```
 
 respuesta:
-
-respuesta:
 body:
 
 ```json
@@ -286,8 +289,6 @@ body:
 ```
 
 respuesta:
-
-respuesta:
 body:
 
 ```json
@@ -316,7 +317,7 @@ body:
 
 ### /products => METHOD DELETE
 
-eliminar producto
+eliminar producto => cambio de la propiedad active a "false" (para poder recuperar el producto luego)
 withCredentials: true, => el usuario debe estar logueado y ser administrador
 body:
 
@@ -325,8 +326,6 @@ body:
   id: ObjectId, // id del producto
 }
 ```
-
-respuesta:
 
 respuesta:
 body:

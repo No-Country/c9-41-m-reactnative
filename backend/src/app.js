@@ -2,6 +2,8 @@ import express from "express";
 import session from "express-session";
 import cors from "cors";
 import bodyParser from "body-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 import MongoStore from "connect-mongo"; // Para almacenar sesiones en la db
 // import morgan from "morgan"; // => Lo usamos?
 
@@ -31,6 +33,14 @@ app.use(
     credentials: true,
   })
 );
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use((req, res, next) => {
+  req.dirnameViews = path.join(__dirname, "/views");
+  next();
+});
 
 // SESSION
 app.use(
