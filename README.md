@@ -6,6 +6,12 @@ PORT='3001' => puerto donde estara escuchando el back
 DB_URI='mongodb://localhost:27017/noCountry' => direccion para conectar a la base de datos local  
 SESSION_SECRET='algunsupersecreto' => clave para las sessiones de usuario
 
+NODEMAILER_USUARIO
+NODEMAILER_CONTRASENA
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+SECRETO_JWT
+
 PATH_FRONT='https://auth.expo.io' => dirección URL del front
 PATH_BACK='https://nocountry.onrender.com' => direccion del deploy del back
 
@@ -333,5 +339,171 @@ body:
 ```json
 {
   "message": "Removed successfully"
+}
+```
+
+## /user
+
+### /user/favorites
+
+#### METHOD: GET
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "message": "Removed successfully"
+}
+```
+
+#### METHOD POST
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+  productId: "63de97a4ec94603f82291208";
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "id": "63e138bc2bad9feb99ecd529",
+    "username": "a@a.com",
+    "role": "user",
+    "verified": true,
+    "favorites": ["63de97a4ec94603f82291208"],
+    "cart": []
+  }
+}
+```
+
+#### METHOD DELETE
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+  productId: "63de978a0fcf5b832802f7b5";
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "id": "63e138bc2bad9feb99ecd529",
+    "username": "a@a.com",
+    "role": "user",
+    "verified": true,
+    "favorites": [],
+    "cart": []
+  }
+}
+```
+
+### /user/cart
+
+#### METHOD GET
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "cart": []
+}
+```
+
+#### METHOD POST
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    productId: "63de978a0fcf5b832802f7b5", // id del producto
+    quantity: 2 // Number cantidad del producto
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "id": "63e138bc2bad9feb99ecd529",
+    "username": "a@a.com",
+    "role": "user",
+    "verified": true,
+    "favorites": [],
+    "cart": ["63e13d15d2f2eed6917fc277"]
+  }
+}
+```
+
+#### METHOD PUT
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    cartItemId: "63e13d15d2f2eed6917fc277", // id del item del carrito
+    quantity: 5 // cantidad
+}
+```
+
+respuesta:
+
+```json
+{
+  "cartItem": {
+    "_id": "63e13d15d2f2eed6917fc277",
+    "quantity": 5,
+    "productId": "63de978a0fcf5b832802f7b5",
+    "userId": "63e138bc2bad9feb99ecd529",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD DELETE
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    "cartItemId": "63e03d23f3ea01cc8bea032b"
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "id": "63e138bc2bad9feb99ecd529",
+    "username": "a@a.com",
+    "role": "user",
+    "verified": false,
+    "favorites": [],
+    "cart": []
+  }
 }
 ```

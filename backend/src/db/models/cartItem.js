@@ -43,7 +43,6 @@ cartItemSchema.statics.deleteCartItem = async function (cartItemId, user) {
       (i) => i.toString() !== cartItemId.toString()
     );
     user.cart = cart;
-    console.log("cart", cart);
     await user.save();
     return true;
   } else {

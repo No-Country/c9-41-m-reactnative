@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { isLogIn } from "../auth/authMiddlewares.js";
 import {
   getFavorites,
   addFavorite,
@@ -13,15 +14,15 @@ const userRouter = Router();
 
 userRouter
   .route("/favorites")
-  .get(getFavorites)
-  .post(addFavorite)
-  .delete(removeFavorite);
+  .get(isLogIn, getFavorites)
+  .post(isLogIn, addFavorite)
+  .delete(isLogIn, removeFavorite);
 
 userRouter
   .route("/cart")
-  .get(getCart)
-  .post(addToCart)
-  .put(modifyCartItem)
-  .delete(removeFromCart);
+  .get(isLogIn, getCart)
+  .post(isLogIn, addToCart)
+  .put(isLogIn, modifyCartItem)
+  .delete(isLogIn, removeFromCart);
 
 export default userRouter;
