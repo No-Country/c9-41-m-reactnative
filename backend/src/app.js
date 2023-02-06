@@ -18,6 +18,7 @@ import User from "./db/models/user.js";
 import authRoutes from "./routes/authRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
 import productsRouter from "./routes/productsRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 const { DB_URI, PATH_FRONT, SESSION_SECRET } = process.env;
 
@@ -34,11 +35,11 @@ app.use(
   })
 );
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 app.use((req, res, next) => {
-  req.dirnameViews = path.join(__dirname, "/views");
+  req.dirnameViews = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "/views"
+  );
   next();
 });
 
@@ -70,6 +71,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use("/auth", authRoutes);
 app.use("/categories", categoryRouter);
 app.use("/products", productsRouter);
+app.use("/user", userRouter);
 
 // Manejo errores
 app.use((err, req, res, next) => {

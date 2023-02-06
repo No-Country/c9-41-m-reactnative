@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
+import Product from "./product.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -48,7 +49,7 @@ const userSchema = new mongoose.Schema(
       default: "local",
     },
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
-    cart: [],
+    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "CartItem" }],
   },
   {
     timestamps: true,
@@ -66,13 +67,44 @@ userSchema.methods.extractProfile = async function () {
     role: this.role,
     verified: this.verified,
     favorites: this.favorites,
+    cart: this.cart,
   };
   return userProfile;
 };
 
-userSchema.pre("extractProfile", async function (data) {
-  await this.populate("favorites");
-});
+userSchema.methods.addFavorite = async function (productId) {
+  const product = await Product.findOne({ _id: productId });
+  if (
+    !this.favorites.find((i) => {
+      return i.toString() === product._id.toString();
+    })
+  ) {
+    if (product && product.active) {
+      this.favorites.push(product._id);
+    }
+  }
+  return this.save();
+};
+
+userSchema.methods.removeFavorite = async function (productId) {
+  const product = await Product.findOne({ _id: productId });
+  if (product && product.active) {
+    const favorites = this.favorites.filter((i) => {
+      return i.toString() !== product._id.toString();
+    });
+    this.favorites = favorites;
+  }
+  return this.save();
+};
+
+// userSchema.post("extractProfile", async function (data) {
+//   await this.populate("favorites", [
+//     "-active",
+//     "-createdAt",
+//     "-updatedAt",
+//     "-__v",
+//   ]);
+// });
 
 userSchema.plugin(passportLocalMongoose);
 
