@@ -234,10 +234,11 @@ body:
 }
 ```
 
-### /products => METHOD POST => a modificar para agregar imagenes
+### /products => METHOD POST
 
 crear producto => el nombre debe ser unico
 withCredentials: true, => el usuario debe estar logueado y ser administrador
+form con formato => enctype="multipart/form-data"
 body:
 
 ```js
@@ -249,6 +250,7 @@ body:
   onSale: Boolean, // si el producto esta en oferta, default False
   discount: Number, // minimo 0 - maximo 100 => % de descuento del producto
   categories: ObjectId, // id de las categorias
+  images: [] // array con los objetos de imagenes a subir
 }
 ```
 
@@ -266,6 +268,13 @@ body:
     "discount": 0,
     "categories": ["63dcfa868b15924c52b362f1"],
     "active": true,
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dmfmud5fb/image/upload/v1675722373/restaurantNoCountry/vtfnubm5di1d0fpl7uwe.png",
+        "nombre": "restaurantNoCountry/vtfnubm5di1d0fpl7uwe",
+        "_id": "63e17e8686e3f30e5ec93874"
+      }
+    ],
     "_id": "63de97a4ec94603f82291208",
     "createdAt": "2023-02-04T17:36:36.699Z",
     "updatedAt": "2023-02-04T17:36:36.699Z",
@@ -274,10 +283,11 @@ body:
 }
 ```
 
-### /products => METHOD PUT => a modificar para agregar imagenes
+### /products => METHOD PUT
 
 modificar producto => el nombre debe ser unico
 withCredentials: true, => el usuario debe estar logueado y ser administrador
+form con formato => enctype="multipart/form-data"
 body:
 
 ```js
@@ -291,6 +301,8 @@ body:
   discount: Number, // minimo 0 - maximo 100 => % de descuento del producto
   categories: [ ObjectId ], // Array con las id de las categorias
   active: Boolean
+  images: [], // Array con los objetos de las imagenes a subir
+  imagesToDelete: [string, string] // Array con los NAME de las imagenes a eliminar
 }
 ```
 
@@ -312,12 +324,53 @@ body:
             "63dcfa8c8b15924c52b362f3",
             "63dd59d1fce99c82aca31034"
         ],
+        "images": [
+          {
+            "url": "https://res.cloudinary.com/dmfmud5fb/image/upload/v1675722373/    restaurantNoCountry/vtfnubm5di1d0fpl7uwe.png",
+            "nombre": "restaurantNoCountry/vtfnubm5di1d0fpl7uwe",
+            "_id": "63e17e8686e3f30e5ec93874"
+          }
+        ],
         "active": false,
         "createdAt": "2023-02-04T17:38:29.073Z",
         "updatedAt": "2023-02-04T20:32:44.779Z",
         "__v": 0
     }
 }
+}
+```
+
+### /products => METHOD PATCH => Para recuperar producto eliminado previamente
+
+withCredentials: true, => el usuario debe estar logueado y ser administrador
+body:
+
+```js
+{
+  id: ObjectId, // id del producto a recuperar
+}
+```
+
+respuesta:
+
+```json
+{
+  "message": "Recovery successfully",
+  "product": {
+    "_id": "63dd0ed70dc08dbbed44580c",
+    "name": "nombre",
+    "price": 10.5,
+    "description": "descripcion",
+    "stock": 100,
+    "onSale": false,
+    "discount": 0,
+    "categories": ["63dcfa868b15924c52b362f1"],
+    "active": true,
+    "createdAt": "2023-02-03T13:40:39.895Z",
+    "updatedAt": "2023-02-07T14:20:43.315Z",
+    "__v": 0,
+    "images": []
+  }
 }
 ```
 
@@ -366,7 +419,7 @@ body:
 
 ```js
 {
-  productId: "63de97a4ec94603f82291208";
+  productId: ObjectId, // id del producto
 }
 ```
 
@@ -393,7 +446,7 @@ body:
 
 ```js
 {
-  productId: "63de978a0fcf5b832802f7b5";
+  productId: ObjectId, // id del producto
 }
 ```
 
@@ -434,8 +487,8 @@ body:
 
 ```js
 {
-    productId: "63de978a0fcf5b832802f7b5", // id del producto
-    quantity: 2 // Number cantidad del producto
+    productId: ObjectId, // id del producto
+    quantity: Number // Cantidad del producto a agregar.. min 1
 }
 ```
 
@@ -462,8 +515,8 @@ body:
 
 ```js
 {
-    cartItemId: "63e13d15d2f2eed6917fc277", // id del item del carrito
-    quantity: 5 // cantidad
+    cartItemId: ObjectId, // id del CARRITO
+    quantity: Number // Cantidad del producto a agregar.. min 1
 }
 ```
 
@@ -489,7 +542,7 @@ body:
 
 ```js
 {
-    "cartItemId": "63e03d23f3ea01cc8bea032b"
+    cartItemId: ObjectId, // id del CARRITO
 }
 ```
 

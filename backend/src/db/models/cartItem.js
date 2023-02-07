@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const cartItemSchema = new mongoose.Schema({
   quantity: {
     type: Number,
-    min: [0, "Quantity can't be negative"],
+    min: [1, "Quantity can't be negative"],
   },
   productId: {
     type: mongoose.Schema.Types.ObjectId,

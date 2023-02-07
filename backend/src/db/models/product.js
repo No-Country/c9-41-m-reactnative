@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const imagenSchema = new mongoose.Schema({
+  url: { type: String },
+  name: { type: String },
+});
+
+// imagenSchema.virtual("urlW200").get(function () {
+//   return `${this.url.replace("/upload", "/upload/w_200")}`;
+// });
+
 const productSchema = new mongoose.Schema(
   {
     name: {
@@ -24,6 +33,7 @@ const productSchema = new mongoose.Schema(
         "Description can be no longer than one hundred and fifty characters",
       ],
     },
+    images: [imagenSchema],
     stock: {
       type: Number,
       min: [0, "Stock can't be negative"],
