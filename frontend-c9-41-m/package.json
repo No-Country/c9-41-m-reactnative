@@ -35,7 +35,10 @@
       "standard-jsx",
       "standard-react",
       "plugin:react/jsx-runtime"
-    ]
+    ],
+    "rules": {
+      "react/prop-types": "off"
+    }
   },
   "private": true
 }
