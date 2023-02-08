@@ -15,7 +15,27 @@
     "react-native": "0.70.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.19.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-jsx": "^11.0.0",
+    "eslint-config-standard-react": "^13.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2"
+  },
+  "parser": "@babel/eslint-parser",
+  "eslintConfig": {
+    "parserOptions": {
+      "requireConfigFile": false
+    },
+    "extends": [
+      "standard",
+      "standard-jsx",
+      "standard-react",
+      "plugin:react/jsx-runtime"
+    ]
   },
   "private": true
 }
