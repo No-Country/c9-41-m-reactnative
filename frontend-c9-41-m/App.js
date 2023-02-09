@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import * as Svg from "react-native-svg";
 import React from "react";
-const { width, height } = Dimensions.get("window");
 export default function App() {
   return (
     <View style={styles.container}>
