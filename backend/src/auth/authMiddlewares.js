@@ -7,6 +7,7 @@ export const verificateAdminRole = wrapAsync(async (req, res, next) => {
       email: req.user?.email,
     },
   });
+  console.log("verificateAdminRole", req.user);
   if (user.role === "admin" || user.role === "superadmin") {
     next();
   } else {
