@@ -61,7 +61,6 @@ export const verifyUserEmail = wrapAsync(async (req, res, next) => {
 
 export const signInLocal = wrapAsync(async (req, res, next) => {
   let user = await req.user.extractProfile();
-
   return res.status(200).send({ user });
 });
 
