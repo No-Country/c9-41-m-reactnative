@@ -14,19 +14,28 @@ const userSchema = new mongoose.Schema(
     },
     // password: => generada por passport-local-mongoose
     // username: => lo usa passport-local-mongoose para generar contraseña
-    name: {
+    fullName: {
       type: String,
       trim: true,
+      maxlength: [25, "The name can not have more than 25 characters"],
     },
-    lastname: {
-      type: String,
-      trim: true,
-    },
+    // name: {
+    //   type: String,
+    //   trim: true,
+    // },
+    // lastname: {
+    //   type: String,
+    //   trim: true,
+    // },
     birthday: {
       type: Date,
     },
     phoneNumber: {
       type: Number,
+      max: [
+        999999999999,
+        "The phone number can not have more than 12 characters",
+      ],
     },
     active: {
       type: Boolean,
@@ -60,8 +69,7 @@ userSchema.methods.extractProfile = async function () {
   const userProfile = {
     id: this._id,
     username: this.username,
-    name: this.name,
-    lastname: this.lastname,
+    fullName: this.fullName,
     phoneNumber: this.phoneNumber,
     birthday: this.birthday,
     role: this.role,

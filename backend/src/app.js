@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-import MongoStore from "connect-mongo"; // Para almacenar sesiones en la db
+import MongoStore from "connect-mongo";
 // import morgan from "morgan"; // => Lo usamos?
 
 // PASSPORT
@@ -19,6 +19,7 @@ import authRoutes from "./routes/authRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
 import productsRouter from "./routes/productsRouter.js";
 import userRouter from "./routes/userRouter.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 const { DB_URI, PATH_FRONT, SESSION_SECRET } = process.env;
 
@@ -72,6 +73,7 @@ app.use("/auth", authRoutes);
 app.use("/categories", categoryRouter);
 app.use("/products", productsRouter);
 app.use("/user", userRouter);
+app.use("/admin", adminRoutes);
 
 // Manejo errores
 app.use((err, req, res, next) => {

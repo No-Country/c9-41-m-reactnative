@@ -29,10 +29,9 @@ body:
 {
   email: string, // obligatorio => formato email
   password: string, // obligatorio
-  name: string,
-  lastname: string,
-  birthday: DATE,
-  phoneNumber: number,
+  fullName: string, // maximo 25 caracteres
+  birthday: DATE,  // 2023-02-22 ( AAAA-MM-DD )
+  phoneNumber: number // maximo 12 numeros
 }
 ```
 
@@ -407,7 +406,7 @@ respuesta:
 
 ```json
 {
-  "message": "Removed successfully"
+  "favorites": []
 }
 ```
 
@@ -467,7 +466,7 @@ respuesta:
 
 ### /user/cart
 
-#### METHOD GET
+#### METHOD GET => obtener los productos en el carrito
 
 withCredentials: true, => el usuario debe estar logueado con session activa
 
@@ -479,7 +478,7 @@ respuesta:
 }
 ```
 
-#### METHOD POST
+#### METHOD POST => agregar producto al carrito
 
 withCredentials: true, => el usuario debe estar logueado con session activa
 
@@ -507,7 +506,7 @@ respuesta:
 }
 ```
 
-#### METHOD PUT
+#### METHOD PUT => modificar cantidad del producto en el carrito
 
 withCredentials: true, => el usuario debe estar logueado con session activa
 
@@ -534,7 +533,7 @@ respuesta:
 }
 ```
 
-#### METHOD DELETE
+#### METHOD DELETE => eliminar producto del carrito
 
 withCredentials: true, => el usuario debe estar logueado con session activa
 
@@ -560,3 +559,133 @@ respuesta:
   }
 }
 ```
+
+### /user/profile
+
+#### METHOD GET => obtener el perfil del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "user": {
+    "id": "63e03a5ad5afd6534aadb3b1",
+    "username": "a@a.com",
+    "role": "user",
+    "verified": false,
+    "favorites": [],
+    "cart": []
+  }
+}
+```
+
+#### METHOD PUT => modificar el perfil del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    fullName: string, // maximo 25 caracteres
+    birthday: DATE,  // 2023-02-22 ( AAAA-MM-DD )
+    phoneNumber: number // maximo 12 numeros
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "id": "63e03a5ad5afd6534aadb3b1",
+    "username": "a@a.com",
+    "fullName": "Nombre Apellido",
+    "phoneNumber": 1234567890,
+    "birthday": "2023-02-09T00:00:00.000Z",
+    "role": "superadmin",
+    "verified": false,
+    "favorites": [],
+    "cart": ["63e03d83f3ea01cc8bea0336"]
+  }
+}
+```
+
+## /admin
+
+### /admin/users => listar todos los usuarios
+
+withCredentials: true, => el usuario debe ser admin con session activa
+
+respuesta:
+
+```json
+{
+  "users": [
+    {
+      "_id": "63e54a28a0f3982d0e3622a4",
+      "email": "a@a.com",
+      "active": true,
+      "role": "superadmin",
+      "verified": false,
+      "createdIn": "local",
+      "favorites": [],
+      "cart": [],
+      "username": "a@a.com",
+      "createdAt": "2023-02-09T19:31:52.504Z",
+      "updatedAt": "2023-02-09T19:50:31.299Z",
+      "__v": 0,
+      "birthday": "2023-02-18T00:00:00.000Z",
+      "fullName": "nombresirijillo",
+      "phoneNumber": 123456789012
+    },
+    {
+      "_id": "63e5764039ed1c7904bbd085",
+      "email": "b@b.com",
+      "active": true,
+      "role": "user",
+      "verified": false,
+      "createdIn": "local",
+      "favorites": [],
+      "cart": [],
+      "username": "b@b.com",
+      "createdAt": "2023-02-09T22:40:01.005Z",
+      "updatedAt": "2023-02-09T22:40:01.005Z",
+      "__v": 0
+    }
+  ]
+}
+```
+
+### /admin/users/:userid => obtener detalles de un usuario
+
+withCredentials: true, => el usuario debe ser admin con session activa
+params => id del usuario a consultar
+
+respuesta:
+
+```json
+{
+  "userDetails": {
+    "_id": "63e54a28a0f3982d0e3622a4",
+    "email": "a@a.com",
+    "active": true,
+    "role": "superadmin",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "a@a.com",
+    "createdAt": "2023-02-09T19:31:52.504Z",
+    "updatedAt": "2023-02-09T19:50:31.299Z",
+    "__v": 0,
+    "birthday": "2023-02-18T00:00:00.000Z",
+    "fullName": "nombresirijillo",
+    "phoneNumber": 123456789012
+  }
+}
+```
+
+## proxima ruta

@@ -45,8 +45,7 @@ passport.use(
           let user = await new User({
             email: profile._json.email,
             username: profile._json.email,
-            name: profile._json?.given_name,
-            lastname: profile._json?.family_name,
+            fullName: `${profile._json?.given_name} ${profile._json?.family_name}`,
             verified: true,
             createdIn: "google",
           });
@@ -54,7 +53,7 @@ passport.use(
           return cb(null, user);
         }
       } catch (e) {
-        return cb(e);
+        return cb(e); 
       }
     }
   )

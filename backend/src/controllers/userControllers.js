@@ -1,5 +1,6 @@
 import wrapAsync from "../../utils/wrapAsync.js";
 import CartItem from "../db/models/cartItem.js";
+import User from "../db/models/user.js";
 
 export const getFavorites = wrapAsync(async (req, res, next) => {
   const user = await req.user.populate("favorites", [
@@ -69,4 +70,18 @@ export const removeFromCart = wrapAsync(async (req, res, next) => {
   } else {
     return res.status(400).json({ message: "Could not be deleted" });
   }
+});
+
+export const getUserProfile = wrapAsync(async (req, res, next) => {
+  return res.status(200).json({ user: await req.user.extractProfile() });
+});
+
+export const modifyUserProfile = wrapAsync(async (req, res, next) => {
+  const { fullName, birthday, phoneNumber } = req.body;
+  const user = await User.findByIdAndUpdate(
+    { _id: req.user._id },
+    { fullName, birthday, phoneNumber },
+    { new: true, runValidators: true }
+  );
+  return res.status(200).json({ user: await user.extractProfile() });
 });
