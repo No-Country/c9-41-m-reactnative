@@ -2,7 +2,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useState } from 'react'
 import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native'
-import { LoginMedia } from '../LoginMedia'
+import { LoginMedia } from './LoginMedia'
 
 export function Register () {
   const [passwordHidden, setPasswordHidden] = useState(true)

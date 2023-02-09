@@ -1,17 +1,17 @@
 
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from 'expo-status-bar'
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   TextInput,
-  Dimensions,
-} from "react-native";
-import * as Svg from "react-native-svg";
-import React from "react";
-const { width, height } = Dimensions.get("window");
-export default function Login() {
+  Dimensions
+} from 'react-native'
+import * as Svg from 'react-native-svg'
+import React from 'react'
+const { width, height } = Dimensions.get('window')
+export default function Login () {
   return (
     <View style={styles.container}>
       <View style={styles.containertextwelcome}>
@@ -20,15 +20,15 @@ export default function Login() {
 
       <View>
         <TextInput
-          placeholder="E-mail"
+          placeholder='E-mail'
           style={styles.inputlogin}
-          placeholderTextColor="#000"
-        ></TextInput>
+          placeholderTextColor='#000'
+        />
         <TextInput
-          placeholder="Contraseña"
+          placeholder='Contraseña'
           style={styles.inputlogin}
-          placeholderTextColor="#000"
-        ></TextInput>
+          placeholderTextColor='#000'
+        />
         <Text style={styles.forgotText}>¿Olvidaste la contraseña?</Text>
       </View>
       <View>
@@ -36,55 +36,54 @@ export default function Login() {
           <Text>Iniciar sesion</Text>
         </TouchableOpacity>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center'
   },
   containertextwelcome: {
     marginTop: 100,
-    marginBottom: 80,
+    marginBottom: 80
   },
   textwelcome: {
     fontSize: 20,
-    fontWeight: "700",
-    lineHeight: 27,
+    fontWeight: '700',
+    lineHeight: 27
   },
   inputlogin: {
     borderWidth: 1,
-    borderColor: "gray",
+    borderColor: 'gray',
     padding: 10,
     paddingStart: 40,
     width: 300,
     height: 50,
     marginTop: 40,
     borderRadius: 10,
-    backgroundColor: "#D9D9D9",
-    position: "relative",
+    backgroundColor: '#D9D9D9',
+    position: 'relative'
   },
   forgotText: {
     marginLeft: 165,
     fontSize: 12,
-    marginTop: 8,
+    marginTop: 8
   },
   loginButton: {
-    borderColor: "gray",
+    borderColor: 'gray',
     width: 300,
     height: 50,
     marginTop: 40,
     borderRadius: 30,
-    backgroundColor: "#D9D9D9",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#D9D9D9',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   mail: {
-    position: "absolute",
-  },
-});
-
+    position: 'absolute'
+  }
+})
