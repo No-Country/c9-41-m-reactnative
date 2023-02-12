@@ -659,8 +659,9 @@ respuesta:
 }
 ```
 
-### /admin/users/:userid => obtener detalles de un usuario
+### /admin/user/:userid => obtener detalles de un usuario
 
+METHOD: GET
 withCredentials: true, => el usuario debe ser admin con session activa
 params => id del usuario a consultar
 
@@ -688,4 +689,39 @@ respuesta:
 }
 ```
 
-## proxima ruta
+### /admin/user/:userid => modificar rol del usuario
+
+METHOD: PUT
+withCredentials: true, => el usuario debe ser "superadmin" con session activa
+params => id del usuario a consultar
+body:
+
+```js
+{
+  role: string; // rol a asignar "user" o "admin"
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "_id": "63e5764039ed1c7904bbd085",
+    "email": "b@b.com",
+    "active": true,
+    "role": "admin",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "b@b.com",
+    "createdAt": "2023-02-09T22:40:01.005Z",
+    "updatedAt": "2023-02-11T21:09:31.423Z",
+    "__v": 0
+  }
+}
+```
+
+### /
+
