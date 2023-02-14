@@ -44,14 +44,21 @@ export default function Login ({ navigation }) {
       </View>
       <View>
         <TouchableOpacity style={styles.loginButton}>
-          <Text>Iniciar sesion</Text>
+          <Text>Iniciar sesión</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.dividerContainer}>
+        <View style={styles.divider} />
+        <View style={styles.divider} />
       </View>
       <StatusBar style='auto' />
       <LoginMedia large />
-      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Register')}>
-        <Text>REGISTRATE</Text>
-      </TouchableOpacity>
+      <View style={styles.registerContainer}>
+        <Text style={styles.registerText}>¿No tienes cuenta todavía?</Text>
+        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
+          <Text>Registro</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -117,6 +124,33 @@ const styles = StyleSheet.create({
       left: 290,
       zIndex: 1
     }
+  },
+  registerContainer: {
+    alignItems: 'center',
+    marginTop: 16
+  },
+  registerText: {
+    fontSize: 10,
+    color: '#555'
+  },
+  registerButton: {
+    borderColor: 'gray',
+    width: 330,
+    height: 50,
+    marginTop: 16,
+    borderRadius: 20,
+    backgroundColor: '#D9D9D9',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    marginVertical: 16
+  },
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#bbb',
+    width: 88,
+    marginHorizontal: 16
   }
-
 })
