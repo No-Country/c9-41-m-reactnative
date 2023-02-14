@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { LoginMedia } from './LoginMedia'
-export default function Login () {
+export default function Login ({ navigation }) {
   const [passwordHidden, setpasswordHidden] = useState(true)
   const handlePasswordVisibility = () => {
     setpasswordHidden(!passwordHidden)
@@ -49,6 +49,9 @@ export default function Login () {
       </View>
       <StatusBar style='auto' />
       <LoginMedia large />
+      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Register')}>
+        <Text>REGISTRATE</Text>
+      </TouchableOpacity>
     </View>
   )
 }
