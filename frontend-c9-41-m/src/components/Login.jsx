@@ -1,5 +1,4 @@
 import { faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons'
-
 import { StatusBar } from 'expo-status-bar'
 import { useState } from 'react'
 import {
