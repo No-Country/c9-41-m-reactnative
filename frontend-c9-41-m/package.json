@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^0.17.2",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-brands-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
@@ -19,13 +20,13 @@
     "expo-status-bar": "~1.4.2",
     "formik": "^2.2.9",
     "react": "18.1.0",
+    "react-dom": "18.1.0",
     "react-native": "0.70.5",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.9",
-    "react-dom": "18.1.0",
-    "@expo/webpack-config": "^0.17.2"
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
