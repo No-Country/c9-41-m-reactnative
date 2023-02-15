@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   containertextwelcome: {
-    marginTop: 100,
-    marginBottom: 100
+    marginTop: 80,
+    marginBottom: 80
   },
   textwelcome: {
     fontSize: 20,
