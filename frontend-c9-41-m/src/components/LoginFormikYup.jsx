@@ -1,3 +1,4 @@
+
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -6,7 +7,7 @@ import { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { LoginMedia } from './LoginMedia'
-const Login = ({ navigation }) => {
+const LoginFormikYup = ({ navigation }) => {
   const [passwordHidden, setpasswordHidden] = useState(true)
   const handlePasswordVisibility = () => {
     setpasswordHidden(!passwordHidden)
@@ -187,4 +188,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Login
+export default LoginFormikYup
