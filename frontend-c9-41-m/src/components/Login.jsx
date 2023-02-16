@@ -1,5 +1,4 @@
 import { faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons'
-
 import { StatusBar } from 'expo-status-bar'
 import { useState } from 'react'
 import {
@@ -70,8 +69,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   containertextwelcome: {
-    marginTop: 100,
-    marginBottom: 100
+    marginTop: 80,
+    marginBottom: 80
   },
   textwelcome: {
     fontSize: 20,
