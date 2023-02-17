@@ -20,6 +20,7 @@ import categoryRouter from "./routes/categoryRoutes.js";
 import productsRouter from "./routes/productsRouter.js";
 import userRouter from "./routes/userRouter.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import shopRoutes from "./routes/shopRoutes.js";
 
 const { DB_URI, PATH_FRONT, SESSION_SECRET } = process.env;
 
@@ -74,6 +75,7 @@ app.use("/categories", categoryRouter);
 app.use("/products", productsRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRoutes);
+app.use("/shop", shopRoutes);
 
 // Manejo errores
 app.use((err, req, res, next) => {

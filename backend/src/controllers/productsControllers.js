@@ -6,6 +6,7 @@ export const getProducts = wrapAsync(async (req, res, next) => {
   req.user?.role === "admin" || req.user?.role === "superadmin"
     ? (products = await Product.find())
     : (products = await Product.find({ active: true }, [
+        "sales",
         "-active",
         "-createdAt",
         "-updatedAt",
@@ -77,14 +78,14 @@ export const deleteProduct = wrapAsync(async (req, res, next) => {
   return res.status(200).json({ message: "Removed successfully" });
 });
 
-export const findProducts = wrapAsync(async (req, res, next) => {
-  console.log(req.query);
-  const products = await Product.find(
-    {
-      name: { $regex: `${req.query.find}`, $options: "i" },
-      active: true,
-    },
-    ["-active", "-createdAt", "-updatedAt", "-__v"]
-  );
-  res.status(200).json({ products });
-});
+// export const findProducts = wrapAsync(async (req, res, next) => {
+//   console.log(req.query);
+//   const products = await Product.find(
+//     {
+//       name: { $regex: `${req.query.find}`, $options: "i" },
+//       active: true,
+//     },
+//     ["-active", "-createdAt", "-updatedAt", "-__v"]
+//   );
+//   res.status(200).json({ products });
+// });
