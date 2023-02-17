@@ -723,5 +723,125 @@ respuesta:
 }
 ```
 
-### /
+## /shop
 
+### /shop/search
+
+METHOD: GET
+query: find => ?find=loquesebusque
+
+respuesta:
+
+```json
+{
+  "products": [
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "sales": 0,
+      "categories": ["63dcfa868b15924c52b362f1"]
+    },
+    {
+      "_id": "63ef386fc7debaa561101287",
+      "name": "2",
+      "price": 2,
+      "description": "2",
+      "images": [],
+      "stock": 2,
+      "onSale": false,
+      "discount": 0,
+      "sales": 0,
+      "categories": ["63dcfa868b15924c52b362f1"]
+    }
+  ]
+}
+```
+
+### /shop/filtercategory?filter=categoryid
+
+METHOD: GET
+query: filter => ?filter=id => se debe pasar un string con los ID de la categoria separados por una coma (,) ej ?filter=idcat1,idcat2,idcat3
+
+respuesta:
+
+```json
+{
+  "products": [
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "sales": 2,
+      "categories": ["63dd59d1fce99c82aca31034", "63dcfa868b15924c52b362f1"],
+      "active": true,
+      "createdAt": "2023-02-17T08:18:46.845Z",
+      "updatedAt": "2023-02-17T08:58:08.278Z",
+      "__v": 0
+    },
+    {
+      "_id": "63ef386fc7debaa561101287",
+      "name": "2",
+      "price": 2,
+      "description": "2",
+      "images": [],
+      "stock": 2,
+      "onSale": false,
+      "discount": 0,
+      "sales": 1,
+      "categories": ["63dd59d1fce99c82aca31034"],
+      "active": true,
+      "createdAt": "2023-02-17T08:18:55.564Z",
+      "updatedAt": "2023-02-17T08:48:18.631Z",
+      "__v": 0
+    }
+  ]
+}
+```
+
+### /shop/bestsellers
+
+METHOD: GET
+
+respuesta:
+
+```json
+{
+  "bestSellers": [
+    {
+      "_id": "63ef386fc7debaa561101287",
+      "name": "2",
+      "price": 2,
+      "description": "2",
+      "images": [],
+      "stock": 2,
+      "onSale": false,
+      "discount": 0,
+      "categories": ["63dd59d1fce99c82aca31034"]
+    },
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "categories": ["63dd59d1fce99c82aca31034", "63dcfa868b15924c52b362f1"]
+    }
+  ]
+}
+```
+
+## nuevo titutlo
