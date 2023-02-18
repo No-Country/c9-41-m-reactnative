@@ -6,7 +6,6 @@ export const getProducts = wrapAsync(async (req, res, next) => {
   req.user?.role === "admin" || req.user?.role === "superadmin"
     ? (products = await Product.find())
     : (products = await Product.find({ active: true }, [
-        "sales",
         "-active",
         "-createdAt",
         "-updatedAt",

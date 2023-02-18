@@ -613,6 +613,18 @@ respuesta:
 }
 ```
 
+#### METHOD DELETE => permite eliminar completamente la cuenta del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "mesagge": "Removed complete"
+}
+```
+
 ## /admin
 
 ### /admin/users => listar todos los usuarios
@@ -659,7 +671,9 @@ respuesta:
 }
 ```
 
-### /admin/user/:userid => obtener detalles de un usuario
+### /admin/user/:userid
+
+#### METHOD: GET obtener detalles de un usuario
 
 METHOD: GET
 withCredentials: true, => el usuario debe ser admin con session activa
@@ -689,7 +703,7 @@ respuesta:
 }
 ```
 
-### /admin/user/:userid => modificar rol del usuario
+#### METHOD: PUT modificar rol del usuario
 
 METHOD: PUT
 withCredentials: true, => el usuario debe ser "superadmin" con session activa
@@ -720,6 +734,61 @@ respuesta:
     "updatedAt": "2023-02-11T21:09:31.423Z",
     "__v": 0
   }
+}
+```
+
+#### METHOD: PATCH para recuperar usuario baneado
+
+METHOD: PATCH
+withCredentials: true, => el usuario debe ser "superadmin" con session activa
+params => id del usuario a consultar
+body:
+
+respuesta:
+
+```json
+{
+  "recoveredUser": {
+    "_id": "63ef7072841c718a3709a67e",
+    "email": "c@c.com",
+    "active": true,
+    "role": "user",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "c@c.com",
+    "createdAt": "2023-02-17T12:17:54.409Z",
+    "updatedAt": "2023-02-17T12:26:26.941Z",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD: DELETE para BANEAR un usuario (borrado logico)
+
+METHOD: DELETE
+withCredentials: true, => el usuario debe ser "superadmin" con session activa
+params => id del usuario a consultar
+
+respuesta:
+
+```json
+{
+  "bannedUser": {
+    "_id": "63ef7072841c718a3709a67e",
+    "email": "c@c.com",
+    "active": false,
+    "role": "user",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "c@c.com",
+    "createdAt": "2023-02-17T12:17:54.409Z",
+    "updatedAt": "2023-02-17T12:27:13.458Z",
+    "__v": 0
+  } 
 }
 ```
 
@@ -844,4 +913,4 @@ respuesta:
 }
 ```
 
-## nuevo titutlo
+## nuevo titulo
