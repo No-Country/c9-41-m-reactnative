@@ -10,6 +10,7 @@ import {
   removeFromCart,
   getUserProfile,
   modifyUserProfile,
+  deleteUser
 } from "../controllers/userControllers.js";
 
 const userRouter = Router();
@@ -30,6 +31,7 @@ userRouter
 userRouter
   .route("/profile")
   .get(isLogIn, getUserProfile)
-  .put(isLogIn, modifyUserProfile);
+  .put(isLogIn, modifyUserProfile)
+  .delete(isLogIn, deleteUser)
 
 export default userRouter;

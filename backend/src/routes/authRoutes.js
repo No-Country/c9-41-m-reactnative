@@ -46,7 +46,6 @@ authRouter.get(
   "/google/redirect",
   passport.authenticate("google", {
     session: true,
-    // successRedirect: `${PATH_FRONT}/inicioGoogle/${req.user.email}`
     failureRedirect: "/auth/google/fail",
   }),
   finishGoogleLogin

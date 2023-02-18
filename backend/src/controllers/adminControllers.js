@@ -28,3 +28,26 @@ export const changeUserRole = wrapAsync(async (req, res, next) => {
 
   return res.status(200).json({ user });
 });
+
+export const retrieveUser = wrapAsync(async (req, res, next) => {
+  const recoveredUser = await User.findOneAndUpdate(
+    { _id: req.params.userid },
+    { active: true },
+    { new: true, runValidators: true }
+  );
+
+  return res.status(200).json({ recoveredUser });
+});
+
+export const banUser = wrapAsync(async (req, res, next) => {
+  const bannedUser = await User.findOne({ _id: req.params.userid });
+
+  if (bannedUser.role === "admin" || bannedUser === "superadmin") {
+    throw new Error("Can not ban admin o superadmin users");
+  } else {
+    bannedUser.active = false;
+    await bannedUser.save();
+  }
+
+  return res.status(200).json({ bannedUser });
+});

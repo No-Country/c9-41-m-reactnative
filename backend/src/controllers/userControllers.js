@@ -85,3 +85,15 @@ export const modifyUserProfile = wrapAsync(async (req, res, next) => {
   );
   return res.status(200).json({ user: await user.extractProfile() });
 });
+
+export const deleteUser = wrapAsync(async (req, res, next) => {
+  console.log(req.user);
+
+  if (req.user.role === "superadmin") {
+    throw new Error("SuperAdmin can not be removed");
+  } else {
+    await User.deleteOne({ _id: req.user._id });
+  }
+
+  return res.status(200).json({ mesagge: "Removed complete" });
+});
