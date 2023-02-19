@@ -394,6 +394,36 @@ body:
 }
 ```
 
+## /products/deleted
+
+METHOD: GET
+withCredentials: true, => el usuario debe estar logueado y ser administrador
+
+respuesta:
+
+```json
+{
+  "products": [
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "sales": 2,
+      "categories": ["63dd59d1fce99c82aca31034", "63dcfa868b15924c52b362f1"],
+      "active": false,
+      "createdAt": "2023-02-17T08:18:46.845Z",
+      "updatedAt": "2023-02-19T23:17:08.980Z",
+      "__v": 0
+    }
+  ]
+}
+```
+
 ## /user
 
 ### /user/favorites
