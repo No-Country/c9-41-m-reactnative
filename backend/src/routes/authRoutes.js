@@ -5,9 +5,11 @@ import {
   createUserLocal,
   verifyUserEmail,
   signInLocal,
+  getUser,
   logOut,
   finishGoogleLogin,
 } from "../controllers/authControllers.js";
+import { isLogIn } from "../auth/authMiddlewares.js";
 
 const { PATH_FRONT } = process.env;
 
@@ -28,6 +30,9 @@ authRouter.post(
   passport.authenticate("local", { session: true }),
   signInLocal
 );
+
+// Verificar usuario
+authRouter.get("/perfil", isLogIn, getUser);
 
 // Cerrar sesión
 authRouter.post("/logout", logOut);

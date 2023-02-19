@@ -62,7 +62,7 @@ body:
 
 ```js
 {
-  email: string, // obligatorio => el email del usuario
+  username: string, // obligatorio => el email del usuario
   password: string, // obligatorio
 }
 ```
@@ -788,7 +788,7 @@ respuesta:
     "createdAt": "2023-02-17T12:17:54.409Z",
     "updatedAt": "2023-02-17T12:27:13.458Z",
     "__v": 0
-  } 
+  }
 }
 ```
 

@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: "*", //[`${process.env.PATH_FRONT}`], //URL DEL FRONT!!
+    origin: [`${process.env.PATH_FRONT}`, `${process.env.PATH_FRONT_ADMIN}`], //URL DEL FRONT!!
     credentials: true,
     methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
   })
