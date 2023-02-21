@@ -339,7 +339,7 @@ body:
 }
 ```
 
-### /products => METHOD PATCH => Para recuperar producto eliminado previamente
+### /products => METHOD PATCH => Para recuperar producto eliminado previamente
 
 withCredentials: true, => el usuario debe estar logueado y ser administrador
 body:
