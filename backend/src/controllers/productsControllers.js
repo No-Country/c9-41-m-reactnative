@@ -16,6 +16,11 @@ export const getProducts = wrapAsync(async (req, res, next) => {
 });
 
 export const createProduct = wrapAsync(async (req, res, next) => {
+  let categories = [];
+  if (req.body.categories?.includes(",")) {
+    categories = req.body.categories.split(",");
+    req.body.categories = categories;
+  }
   const product = await Product.create(req.body);
   if (req.files?.length) {
     for (const image of req.files) {
