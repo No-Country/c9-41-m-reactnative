@@ -1,3 +1,4 @@
+
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -6,6 +7,7 @@ import { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { LoginMedia } from './LoginMedia'
+import loginSubmit from '../utils/login/loginSubmit'
 const Login = ({ navigation }) => {
   const [passwordHidden, setpasswordHidden] = useState(true)
   const handlePasswordVisibility = () => {
@@ -26,12 +28,17 @@ const Login = ({ navigation }) => {
           password: Yup.string()
             .required('Password is required')
         })}
-        onSubmit={(values, { resetForm }) => {
-          console.log(values)
-          resetForm()
+        onSubmit={(values, { resetForm, setSubmitting }) => {
+          setSubmitting(true)
+          loginSubmit(values)
+            .then((data) => {
+              console.log(data)
+              resetForm()
+            })
+            .finally(() => { setSubmitting(false) })
         }}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isSubmitting }) => (
           <View style={styles.containericons}>
             <TextInput
               onChangeText={handleChange('email')}
@@ -45,7 +52,7 @@ const Login = ({ navigation }) => {
             <FontAwesomeIcon icon={faEnvelope} style={styles.icons.mail} size={24} />
             {touched.email && errors.email
               ? (
-                <Text style={{ color: 'red' }}>{errors.email}</Text>
+                <Text style={styles.errorEmail}>{errors.email}</Text>
                 )
               : null}
             <TextInput
@@ -62,18 +69,15 @@ const Login = ({ navigation }) => {
             <TouchableOpacity onPress={handlePasswordVisibility} style={styles.icons.eye}>
               <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} />
             </TouchableOpacity>
-            <View>
-              {touched.password && errors.password
-                ? (
-                  <Text style={{ color: 'red' }}>{errors.password}</Text>
-                  )
-                : null}
-            </View>
-
+            {touched.password && errors.password
+              ? (
+                <Text style={styles.errorPass}>{errors.password}</Text>
+                )
+              : null}
             <Text style={styles.forgotText}>¿Olvidaste la contraseña?</Text>
             <View>
               <TouchableOpacity style={styles.loginButton} onPress={handleSubmit}>
-                <Text>Iniciar sesión</Text>
+                {isSubmitting ? <Text>Cargando...</Text> : <Text>Iniciar sesión</Text>}
               </TouchableOpacity>
             </View>
           </View>
@@ -184,6 +188,20 @@ const styles = StyleSheet.create({
     borderBottomColor: '#bbb',
     width: 88,
     marginHorizontal: 16
+  },
+  errorEmail: {
+    fontSize: 10,
+    color: '#931B1B',
+    position: 'absolute',
+    top: 64,
+    left: 4
+  },
+  errorPass: {
+    fontSize: 10,
+    color: '#931B1B',
+    position: 'absolute',
+    top: 148,
+    left: 4
   }
 })
 
