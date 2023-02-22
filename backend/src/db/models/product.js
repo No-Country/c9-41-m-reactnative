@@ -45,6 +45,10 @@ const productSchema = new mongoose.Schema(
       default: 0,
       min: [0, "Discount can't be negative"],
     },
+    sales: {
+      type: Number,
+      default: 0,
+    },
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
     // Para determinar si esta eliminado (Soft deleted)
     active: {

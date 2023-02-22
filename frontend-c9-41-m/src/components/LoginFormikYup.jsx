@@ -46,7 +46,7 @@ const LoginFormikYup = ({ navigation }) => {
             <FontAwesomeIcon icon={faEnvelope} style={styles.icons.mail} size={24} />
             {touched.email && errors.email
               ? (
-                <Text style={{ color: 'red' }}>{errors.email}</Text>
+                <Text style={styles.errorEmail}>{errors.email}</Text>
                 )
               : null}
             <TextInput
@@ -63,14 +63,11 @@ const LoginFormikYup = ({ navigation }) => {
             <TouchableOpacity onPress={handlePasswordVisibility} style={styles.icons.eye}>
               <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} />
             </TouchableOpacity>
-            <View>
-              {touched.password && errors.password
-                ? (
-                  <Text style={{ color: 'red' }}>{errors.password}</Text>
-                  )
-                : null}
-            </View>
-
+            {touched.password && errors.password
+              ? (
+                <Text style={styles.errorPass}>{errors.password}</Text>
+                )
+              : null}
             <Text style={styles.forgotText}>¿Olvidaste la contraseña?</Text>
             <View>
               <TouchableOpacity style={styles.loginButton} onPress={handleSubmit}>
@@ -185,6 +182,20 @@ const styles = StyleSheet.create({
     borderBottomColor: '#bbb',
     width: 88,
     marginHorizontal: 16
+  },
+  errorEmail: {
+    fontSize: 10,
+    color: '#931B1B',
+    position: 'absolute',
+    top: 64,
+    left: 4
+  },
+  errorPass: {
+    fontSize: 10,
+    color: '#931B1B',
+    position: 'absolute',
+    top: 148,
+    left: 4
   }
 })
 
