@@ -1,16 +1,26 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Login from './src/components/Login'
-import { Register } from './src/components/Register'
+// import { NavigationContainer } from '@react-navigation/native'
+// import { createNativeStackNavigator } from '@react-navigation/native-stack'
+// import Login from './src/components/Login'
+// import { Register } from './src/components/Register'
 
-const Stack = createNativeStackNavigator()
+// const Stack = createNativeStackNavigator()
+// export default function App () {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName='Login'>
+//         <Stack.Screen name='Login' component={Login} />
+//         <Stack.Screen name='Register' component={Register} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   )
+// }
+
+import { View } from 'react-native'
+import MedioDePago from './src/components/MedioDePago'
 export default function App () {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='Register' component={Register} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View>
+      <MedioDePago />
+    </View>
   )
 }
