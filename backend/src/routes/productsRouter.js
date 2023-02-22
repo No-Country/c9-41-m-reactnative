@@ -7,7 +7,7 @@ import {
   modifyProduct,
   recoverProduct,
   deleteProduct,
-  findProducts,
+  // findProducts, 
 } from "../controllers/productsControllers.js";
 
 const productsRouter = Router();
@@ -15,15 +15,11 @@ const productsRouter = Router();
 productsRouter
   .route("/")
   .get(getProducts)
-  .post(
-    verificateAdminRole,
-    upload.array("images", 5),
-    createProduct
-  )
+  .post(verificateAdminRole, upload.array("images", 5), createProduct)
   .put(verificateAdminRole, upload.array("images", 5), modifyProduct)
   .patch(verificateAdminRole, recoverProduct)
   .delete(verificateAdminRole, deleteProduct);
 
-productsRouter.route("/search").get(findProducts);
+// productsRouter.route("/search").get(findProducts);
 
 export default productsRouter;
