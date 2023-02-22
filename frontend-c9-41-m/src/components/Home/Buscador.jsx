@@ -1,10 +1,10 @@
-import React from 'react'
+import { useState } from 'react'
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 const Buscador = () => {
-  const [text, onChangeText] = React.useState('Buscar')
+  const [text, onChangeText] = useState('¿Qué estás buscando?')
 
   return (
     <View style={styles.InputContainer}>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#D9D9D9',
     borderRadius: 15,
-    width: '88%',
+    width: '90%',
     alignSelf: 'center'
   },
   InputContainer: {
