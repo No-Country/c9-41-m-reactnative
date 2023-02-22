@@ -34,6 +34,7 @@ const MedioDePago = () => {
       <View>
         <Text styel={styles.añadir}>Añadir</Text>
       </View>
+
     </View>
 
   )

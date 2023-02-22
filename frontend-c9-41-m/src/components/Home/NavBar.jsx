@@ -16,7 +16,7 @@ const NavBar = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity style={styles.boton}>
+        <TouchableOpacity onPress={() => navigation.navigate('MediodePago')} style={styles.boton}>
           <FontAwesomeIcon icon={faCartShopping} size={34} />
           <Text style={styles.pedidos}>
             Pedidos
@@ -32,7 +32,7 @@ const NavBar = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity style={styles.boton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Favorites')} style={styles.boton}>
           <FontAwesomeIcon icon={faHeart} size={34} />
           <Text style={styles.favoritos}>
             Favoritos
