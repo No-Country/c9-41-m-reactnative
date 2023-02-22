@@ -3,8 +3,8 @@ import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native
 import getCategories from '../../utils/categories/getCategories'
 import CategoryCard from './CategoryCard'
 import CategorySearch from './CategorySearch'
-import Navbar from './Navbar'
-export function Categories () {
+import Navbar from '../Home/NavBar'
+export default function Categories () {
   const [categories, setCategories] = useState([])
   const [categoriesFilter, setCategoriesFilter] = useState([])
   useEffect(() => {

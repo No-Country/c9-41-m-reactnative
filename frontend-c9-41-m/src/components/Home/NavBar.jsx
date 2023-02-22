@@ -1,16 +1,18 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCartShopping, faClipboard, faHeart, faHome } from '@fortawesome/free-solid-svg-icons'
-
+import { useNavigation } from '@react-navigation/native'
 const NavBar = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.Container}>
       <View>
-        <TouchableOpacity style={styles.boton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.boton}>
           <FontAwesomeIcon icon={faHome} size={34} />
           <Text style={styles.inicio}>
             Inicio
           </Text>
+
         </TouchableOpacity>
       </View>
       <View>
@@ -22,7 +24,7 @@ const NavBar = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity style={styles.boton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Categories')} style={styles.boton}>
           <FontAwesomeIcon icon={faClipboard} size={34} />
           <Text style={styles.carta}>
             Carta
