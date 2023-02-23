@@ -18,9 +18,9 @@ export default function App () {
         <Stack.Screen name='Categories' component={Categories} />
         <Stack.Screen name='MediodePago' component={MedioDePago} />
         <Stack.Screen name='Favorites' component={Favorites} />
-
-      </Stack.Navigator>
+       </Stack.Navigator>
     </NavigationContainer>
   )
 }
-// Exportar todas los componentes de la misma forma, se recomienda export default porque en los archivos solose exporta una sola función, que es el componente
+// Exportar todas los componentes de la misma forma, se recomienda export default porque en los archivos solo se exporta una sola función, que es el componente
+
