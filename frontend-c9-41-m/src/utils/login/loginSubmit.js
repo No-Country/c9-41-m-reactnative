@@ -1,3 +1,4 @@
+import * as SecureStore from 'expo-secure-store'
 export default async function loginSubmit (values) {
   const parsedValues = { username: values.email, password: values.password }
   try {
@@ -12,9 +13,16 @@ export default async function loginSubmit (values) {
     if (response.status === 401) {
       throw new Error('Email y/o contraseña incorrectos')
     }
-    console.log(response.headers.get('set-cookie'))
+    // Obtener la cookie de la respuesta HTTP
+    const cookieHeader = response.headers.get('Set-Cookie')
+    // console.log(response.headers.get('Set-Cookie'))
+    const cookieValue = cookieHeader.split(';')[0].substring(cookieHeader.split(';')[0].indexOf('=') + 1)
+    // Almacenar la cookie en SecureStore
+    await SecureStore.setItemAsync('sessionNoCountry', cookieValue)
+    // const cookie = await SecureStore.getItemAsync('sessionNoCountry')
+    // console.log({ cookie })
+
     const json = await response.json()
-    console.log({ json })
     return json
   } catch (e) {
     console.error(e)
