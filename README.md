@@ -613,6 +613,18 @@ respuesta:
 }
 ```
 
+#### METHOD DELETE => permite eliminar completamente la cuenta del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "mesagge": "Removed complete"
+}
+```
+
 ## /admin
 
 ### /admin/users => listar todos los usuarios
@@ -659,8 +671,11 @@ respuesta:
 }
 ```
 
-### /admin/users/:userid => obtener detalles de un usuario
+### /admin/user/:userid
 
+#### METHOD: GET obtener detalles de un usuario
+
+METHOD: GET
 withCredentials: true, => el usuario debe ser admin con session activa
 params => id del usuario a consultar
 
@@ -688,4 +703,214 @@ respuesta:
 }
 ```
 
-## proxima ruta
+#### METHOD: PUT modificar rol del usuario
+
+METHOD: PUT
+withCredentials: true, => el usuario debe ser "superadmin" con session activa
+params => id del usuario a consultar
+body:
+
+```js
+{
+  role: string; // rol a asignar "user" o "admin"
+}
+```
+
+respuesta:
+
+```json
+{
+  "user": {
+    "_id": "63e5764039ed1c7904bbd085",
+    "email": "b@b.com",
+    "active": true,
+    "role": "admin",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "b@b.com",
+    "createdAt": "2023-02-09T22:40:01.005Z",
+    "updatedAt": "2023-02-11T21:09:31.423Z",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD: PATCH para recuperar usuario baneado
+
+METHOD: PATCH
+withCredentials: true, => el usuario debe ser "superadmin" con session activa
+params => id del usuario a consultar
+body:
+
+respuesta:
+
+```json
+{
+  "recoveredUser": {
+    "_id": "63ef7072841c718a3709a67e",
+    "email": "c@c.com",
+    "active": true,
+    "role": "user",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "c@c.com",
+    "createdAt": "2023-02-17T12:17:54.409Z",
+    "updatedAt": "2023-02-17T12:26:26.941Z",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD: DELETE para BANEAR un usuario (borrado logico)
+
+METHOD: DELETE
+withCredentials: true, => el usuario debe ser "superadmin" con session activa
+params => id del usuario a consultar
+
+respuesta:
+
+```json
+{
+  "bannedUser": {
+    "_id": "63ef7072841c718a3709a67e",
+    "email": "c@c.com",
+    "active": false,
+    "role": "user",
+    "verified": false,
+    "createdIn": "local",
+    "favorites": [],
+    "cart": [],
+    "username": "c@c.com",
+    "createdAt": "2023-02-17T12:17:54.409Z",
+    "updatedAt": "2023-02-17T12:27:13.458Z",
+    "__v": 0
+  } 
+}
+```
+
+## /shop
+
+### /shop/search
+
+METHOD: GET
+query: find => ?find=loquesebusque
+
+respuesta:
+
+```json
+{
+  "products": [
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "sales": 0,
+      "categories": ["63dcfa868b15924c52b362f1"]
+    },
+    {
+      "_id": "63ef386fc7debaa561101287",
+      "name": "2",
+      "price": 2,
+      "description": "2",
+      "images": [],
+      "stock": 2,
+      "onSale": false,
+      "discount": 0,
+      "sales": 0,
+      "categories": ["63dcfa868b15924c52b362f1"]
+    }
+  ]
+}
+```
+
+### /shop/filtercategory?filter=categoryid
+
+METHOD: GET
+query: filter => ?filter=id => se debe pasar un string con los ID de la categoria separados por una coma (,) ej ?filter=idcat1,idcat2,idcat3
+
+respuesta:
+
+```json
+{
+  "products": [
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "sales": 2,
+      "categories": ["63dd59d1fce99c82aca31034", "63dcfa868b15924c52b362f1"],
+      "active": true,
+      "createdAt": "2023-02-17T08:18:46.845Z",
+      "updatedAt": "2023-02-17T08:58:08.278Z",
+      "__v": 0
+    },
+    {
+      "_id": "63ef386fc7debaa561101287",
+      "name": "2",
+      "price": 2,
+      "description": "2",
+      "images": [],
+      "stock": 2,
+      "onSale": false,
+      "discount": 0,
+      "sales": 1,
+      "categories": ["63dd59d1fce99c82aca31034"],
+      "active": true,
+      "createdAt": "2023-02-17T08:18:55.564Z",
+      "updatedAt": "2023-02-17T08:48:18.631Z",
+      "__v": 0
+    }
+  ]
+}
+```
+
+### /shop/bestsellers
+
+METHOD: GET
+
+respuesta:
+
+```json
+{
+  "bestSellers": [
+    {
+      "_id": "63ef386fc7debaa561101287",
+      "name": "2",
+      "price": 2,
+      "description": "2",
+      "images": [],
+      "stock": 2,
+      "onSale": false,
+      "discount": 0,
+      "categories": ["63dd59d1fce99c82aca31034"]
+    },
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "categories": ["63dd59d1fce99c82aca31034", "63dcfa868b15924c52b362f1"]
+    }
+  ]
+}
+```
+
+## nuevo titulo

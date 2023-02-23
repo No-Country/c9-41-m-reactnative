@@ -46,6 +46,9 @@ export const createUserLocal = wrapAsync(async (req, res, next) => {
     return res.status(200).send({ message: "User created", user });
   } else {
     // Si ya existe devolvemos error
+    if (!exist.active) {
+      return res.status(401).send({ message: "Email banned" });
+    }
     return res.status(400).send({ message: "Email in use" });
   }
 });
@@ -61,7 +64,16 @@ export const verifyUserEmail = wrapAsync(async (req, res, next) => {
 
 export const signInLocal = wrapAsync(async (req, res, next) => {
   let user = await req.user.extractProfile();
-  return res.status(200).send({ user });
+  if (req.user.active) {
+    return res.status(200).json({ user });
+  } else {
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+    });
+    return res.status(401).json({ message: "Email banned" });
+  }
 });
 
 export const logOut = wrapAsync(async (req, res, next) => {
@@ -76,10 +88,19 @@ export const logOut = wrapAsync(async (req, res, next) => {
 });
 
 export const finishGoogleLogin = wrapAsync(async (req, res, next) => {
-  req.login(req.user, (err) => {
-    if (err) {
-      return next(err);
-    }
-  });
-  return res.sendFile("logeoGoogle.html", { root: req.dirnameViews });
+  if (!req.user.active) {
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+    });
+    return res.sendFile("userBanned.html", { root: req.dirnameViews });
+  } else {
+    req.login(req.user, (err) => {
+      if (err) {
+        return next(err);
+      }
+    });
+    return res.sendFile("logeoGoogle.html", { root: req.dirnameViews });
+  }
 });

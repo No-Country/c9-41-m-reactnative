@@ -5,31 +5,30 @@ import { faBell, faCartShopping, faClipboard, faHome } from '@fortawesome/free-s
 const NavBar = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.NavBar}>
-        <View>
-          <FontAwesomeIcon icon={faHome} size={34} />
-          <Text>
-            Inicio
-          </Text>
-        </View>
-        <View>
-          <FontAwesomeIcon icon={faCartShopping} size={34} />
-          <Text>
-            Pedidos
-          </Text>
-        </View>
-        <View>
-          <FontAwesomeIcon icon={faClipboard} size={34} />
-          <Text>
-            Carta
-          </Text>
-        </View>
-        <View style={styles.Notification}>
-          <FontAwesomeIcon icon={faBell} size={34} />
-          <Text>
-            Notificación
-          </Text>
-        </View>
+
+      <View>
+        <FontAwesomeIcon icon={faHome} size={34} />
+        <Text>
+          Inicio
+        </Text>
+      </View>
+      <View>
+        <FontAwesomeIcon icon={faCartShopping} size={34} />
+        <Text>
+          Pedidos
+        </Text>
+      </View>
+      <View>
+        <FontAwesomeIcon icon={faClipboard} size={34} />
+        <Text>
+          Carta
+        </Text>
+      </View>
+      <View style={styles.Notification}>
+        <FontAwesomeIcon icon={faBell} size={34} />
+        <Text>
+          Notificación
+        </Text>
       </View>
     </View>
   )
@@ -50,9 +49,15 @@ const styles = StyleSheet.create({
   },
   container: {
     display: 'flex',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-end'
+    position: 'absolute',
+    flexDirection: 'row',
+    height: 60,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    bottom: 0,
+    left: 0,
+    right: 0
   }
 })
 
