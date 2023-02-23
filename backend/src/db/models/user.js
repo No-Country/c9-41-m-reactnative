@@ -19,14 +19,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       maxlength: [25, "The name can not have more than 25 characters"],
     },
-    // name: {
-    //   type: String,
-    //   trim: true,
-    // },
-    // lastname: {
-    //   type: String,
-    //   trim: true,
-    // },
     birthday: {
       type: Date,
     },
@@ -57,8 +49,10 @@ const userSchema = new mongoose.Schema(
       enum: ["local", "google"],
       default: "local",
     },
+    addresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }],
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
     cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "CartItem" }],
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
   },
   {
     timestamps: true,
@@ -76,6 +70,8 @@ userSchema.methods.extractProfile = async function () {
     verified: this.verified,
     favorites: this.favorites,
     cart: this.cart,
+    addresses: this.addresses,
+    orders: this.orders,
   };
   return userProfile;
 };
@@ -103,6 +99,11 @@ userSchema.methods.removeFavorite = async function (productId) {
     this.favorites = favorites;
   }
   return this.save();
+};
+
+userSchema.statics.getCart = async function (userId) {
+  const user = await this.findOne({ _id: userId }).populate("cart");
+  return user.cart;
 };
 
 // userSchema.post("extractProfile", async function (data) {

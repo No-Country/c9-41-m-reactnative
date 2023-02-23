@@ -1,6 +1,7 @@
 import wrapAsync from "../../utils/wrapAsync.js";
 import CartItem from "../db/models/cartItem.js";
 import User from "../db/models/user.js";
+import Address from "../db/models/address.js";
 
 export const getFavorites = wrapAsync(async (req, res, next) => {
   const user = await req.user.populate("favorites", [
@@ -87,8 +88,6 @@ export const modifyUserProfile = wrapAsync(async (req, res, next) => {
 });
 
 export const deleteUser = wrapAsync(async (req, res, next) => {
-  console.log(req.user);
-
   if (req.user.role === "superadmin") {
     throw new Error("SuperAdmin can not be removed");
   } else {
@@ -96,4 +95,50 @@ export const deleteUser = wrapAsync(async (req, res, next) => {
   }
 
   return res.status(200).json({ mesagge: "Removed complete" });
+});
+
+// ---------- ADDRESS ----------
+
+export const createAddress = wrapAsync(async (req, res, next) => {
+  const address = await Address.create({
+    ...req.body,
+    userId: req.user._id,
+  });
+  const user = await User.findOne({ _id: req.user._id });
+  user.addresses.push(address._id);
+  await user.save();
+  return res.status(200).json({ address });
+});
+
+export const getUserAddresses = wrapAsync(async (req, res, next) => {
+  const addresses = await Address.find({ userId: req.user._id });
+  return res.status(200).json({ addresses });
+});
+
+export const modifyAddress = wrapAsync(async (req, res, next) => {
+  const address = await Address.findOneAndUpdate(
+    { _id: req.body.id, userId: req.user._id },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  return res.status(200).json({ address });
+});
+
+export const deleteAddress = wrapAsync(async (req, res, next) => {
+  const address = await Address.deleteOne({
+    _id: req.body.id,
+    userId: req.user._id,
+  });
+  if (address.deletedCount) {
+    const user = await User.findOne({ _id: req.user._id });
+    const addresses = user.addresses.filter(
+      (i) => i.toString() !== req.body.id
+    );
+    user.addresses = addresses;
+    await user.save();
+  }
+  return res.status(200).json({ mesagge: "Deleted complete" });
 });

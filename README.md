@@ -655,6 +655,129 @@ respuesta:
 }
 ```
 
+### /user/address
+
+#### METHOD GET => obtener direcciones del usuario logueado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "addresses": [
+    {
+      "_id": "63f7c83b2951de23f1a1e703",
+      "street": "calle",
+      "number": 10,
+      "city": "ciudad",
+      "province": "provincia",
+      "zipCode": "1234",
+      "detail": "algun detalle",
+      "contact": 1234567890,
+      "userId": "63f7a657da48fa328b046b66",
+      "__v": 0
+    }
+  ]
+}
+```
+
+#### METHOD POST => crear dirección
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    street: string,
+    number: number,
+    city: string,
+    province: string,
+    zipCode: number,
+    detail: string,
+    contact: number,
+    userId: objectId
+}
+```
+
+respuesta:
+
+```json
+{
+  "address": {
+    "street": "calle",
+    "number": 10,
+    "city": "ciudad",
+    "province": "provincia",
+    "zipCode": "1234",
+    "detail": "algun detalle",
+    "contact": 1234567890,
+    "userId": "63f7a657da48fa328b046b66",
+    "_id": "63f7c83b2951de23f1a1e703",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD PUT => modificar direccion del usuario
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    id: objectId, // => id de la direccion a modificar
+    street: string,
+    number: number,
+    city: string,
+    province: string,
+    zipCode: number,
+    detail: string,
+    contact: number,
+}
+```
+
+respuesta:
+
+```json
+{
+  "address": {
+    "_id": "63f7c83b2951de23f1a1e703",
+    "street": "calle mod",
+    "number": 20,
+    "city": "ciudad mod",
+    "province": "provincia mod",
+    "zipCode": "9876",
+    "detail": "algun detalle mod",
+    "contact": 9876543210,
+    "userId": "63f7a657da48fa328b046b66",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD DELETE => eliminar direccion de usuario
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    id: objectId, // => id de la direccion a eliminar
+}
+```
+
+respuesta:
+
+```json
+{
+  "mesagge": "Deleted complete"
+}
+```
+
 ## /admin
 
 ### /admin/users => listar todos los usuarios

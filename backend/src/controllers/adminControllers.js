@@ -51,3 +51,6 @@ export const banUser = wrapAsync(async (req, res, next) => {
 
   return res.status(200).json({ bannedUser });
 });
+
+// ---------- VENTAS ----------
+export const getSales = wrapAsync((req, res, next) => {});

@@ -10,6 +10,7 @@ import {
   changeUserRole,
   retrieveUser,
   banUser,
+  getSales,
 } from "../controllers/adminControllers.js";
 
 const adminRoutes = Router();
@@ -22,5 +23,7 @@ adminRoutes
   .put(verificateSuperAdminRole, changeUserRole)
   .patch(verificateAdminRole, retrieveUser)
   .delete(verificateAdminRole, banUser);
+
+adminRoutes.route("/sales").get(verificateAdminRole, getSales);
 
 export default adminRoutes;
