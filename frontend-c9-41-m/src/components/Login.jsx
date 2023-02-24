@@ -83,7 +83,7 @@ const Login = ({ navigation }) => {
             <Text style={styles.forgotText}>¿Olvidaste la contraseña?</Text>
             {error && <Text style={{ color: '#931B1B' }}>{error}</Text>}
             <View>
-              <TouchableOpacity style={styles.loginButton} onPress={handleSubmit}>
+              <TouchableOpacity style={styles.loginButton} onPress={handleSubmit} disabled={isSubmitting}>
                 {
                     isSubmitting
                       ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin /><Text style={{ marginLeft: 8 }}>Cargando...</Text></View>
