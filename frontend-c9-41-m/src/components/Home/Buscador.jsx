@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import Theme from '../../../theme/Theme'
 
 const Buscador = () => {
   const [text, onChangeText] = useState('¿Qué estás buscando?')
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: Theme.colors.colorPrincipal,
     borderRadius: 15,
     width: '90%',
     alignSelf: 'center'
