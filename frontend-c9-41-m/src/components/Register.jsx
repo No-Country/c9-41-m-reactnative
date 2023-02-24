@@ -1,5 +1,6 @@
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faEyeSlash, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import { useState } from 'react'
 import { Formik } from 'formik'
 import { TextInput, View, StyleSheet, TouchableOpacity, Text } from 'react-native'
@@ -8,6 +9,7 @@ import validationSchemaRegister from '../utils/register/validation'
 import registerSubmit from '../utils/register/registerSubmit'
 import RegisterModal from './RegisterModal'
 
+library.add(faSpinner)
 export function Register () {
   const [passwordHidden, setPasswordHidden] = useState(true)
   const [modal, setModal] = useState(false)
@@ -20,7 +22,8 @@ export function Register () {
           <Formik
             initialValues={{ fullName: '', email: '', phoneNumber: '', password: '', confirmPassword: '' }}
             validationSchema={validationSchemaRegister}
-            onSubmit={(values, { resetForm }) => {
+            onSubmit={(values, { resetForm, setSubmitting }) => {
+              setSubmitting(true)
               registerSubmit(values)
                 .then(({ message }) => {
                   const msgFromAPI = message === 'Email in use' ? 'El email ya tiene una cuenta asociada!' : 'Recibió un mail para verificar su usuario!'
@@ -28,11 +31,12 @@ export function Register () {
                   setModal(!modal)
                 })
                 .finally(() => {
+                  setSubmitting(false)
                   resetForm()
                 })
             }}
           >
-            {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isSubmitting }) => (
               <>
                 <TextInput
                   style={styles.input}
@@ -92,7 +96,7 @@ export function Register () {
                     secureTextEntry={passwordHidden}
                   />
                   <TouchableOpacity onPress={handlePasswordVisibility} style={styles.passwordInput}>
-                    <FontAwesomeIcon icon={passwordHidden ? faEye : faEyeSlash} size={24} />
+                    <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} />
                   </TouchableOpacity>
                 </View>
                 {touched.password && errors.password
@@ -112,8 +116,12 @@ export function Register () {
                     <Text style={styles.error}>{errors.confirmPassword}</Text>
                     )
                   : null}
-                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                  <Text style={styles.buttonText}>Registrate</Text>
+                <TouchableOpacity style={styles.button} onPress={handleSubmit} disabled={isSubmitting}>
+                  {
+                    isSubmitting
+                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin /><Text style={{ marginLeft: 8 }}>Cargando...</Text></View>
+                      : <Text style={styles.buttonText}>Registrate</Text>
+                  }
                 </TouchableOpacity>
               </>
             )}
@@ -154,6 +162,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '90%',
+    alignItems: 'center',
+    justifyContent: 'center',
     margin: 12,
     backgroundColor: '#bbb',
     paddingVertical: 8,

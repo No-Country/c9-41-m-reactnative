@@ -1,7 +1,7 @@
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faEye, faEyeSlash, faLock, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -83,8 +83,12 @@ const Login = ({ navigation }) => {
             <Text style={styles.forgotText}>¿Olvidaste la contraseña?</Text>
             {error && <Text style={{ color: '#931B1B' }}>{error}</Text>}
             <View>
-              <TouchableOpacity style={styles.loginButton} onPress={handleSubmit}>
-                {isSubmitting ? <Text>Cargando...</Text> : <Text>Iniciar sesión</Text>}
+              <TouchableOpacity style={styles.loginButton} onPress={handleSubmit} disabled={isSubmitting}>
+                {
+                    isSubmitting
+                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin /><Text style={{ marginLeft: 8 }}>Cargando...</Text></View>
+                      : <Text>Iniciar Sesión</Text>
+                  }
               </TouchableOpacity>
             </View>
           </View>
