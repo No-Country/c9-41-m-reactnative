@@ -16,7 +16,7 @@ const Theme = {
   colors: {
     colorPrincipal: '#FB6D3B',
     colorSecundario: '#676767 36%',
-    colorTerciario: 'FDFDFD',
+    colorTerciario: '#FDFDFD',
     colorLetras: '#000000'
   }
 }
