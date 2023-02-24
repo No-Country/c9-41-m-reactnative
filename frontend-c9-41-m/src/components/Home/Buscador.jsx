@@ -13,6 +13,7 @@ const Buscador = () => {
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
+        color={Theme.colors.colorTerciario}
       />
       <TouchableOpacity
         style={styles.button}
@@ -20,6 +21,7 @@ const Buscador = () => {
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
           size={24}
+          color={Theme.colors.colorTerciario}
         />
       </TouchableOpacity>
     </View>
@@ -28,25 +30,25 @@ const Buscador = () => {
 
 const styles = StyleSheet.create({
   input: {
-    height: 45,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    backgroundColor: Theme.colors.colorPrincipal,
-    borderRadius: 15,
-    width: '90%',
-    alignSelf: 'center'
+    bottom: 2,
+    width: '60%'
   },
   InputContainer: {
+    backgroundColor: Theme.colors.colorPrincipal,
+    height: 45,
+    margin: 20,
+    padding: 10,
+    borderRadius: 10,
     position: 'relative',
-    width: '100%',
+    width: '90%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row-reverse'
   },
   button: {
     position: 'absolute',
     right: 35,
-    bottom: 16,
+    bottom: 3,
     padding: 8
   }
 })
