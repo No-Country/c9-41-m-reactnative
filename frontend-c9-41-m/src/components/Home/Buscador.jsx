@@ -31,7 +31,8 @@ const Buscador = () => {
 const styles = StyleSheet.create({
   input: {
     bottom: 2,
-    width: '60%'
+    width: '60%',
+    marginRight: 55
   },
   InputContainer: {
     backgroundColor: Theme.colors.colorPrincipal,
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    right: 35,
+    right: 5,
     bottom: 3,
     padding: 8
   }
