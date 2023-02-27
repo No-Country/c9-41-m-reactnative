@@ -1,16 +1,23 @@
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-
+import { SvgUri } from 'react-native-svg'
+import Theme from '../../theme/Theme'
 export function LoginMedia ({ large }) {
   return (
     <View style={styles.buttonsContainer}>
       <TouchableOpacity style={[styles.button, large ? styles.buttonLg : styles.buttonSm]}>
-        <FontAwesomeIcon icon={faGoogle} />
+        <SvgUri
+          width={24}
+          height={24}
+          uri='https://cdn.svgporn.com/logos/google-icon.svg'
+        />
         {large && <Text style={styles.text}>Google</Text>}
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, large ? styles.buttonLg : styles.buttonSm]}>
-        <FontAwesomeIcon icon={faFacebook} />
+        <SvgUri
+          width={24}
+          height={24}
+          uri='https://cdn.svgporn.com/logos/facebook.svg'
+        />
         {large && <Text style={styles.text}>Facebook</Text>}
       </TouchableOpacity>
     </View>
@@ -20,22 +27,24 @@ export function LoginMedia ({ large }) {
 const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
-    marginVertical: 12
+    marginVertical: 4
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ccc',
+    backgroundColor: '#fff',
     borderRadius: 100,
-    marginHorizontal: 16
+    marginHorizontal: 8
   },
   buttonSm: {
-    padding: 16
+    padding: 8
   },
   buttonLg: {
     paddingVertical: 12,
-    paddingHorizontal: 24
+    paddingHorizontal: 24,
+    borderWidth: 1,
+    borderColor: Theme.colors.colorPrincipal
   },
   text: {
     color: '#555',

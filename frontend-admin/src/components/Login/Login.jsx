@@ -20,9 +20,9 @@ function Login() {
     password: "",
   };
 
-  function onSubmit(e) {
+  async function onSubmit(e) {
     setLoading(true);
-    dispatch(loginUser(e));
+    await dispatch(loginUser(e));
     setLoading(false);
   }
 
