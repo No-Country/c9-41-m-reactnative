@@ -41,6 +41,7 @@ const MedioDePago = () => {
          <Text style={styles.confirmarText}> Confirmar </Text>
         </TouchableOpacity>
       </View>
+
     </View>
 
   )
