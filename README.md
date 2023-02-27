@@ -62,7 +62,7 @@ body:
 
 ```js
 {
-  email: string, // obligatorio => el email del usuario
+  username: string, // obligatorio => el email del usuario
   password: string, // obligatorio
 }
 ```
@@ -98,6 +98,48 @@ body:
   "message": "Logout successfully"
 }
 ```
+
+### /auth/perfil
+
+METHOD: GET => obtener perfil del usuario
+withCredentials: true,
+
+respuesta:
+body:
+
+```json
+{
+  "user": {
+    "id": "63f8d18acb1e81b14d74c0f0",
+    "username": "a@a.com",
+    "role": "superadmin",
+    "verified": false,
+    "favorites": [],
+    "cart": [
+      "63f915ad9e4ceac37d7d1dc8",
+      "63f915c29e4ceac37d7d1dd3",
+      "63f9171fb55be8635faadd9f",
+      "63f91a8bb21385a375cac2ea"
+    ],
+    "addresses": ["63f8d1df95438a72a0436cdc"],
+    "orders": [
+      "63f915fd9e4ceac37d7d1dde",
+      "63f91a53d4e28f0483cd3ffc",
+      "63f91a8eb21385a375cac2f2"
+    ]
+  }
+}
+```
+
+### /auth/google
+
+METHOD: GET => realizar logeo con google
+
+respuesta:
+1 - lleva al prompt de google para elegir cuenta e iniciar sesión
+2 - una ves seleccionada la cuenta y otorgados los permisos redirigue a la pagina del front
+
+- si el logeo no es correcto: /auth?fallo=googleLocal
 
 ## /categories
 
@@ -339,7 +381,7 @@ body:
 }
 ```
 
-### /products => METHOD PATCH => Para recuperar producto eliminado previamente
+### /products => METHOD PATCH => Para recuperar producto eliminado previamente
 
 withCredentials: true, => el usuario debe estar logueado y ser administrador
 body:
@@ -391,6 +433,36 @@ body:
 ```json
 {
   "message": "Removed successfully"
+}
+```
+
+## /products/deleted
+
+METHOD: GET
+withCredentials: true, => el usuario debe estar logueado y ser administrador
+
+respuesta:
+
+```json
+{
+  "products": [
+    {
+      "_id": "63ef3866c7debaa561101283",
+      "name": "1",
+      "price": 1,
+      "description": "1",
+      "images": [],
+      "stock": 1,
+      "onSale": false,
+      "discount": 0,
+      "sales": 2,
+      "categories": ["63dd59d1fce99c82aca31034", "63dcfa868b15924c52b362f1"],
+      "active": false,
+      "createdAt": "2023-02-17T08:18:46.845Z",
+      "updatedAt": "2023-02-19T23:17:08.980Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
@@ -625,6 +697,188 @@ respuesta:
 }
 ```
 
+### /user/address
+
+#### METHOD GET => obtener direcciones del usuario logueado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "addresses": [
+    {
+      "_id": "63f7c83b2951de23f1a1e703",
+      "street": "calle",
+      "number": 10,
+      "city": "ciudad",
+      "province": "provincia",
+      "zipCode": "1234",
+      "detail": "algun detalle",
+      "contact": 1234567890,
+      "userId": "63f7a657da48fa328b046b66",
+      "__v": 0
+    }
+  ]
+}
+```
+
+#### METHOD POST => crear dirección
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    street: string,
+    number: number,
+    city: string,
+    province: string,
+    zipCode: number,
+    detail: string,
+    contact: number,
+    userId: objectId
+}
+```
+
+respuesta:
+
+```json
+{
+  "address": {
+    "street": "calle",
+    "number": 10,
+    "city": "ciudad",
+    "province": "provincia",
+    "zipCode": "1234",
+    "detail": "algun detalle",
+    "contact": 1234567890,
+    "userId": "63f7a657da48fa328b046b66",
+    "_id": "63f7c83b2951de23f1a1e703",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD PUT => modificar direccion del usuario
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    id: objectId, // => id de la direccion a modificar
+    street: string,
+    number: number,
+    city: string,
+    province: string,
+    zipCode: number,
+    detail: string,
+    contact: number,
+}
+```
+
+respuesta:
+
+```json
+{
+  "address": {
+    "_id": "63f7c83b2951de23f1a1e703",
+    "street": "calle mod",
+    "number": 20,
+    "city": "ciudad mod",
+    "province": "provincia mod",
+    "zipCode": "9876",
+    "detail": "algun detalle mod",
+    "contact": 9876543210,
+    "userId": "63f7a657da48fa328b046b66",
+    "__v": 0
+  }
+}
+```
+
+#### METHOD DELETE => eliminar direccion de usuario
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+body:
+
+```js
+{
+    id: objectId, // => id de la direccion a eliminar
+}
+```
+
+respuesta:
+
+```json
+{
+  "mesagge": "Deleted complete"
+}
+```
+
+### /user/sales
+
+#### METHOD GET => obtener las ventas del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "sales": []
+}
+```
+
+### /user/sales/:saleId
+
+
+
+respuesta:
+
+```json
+{
+  "sales": {
+    "_id": "63f91a8eb21385a375cac2f2",
+    "total": 3,
+    "shippingMethod": "delivery",
+    "paymentMethod": "MercadoPago",
+    "paymentStatus": "pending",
+    "shippingStatus": "pending",
+    "shippingAddress": "calle 10, ciudad, 1234, provincia. detalle: algun detalle. contacto: 1234567890.",
+    "orderItems": [
+      {
+        "_id": "63f91a8eb21385a375cac2f4",
+        "name": "3",
+        "quantity": 1,
+        "price": 3,
+        "productId": "63ef3af97c27b155e3e76b68",
+        "orderId": "63f91a8eb21385a375cac2f2",
+        "__v": 0
+      }
+    ],
+    "userId": "63f8d18acb1e81b14d74c0f0",
+    "__v": 1
+  }
+}
+```
+
+#### METHOD GET => obtener las ventas del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "sale": {}
+}
+```
+
 ## /admin
 
 ### /admin/users => listar todos los usuarios
@@ -788,7 +1042,35 @@ respuesta:
     "createdAt": "2023-02-17T12:17:54.409Z",
     "updatedAt": "2023-02-17T12:27:13.458Z",
     "__v": 0
-  } 
+  }
+}
+```
+
+### /admin/sales
+
+#### METHOD GET => obtener todas las ventas
+
+withCredentials: true, => el usuario debe ser "admin" con session activa
+
+respuesta
+
+```json
+{
+  "sales": []
+}
+```
+
+### /admin/sales/:saleId
+
+#### METHOD GET => obtener detalles de la venta
+
+withCredentials: true, => el usuario debe ser "admin" con session activa
+
+respuesta
+
+```json
+{
+  "sale": {}
 }
 ```
 

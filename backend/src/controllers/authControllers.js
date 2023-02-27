@@ -104,3 +104,8 @@ export const finishGoogleLogin = wrapAsync(async (req, res, next) => {
     return res.sendFile("logeoGoogle.html", { root: req.dirnameViews });
   }
 });
+
+export const getUser = wrapAsync(async (req, res, next) => {
+  const user = await req.user.extractProfile();
+  return res.status(200).json({ user });
+});

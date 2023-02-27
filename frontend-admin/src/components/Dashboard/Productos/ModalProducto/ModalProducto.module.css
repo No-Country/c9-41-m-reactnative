@@ -1,0 +1,152 @@
+.contenedorModal {
+  position: absolute;
+  top: 0;
+  min-height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.8);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: stretch;
+  overflow: auto;
+}
+
+.contenedorForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: stretch;
+  max-width: 700px;
+  margin: 2vh auto;
+  padding: 0 2vw;
+  background-color: white;
+  border-radius: 16px;
+}
+
+.titulo {
+  font-weight: 600;
+  font-size: 2rem;
+  text-align: center;
+  margin: 5vh 0;
+}
+
+.input {
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-top: 2px;
+  width: stretch;
+  font-size: 100%;
+  resize: none;
+  font-family: "Rubik", sans-serif;
+}
+
+.msjError {
+  font-size: 0.75rem;
+  width: stretch;
+}
+
+.error {
+  color: red;
+  border-color: red;
+}
+
+.input.error.input::placeholder {
+  color: red;
+}
+
+.contenedorImagenes {
+  width: stretch;
+  margin-top: 2px;
+  padding: 2px;
+  background-color: rgb(240, 240, 240);
+  border: 1px solid grey;
+  border-radius: 8px;
+}
+
+.textoImagenes {
+  width: stretch;
+  text-align: center;
+  padding: 2px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.imagenes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ocultar {
+  display: none;
+}
+
+.botonCerrar {
+  background-color: red;
+  font-size: 100%;
+  font-weight: 600;
+  height: fit-content;
+  margin-bottom: 2vh;
+}
+
+.inputFormCrear {
+  margin-top: 5%;
+}
+
+.renglonSelects {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* INPUT SELECT */
+.contenedorSelect {
+  width: 100%;
+}
+
+.inputSelect {
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-top: 2px;
+  width: 100%;
+  height: 40px;
+  font-size: 100%;
+}
+
+.msjErrorSelect {
+  font-size: 0.75rem;
+}
+
+.errorSelect {
+  color: red;
+  border-color: red;
+}
+
+.inputSelect .errorSelect .inputSelect::placeholder {
+  color: red;
+}
+
+.inputSelectCategories {
+  height: fit-content;
+}
+
+@media (min-width: 1024px) {
+  .contenedor {
+    padding: 0 calc((100vw - 1024px) / 2);
+  }
+
+  .contenedorForm {
+    margin: 2vh auto;
+  }
+
+  .titulo {
+    font-size: 4rem;
+  }
+}
