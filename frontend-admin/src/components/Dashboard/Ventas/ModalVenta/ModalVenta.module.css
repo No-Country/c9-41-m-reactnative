@@ -1,0 +1,62 @@
+.contenedor {
+  position: absolute;
+  top: 0;
+  width: stretch;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.502);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.contenedorDetalles {
+  width: 90%;
+  padding: 2% 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detalle {
+  width: 90%;
+}
+
+.detalle b {
+  font-weight: bold;
+}
+
+/* TABLA */
+
+.tituloTabla {
+  font-size: 2rem;
+}
+
+.table {
+  width: 90%;
+  background-color: rgb(255, 217, 217);
+}
+
+.trHeadTable {
+  width: 100%;
+  font-weight: bold;
+}
+
+.trBodyTable td {
+  text-align: center;
+  line-height: 20px;
+}
+
+.trBodyTable:nth-child(even) {
+  background: #d8d8d8;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.cursor:hover {
+  color: orange;
+}
