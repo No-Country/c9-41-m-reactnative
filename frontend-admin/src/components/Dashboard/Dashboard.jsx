@@ -5,6 +5,8 @@ import s from "./Dashboard.module.css";
 import LateralMenu from "./LateralMenu/LateralMenu";
 import Productos from "./Productos/Productos";
 import ProductosEliminados from "./ProductosEliminados/ProductosEliminados";
+import Usuarios from "./Usuarios/Usuarios";
+import Ventas from "./Ventas/Ventas";
 
 function Dashboard({ user }) {
   const [menuAbierto, setMenuAbierto] = useState({
@@ -22,6 +24,8 @@ function Dashboard({ user }) {
       {menuAbierto.categorias ? <Categorias /> : null}
       {menuAbierto.crearProducto ? <CrearProducto /> : null}
       {menuAbierto.productosEliminados ? <ProductosEliminados /> : null}
+      {menuAbierto.ventas ? <Ventas /> : null}
+      {menuAbierto.usuarios ? <Usuarios /> : null}
     </div>
   );
 }

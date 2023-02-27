@@ -3,6 +3,7 @@ import {
   setProducts,
   setNewProduct,
   setDeleteProduct,
+  setModifyProduct,
   setCategories,
   setNewCategory,
   setModifyCategory,
@@ -87,6 +88,24 @@ export function recoveryProduct(productId) {
       return dispatch(setDeleteProduct(res.data.product._id));
     } catch (error) {
       alert("Hubo un problema al recuperar el producto");
+    }
+  };
+}
+
+export function modifyProduct(product) {
+  return async (dispatch) => {
+    try {
+      const res = await axios({
+        method: "PUT",
+        withCredentials: true,
+        data: product,
+        url: "/products",
+      });
+      console.log(res.data);
+      return dispatch(setModifyProduct(res.data.product));
+    } catch (error) {
+      // alert("Hubo un problema al modificar el producto");
+      throw new Error("");
     }
   };
 }

@@ -102,18 +102,15 @@ userSchema.methods.removeFavorite = async function (productId) {
 };
 
 userSchema.statics.getCart = async function (userId) {
-  const user = await this.findOne({ _id: userId }).populate("cart");
+  const user = await this.findOne({ _id: userId }).populate({
+    path: "cart",
+    populate: {
+      path: "productId",
+      model: "Product",
+    },
+  });
   return user.cart;
 };
-
-// userSchema.post("extractProfile", async function (data) {
-//   await this.populate("favorites", [
-//     "-active",
-//     "-createdAt",
-//     "-updatedAt",
-//     "-__v",
-//   ]);
-// });
 
 userSchema.plugin(passportLocalMongoose);
 

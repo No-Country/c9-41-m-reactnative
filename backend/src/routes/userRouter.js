@@ -15,6 +15,8 @@ import {
   getUserAddresses,
   modifyAddress,
   deleteAddress,
+  getUserSales,
+  getUserSaleDetails,
 } from "../controllers/userControllers.js";
 
 const userRouter = Router();
@@ -44,5 +46,9 @@ userRouter
   .post(isLogIn, createAddress)
   .put(isLogIn, modifyAddress)
   .delete(isLogIn, deleteAddress);
+
+userRouter.route("/sales").get(isLogIn, getUserSales);
+
+userRouter.route("/sales/:saleId").get(isLogIn, getUserSaleDetails);
 
 export default userRouter;

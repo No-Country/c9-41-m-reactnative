@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProducts } from "../../../redux/slices/productSlice/productSlice";
+import {
+  setCategories,
+  setProducts,
+} from "../../../redux/slices/productSlice/productSlice";
 import {
   deleteProduct,
+  getCategories,
   getProducts,
 } from "../../../redux/slices/productSlice/productThunk";
 import s from "./Productos.module.css";
 import { BarLoader } from "react-spinners";
+import ModalProducto from "./ModalProducto/ModalProducto";
 
 function Productos({}) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
+
+  const { categories } = useSelector((e) => e.products);
 
   const { products } = useSelector((e) => e.products);
 
@@ -22,19 +29,21 @@ function Productos({}) {
     }
   }
 
-  function handleModificarProduct(productId) {
-    setModal(productId);
+  function handleModificarProduct(product) {
+    setModal(product);
   }
 
   useEffect(() => {
     (async () => {
       setLoading(true);
       await dispatch(getProducts());
+      await dispatch(getCategories());
       setLoading(false);
     })();
 
     return () => {
       dispatch(setProducts([]));
+      dispatch(setCategories([]));
     };
   }, []);
 
@@ -88,7 +97,13 @@ function Productos({}) {
           </tbody>
         </table>
       )}
-      {modal ? <div>{modal._id}</div> : null}
+      {modal ? (
+        <ModalProducto
+          producto={modal}
+          setMostrarModal={setModal}
+          categorias={categories}
+        />
+      ) : null}
     </div>
   );
 }

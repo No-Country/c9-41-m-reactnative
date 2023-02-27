@@ -13,7 +13,7 @@ function ModalCategorias({ categoria, setModal }) {
   const dispatch = useDispatch();
 
   function handleClickCerrar(e) {
-    if (e.target.id === "cerrar") {
+    if (e.target.id === "cerrar" || e.target.id === "botonCerrar") {
       if (
         window.confirm(
           `Cancelar ${
@@ -90,10 +90,10 @@ function ModalCategorias({ categoria, setModal }) {
           />
         </form>
         <Button
-          type={null}
+          type="button"
           text="Cancelar"
           onClick={handleClickCerrar}
-          id="cerrar"
+          id="botonCerrar"
           style={s.botonCerrar}
         />
       </div>

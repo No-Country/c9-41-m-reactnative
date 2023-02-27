@@ -99,6 +99,48 @@ body:
 }
 ```
 
+### /auth/perfil
+
+METHOD: GET => obtener perfil del usuario
+withCredentials: true,
+
+respuesta:
+body:
+
+```json
+{
+  "user": {
+    "id": "63f8d18acb1e81b14d74c0f0",
+    "username": "a@a.com",
+    "role": "superadmin",
+    "verified": false,
+    "favorites": [],
+    "cart": [
+      "63f915ad9e4ceac37d7d1dc8",
+      "63f915c29e4ceac37d7d1dd3",
+      "63f9171fb55be8635faadd9f",
+      "63f91a8bb21385a375cac2ea"
+    ],
+    "addresses": ["63f8d1df95438a72a0436cdc"],
+    "orders": [
+      "63f915fd9e4ceac37d7d1dde",
+      "63f91a53d4e28f0483cd3ffc",
+      "63f91a8eb21385a375cac2f2"
+    ]
+  }
+}
+```
+
+### /auth/google
+
+METHOD: GET => realizar logeo con google
+
+respuesta:
+1 - lleva al prompt de google para elegir cuenta e iniciar sesión
+2 - una ves seleccionada la cuenta y otorgados los permisos redirigue a la pagina del front
+
+- si el logeo no es correcto: /auth?fallo=googleLocal
+
 ## /categories
 
 ### /categories => METHOD GET
@@ -758,7 +800,7 @@ respuesta:
 }
 ```
 
-#### METHOD DELETE => eliminar direccion de usuario
+#### METHOD DELETE => eliminar direccion de usuario
 
 withCredentials: true, => el usuario debe estar logueado con session activa
 
@@ -775,6 +817,65 @@ respuesta:
 ```json
 {
   "mesagge": "Deleted complete"
+}
+```
+
+### /user/sales
+
+#### METHOD GET => obtener las ventas del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "sales": []
+}
+```
+
+### /user/sales/:saleId
+
+
+
+respuesta:
+
+```json
+{
+  "sales": {
+    "_id": "63f91a8eb21385a375cac2f2",
+    "total": 3,
+    "shippingMethod": "delivery",
+    "paymentMethod": "MercadoPago",
+    "paymentStatus": "pending",
+    "shippingStatus": "pending",
+    "shippingAddress": "calle 10, ciudad, 1234, provincia. detalle: algun detalle. contacto: 1234567890.",
+    "orderItems": [
+      {
+        "_id": "63f91a8eb21385a375cac2f4",
+        "name": "3",
+        "quantity": 1,
+        "price": 3,
+        "productId": "63ef3af97c27b155e3e76b68",
+        "orderId": "63f91a8eb21385a375cac2f2",
+        "__v": 0
+      }
+    ],
+    "userId": "63f8d18acb1e81b14d74c0f0",
+    "__v": 1
+  }
+}
+```
+
+#### METHOD GET => obtener las ventas del usuario logeado
+
+withCredentials: true, => el usuario debe estar logueado con session activa
+
+respuesta:
+
+```json
+{
+  "sale": {}
 }
 ```
 
@@ -942,6 +1043,34 @@ respuesta:
     "updatedAt": "2023-02-17T12:27:13.458Z",
     "__v": 0
   }
+}
+```
+
+### /admin/sales
+
+#### METHOD GET => obtener todas las ventas
+
+withCredentials: true, => el usuario debe ser "admin" con session activa
+
+respuesta
+
+```json
+{
+  "sales": []
+}
+```
+
+### /admin/sales/:saleId
+
+#### METHOD GET => obtener detalles de la venta
+
+withCredentials: true, => el usuario debe ser "admin" con session activa
+
+respuesta
+
+```json
+{
+  "sale": {}
 }
 ```
 

@@ -2,6 +2,7 @@ import wrapAsync from "../../utils/wrapAsync.js";
 import CartItem from "../db/models/cartItem.js";
 import User from "../db/models/user.js";
 import Address from "../db/models/address.js";
+import Order from "../db/models/order.js";
 
 export const getFavorites = wrapAsync(async (req, res, next) => {
   const user = await req.user.populate("favorites", [
@@ -141,4 +142,18 @@ export const deleteAddress = wrapAsync(async (req, res, next) => {
     await user.save();
   }
   return res.status(200).json({ mesagge: "Deleted complete" });
+});
+
+// ---------- SALES ----------
+
+export const getUserSales = wrapAsync(async (req, res, next) => {
+  const sales = await Order.find({ userId: req.user._id }).populate(
+    "orderItems"
+  );
+  return res.status(200).json({ sales });
+});
+
+export const getUserSaleDetails = wrapAsync(async (req, res, next) => {
+  const sale = await Order.findById(req.params.saleId).populate("orderItems");
+  return res.status(200).json({ sale });
 });

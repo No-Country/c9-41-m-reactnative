@@ -1,11 +1,12 @@
 import wrapAsync from "../../utils/wrapAsync.js";
+import cloudinary from "../cloudinary/cloudinary.js";
 import Product from "../db/models/product.js";
 
 export const getProducts = wrapAsync(async (req, res, next) => {
   let products = [];
   req.user?.role === "admin" || req.user?.role === "superadmin"
     ? (products = await Product.find({ active: true }))
-    : (products = await Product.find({ active: true }, [
+    : (products = await Product.find({ active: true, stock: { $gt: 0 } }, [
         "-active",
         "-createdAt",
         "-updatedAt",
@@ -35,6 +36,12 @@ export const createProduct = wrapAsync(async (req, res, next) => {
 });
 
 export const modifyProduct = wrapAsync(async (req, res, next) => {
+  console.log("req.body", req.body);
+  let categories = [];
+  if (req.body.categories?.includes(",")) {
+    categories = req.body.categories.split(",");
+    req.body.categories = categories;
+  }
   const { id } = req.body;
   const product = await Product.findOneAndUpdate({ _id: id }, req.body, {
     new: true,

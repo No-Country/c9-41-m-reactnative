@@ -12,9 +12,15 @@ export const usersSlice = createSlice({
     setUsers: (state, action) => {
       state.users = action.payload;
     },
+    modifyUser: (state, action) => {
+      const idx = state.users.findIndex((i) => i._id === action.payload._id);
+      const users = state.users;
+      users[idx] = action.payload;
+      state.users = users;
+    },
   },
 });
 
-export const { setUsers } = usersSlice.actions;
+export const { setUsers, modifyUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

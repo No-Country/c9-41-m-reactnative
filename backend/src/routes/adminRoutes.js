@@ -11,6 +11,7 @@ import {
   retrieveUser,
   banUser,
   getSales,
+  getSaleDetails,
 } from "../controllers/adminControllers.js";
 
 const adminRoutes = Router();
@@ -25,5 +26,6 @@ adminRoutes
   .delete(verificateAdminRole, banUser);
 
 adminRoutes.route("/sales").get(verificateAdminRole, getSales);
+adminRoutes.route("/sales/:saleId").get(verificateAdminRole, getSaleDetails);
 
 export default adminRoutes;

@@ -1,5 +1,6 @@
 import wrapAsync from "../../utils/wrapAsync.js";
 import User from "../db/models/user.js";
+import Order from "../db/models/order.js";
 
 export const getUsers = wrapAsync(async (req, res, next) => {
   const users = await User.find();
@@ -53,4 +54,14 @@ export const banUser = wrapAsync(async (req, res, next) => {
 });
 
 // ---------- VENTAS ----------
-export const getSales = wrapAsync((req, res, next) => {});
+export const getSales = wrapAsync(async (req, res, next) => {
+  const sales = await Order.find().populate("userId");
+  return res.status(200).json({ sales });
+});
+
+export const getSaleDetails = wrapAsync(async (req, res, next) => {
+  const sale = await Order.findById({ _id: req.params.saleId }).populate(
+    "orderItems"
+  );
+  return res.status(200).json({ sale });
+});

@@ -20,6 +20,12 @@ export const productSlice = createSlice({
     setDeleteProduct: (state, action) => {
       state.products = state.products.filter((i) => i._id !== action.payload);
     },
+    setModifyProduct: (state, action) => {
+      const idx = state.products.findIndex((i) => i._id === action.payload._id);
+      const products = state.products;
+      products[idx] = action.payload;
+      state.products = products;
+    },
     // CATEGORIES
     setCategories: (state, action) => {
       state.categories = action.payload;
@@ -47,6 +53,7 @@ export const {
   setProducts,
   setNewProduct,
   setDeleteProduct,
+  setModifyProduct,
   setCategories,
   setNewCategory,
   setModifyCategory,
