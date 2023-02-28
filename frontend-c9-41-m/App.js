@@ -23,4 +23,3 @@ export default function App () {
   )
 }
 // Exportar todas los componentes de la misma forma, se recomienda export default porque en los archivos solo se exporta una sola función, que es el componente
-
