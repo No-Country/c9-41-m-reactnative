@@ -76,6 +76,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Rutas
+app.use((req, res, next) => {
+  console.log("req.user", req.user);
+  next();
+});
 app.use("/auth", authRoutes);
 app.use("/categories", categoryRouter);
 app.use("/products", productsRouter);
