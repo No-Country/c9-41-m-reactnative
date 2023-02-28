@@ -62,7 +62,7 @@ app.use(
     saveUninitialized: true,
     name: "sessionNoCountry",
     cookie: {
-      httpOnly: true,
+      // httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
@@ -78,6 +78,8 @@ passport.deserializeUser(User.deserializeUser());
 // Rutas
 app.use((req, res, next) => {
   console.log("req.user", req.user);
+  console.log("req.session.user", req.session.user);
+
   next();
 });
 app.use("/auth", authRoutes);
