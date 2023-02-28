@@ -84,7 +84,7 @@ function Login() {
         {!loading ? (
           <Button type="submit" text="Iniciar Sesión" />
         ) : (
-          <div cflassName={s.loadingBotonLogin}>
+          <div className={s.loadingBotonLogin}>
             <ClipLoader />
           </div>
         )}
