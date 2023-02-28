@@ -1,11 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native'
+/* import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Login from './src/components/Login'
 import { Register } from './src/components/Register'
 import Home from './src/components/Home/Home'
-import Categories from './src/components/Categories'
+import Categories from './src/components/Categories' */
 import MedioDePago from './src/components/MedioDePago'
-import { Favorites } from './src/components/Favorites/Favorites'
+/* import { Favorites } from './src/components/Favorites/Favorites'
 
 const Stack = createNativeStackNavigator()
 export default function App () {
@@ -21,5 +21,16 @@ export default function App () {
       </Stack.Navigator>
     </NavigationContainer>
   )
-}
+} */
 // Exportar todas los componentes de la misma forma, se recomienda export default porque en los archivos solo se exporta una sola función, que es el componente
+const App = () => {
+  return (
+    <MedioDePago />
+  )
+}
+ 
+
+
+
+
+export default App

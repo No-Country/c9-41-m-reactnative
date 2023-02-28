@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft, faCircle, faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import Theme from '../../theme/Theme'
 
 const MedioDePago = () => {
   return (
