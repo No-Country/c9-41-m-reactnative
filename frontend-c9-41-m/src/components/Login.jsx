@@ -1,12 +1,13 @@
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { faEnvelope, faEye, faEyeSlash, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faEye, faEyeSlash, faLock, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { LoginMedia } from './LoginMedia'
 import loginSubmit from '../utils/login/loginSubmit'
+import Theme from '../../theme/Theme'
 
 const Login = ({ navigation }) => {
   const [passwordHidden, setpasswordHidden] = useState(true)
@@ -16,9 +17,7 @@ const Login = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
-      <View style={styles.containertextwelcome}>
-        <Text style={styles.textwelcome}>Te damos la bienvenida</Text>
-      </View>
+      <Image source={require('../../assets/logo-elbuengusto.png')} style={styles.logo} />
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={Yup.object({
@@ -37,7 +36,7 @@ const Login = ({ navigation }) => {
                 setError(data.error)
                 window.setTimeout(() => { setError('') }, 3000)
               } else {
-                navigation.navigate('Home')
+                navigation.navigate('Inicio')
               }
               resetForm()
             })
@@ -52,10 +51,10 @@ const Login = ({ navigation }) => {
               value={values.email}
               placeholder='E-mail'
               style={[styles.inputlogin, error && styles.inputError]}
-              placeholderTextColor='#000'
+              placeholderTextColor='#fff'
             />
 
-            <FontAwesomeIcon icon={faEnvelope} style={styles.icons.mail} size={24} />
+            <FontAwesomeIcon icon={faEnvelope} style={styles.icons.mail} size={24} color='#fff' />
             {touched.email && errors.email
               ? (
                 <Text style={styles.errorEmail}>{errors.email}</Text>
@@ -67,13 +66,13 @@ const Login = ({ navigation }) => {
               value={values.password}
               placeholder='Contraseña'
               style={[styles.inputlogin, error && styles.inputError]}
-              placeholderTextColor='#000'
+              placeholderTextColor='#fff'
               secureTextEntry={passwordHidden}
             />
 
-            <FontAwesomeIcon icon={faLock} style={styles.icons.lock} size={24} />
+            <FontAwesomeIcon icon={faLock} style={styles.icons.lock} size={24} color='#fff' />
             <TouchableOpacity onPress={handlePasswordVisibility} style={styles.icons.eye}>
-              <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} />
+              <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} color='#fff' />
             </TouchableOpacity>
             {touched.password && errors.password
               ? (
@@ -83,8 +82,12 @@ const Login = ({ navigation }) => {
             <Text style={styles.forgotText}>¿Olvidaste la contraseña?</Text>
             {error && <Text style={{ color: '#931B1B' }}>{error}</Text>}
             <View>
-              <TouchableOpacity style={styles.loginButton} onPress={handleSubmit}>
-                {isSubmitting ? <Text>Cargando...</Text> : <Text>Iniciar sesión</Text>}
+              <TouchableOpacity style={styles.loginButton} onPress={handleSubmit} disabled={isSubmitting}>
+                {
+                    isSubmitting
+                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin color='#fff' /><Text style={{ marginLeft: 8, color: '#fff' }}>Cargando...</Text></View>
+                      : <Text style={{ color: '#fff' }}>Iniciar Sesión</Text>
+                  }
               </TouchableOpacity>
             </View>
           </View>
@@ -98,8 +101,8 @@ const Login = ({ navigation }) => {
       <LoginMedia large />
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>¿No tienes cuenta todavía?</Text>
-        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
-          <Text>Registro</Text>
+        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Registro')}>
+          <Text style={{ color: '#fff' }}>Registro</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -111,25 +114,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center'
   },
-  containertextwelcome: {
-    marginTop: 80,
-    marginBottom: 80
-  },
-  textwelcome: {
-    fontSize: 20,
-    fontWeight: '700',
-    lineHeight: 27
+  logo: {
+    width: 214,
+    height: 150,
+    marginVertical: 32
+
   },
   inputlogin: {
-    borderWidth: 1,
-    borderColor: 'gray',
     padding: 10,
     paddingStart: 50,
     width: 330,
     height: 50,
     marginTop: 10,
     borderRadius: 10,
-    backgroundColor: '#D9D9D9'
+    backgroundColor: Theme.colors.colorPrincipal,
+    color: '#fff'
   },
   inputError: {
     borderColor: '#931B1B'
@@ -140,12 +139,11 @@ const styles = StyleSheet.create({
     marginTop: -40
   },
   loginButton: {
-    borderColor: 'gray',
     width: 330,
     height: 50,
     marginTop: 40,
-    borderRadius: 30,
-    backgroundColor: '#D9D9D9',
+    borderRadius: 10,
+    backgroundColor: Theme.colors.colorPrincipal,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -179,12 +177,11 @@ const styles = StyleSheet.create({
     color: '#555'
   },
   registerButton: {
-    borderColor: 'gray',
     width: 330,
     height: 50,
     marginTop: 16,
-    borderRadius: 20,
-    backgroundColor: '#D9D9D9',
+    borderRadius: 10,
+    backgroundColor: Theme.colors.colorPrincipal,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -194,7 +191,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     borderBottomWidth: 1,
-    borderBottomColor: '#bbb',
+    borderBottomColor: Theme.colors.colorPrincipal,
     width: 88,
     marginHorizontal: 16
   },

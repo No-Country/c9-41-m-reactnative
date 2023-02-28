@@ -7,7 +7,7 @@ import {
   modifyProduct,
   recoverProduct,
   deleteProduct,
-  // findProducts, 
+  getDeletedProducts,
 } from "../controllers/productsControllers.js";
 
 const productsRouter = Router();
@@ -20,6 +20,6 @@ productsRouter
   .patch(verificateAdminRole, recoverProduct)
   .delete(verificateAdminRole, deleteProduct);
 
-// productsRouter.route("/search").get(findProducts);
+productsRouter.route("/deleted").get(verificateAdminRole, getDeletedProducts);
 
 export default productsRouter;

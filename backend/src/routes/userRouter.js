@@ -10,7 +10,13 @@ import {
   removeFromCart,
   getUserProfile,
   modifyUserProfile,
-  deleteUser
+  deleteUser,
+  createAddress,
+  getUserAddresses,
+  modifyAddress,
+  deleteAddress,
+  getUserSales,
+  getUserSaleDetails,
 } from "../controllers/userControllers.js";
 
 const userRouter = Router();
@@ -32,6 +38,17 @@ userRouter
   .route("/profile")
   .get(isLogIn, getUserProfile)
   .put(isLogIn, modifyUserProfile)
-  .delete(isLogIn, deleteUser)
+  .delete(isLogIn, deleteUser);
+
+userRouter
+  .route("/address")
+  .get(isLogIn, getUserAddresses)
+  .post(isLogIn, createAddress)
+  .put(isLogIn, modifyAddress)
+  .delete(isLogIn, deleteAddress);
+
+userRouter.route("/sales").get(isLogIn, getUserSales);
+
+userRouter.route("/sales/:saleId").get(isLogIn, getUserSaleDetails);
 
 export default userRouter;
