@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Product from "./product.js";
 
 const cartItemSchema = new mongoose.Schema({
   quantity: {
@@ -18,19 +19,24 @@ cartItemSchema.statics.findOneOrCreate = async function (
   user,
   quantity
 ) {
-  let cartItem = await this.findOne({ productId, userId: user._id });
-  let created = false;
-  if (!cartItem) {
-    created = true;
-    cartItem = await this.create({
-      userId: user._id,
-      productId,
-      quantity,
-    });
-    await user.cart.push(cartItem._id);
-    await user.save();
+  const product = await Product.findById(productId);
+  if (product.stock < quantity) {
+    throw new Error("Quantity not admited");
+  } else {
+    let cartItem = await this.findOne({ productId, userId: user._id });
+    let created = false;
+    if (!cartItem) {
+      created = true;
+      cartItem = await this.create({
+        userId: user._id,
+        productId,
+        quantity,
+      });
+      await user.cart.push(cartItem._id);
+      await user.save();
+    }
+    return [cartItem, created];
   }
-  return [cartItem, created];
 };
 
 cartItemSchema.statics.deleteCartItem = async function (cartItemId, user) {
