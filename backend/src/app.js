@@ -65,6 +65,8 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,
+      sameSite: "none",
+      secure: true,
     },
   })
 );
@@ -81,6 +83,7 @@ app.use((req, res, next) => {
   console.log("req.user", req.user);
   console.log("req.session.user", req.session);
   console.log("req.cookies", req.cookies);
+  console.log("passport.session", passport.session());
   next();
 });
 app.use("/auth", authRoutes);
