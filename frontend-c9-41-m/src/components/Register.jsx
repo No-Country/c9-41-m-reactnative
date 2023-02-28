@@ -120,7 +120,7 @@ export function Register () {
                 <TouchableOpacity style={styles.button} onPress={handleSubmit} disabled={isSubmitting}>
                   {
                     isSubmitting
-                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin color='#fff' /><Text style={{ marginLeft: 8 }}>Cargando...</Text></View>
+                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin color='#fff' /><Text style={{ marginLeft: 8, color: '#fff' }}>Cargando...</Text></View>
                       : <Text style={styles.buttonText}>Registrate</Text>
                   }
                 </TouchableOpacity>
