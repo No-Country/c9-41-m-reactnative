@@ -1,23 +1,26 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faArrowLeft, faCircle, faCreditCard } from '@fortawesome/free-solid-svg-icons'
-import Theme from '../../theme/Theme'
+import { faArrowLeft, faCircle, faCreditCard, faCross, faXmark } from '@fortawesome/free-solid-svg-icons'
+
 
 const MedioDePago = () => {
   return (
     <View style={styles.container}>
+      <View>
       <View style={styles.flecha}>
-        <TouchableOpacity>
-          <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} />
+        <TouchableOpacity style={styles.exit}>
+          <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} color={'#676767A6'} />
         </TouchableOpacity>
       </View>
+      
       <Text style={styles.title}> Elige medio de pago </Text>
+      </View>
       <View style={styles.medios}>
         <View style={styles.tipoPago}>
           <TouchableOpacity style={styles.buttonTipoPago}>
            <FontAwesomeIcon style={styles.icon} icon={faCircle} size={15} />
             <Text style={styles.text}> Mercado Pago </Text>
-           <FontAwesomeIcon style={styles.icon} icon={faCreditCard} size={15} />
+            <Image style={styles.image} source={require('../../assets/mercadopago.png')}/>
           </TouchableOpacity>
         </View>
         <View style={styles.tipoPago}>
@@ -51,6 +54,9 @@ const styles = StyleSheet.create({
 buttonTipoPago:{
   flexDirection:'row'
 },
+exit:{
+   flexDirection:'row'
+},
   flecha: {
     marginLeft: 16,
     marginTop: 32
@@ -59,7 +65,8 @@ buttonTipoPago:{
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 70
+    marginBottom: 70,
+    
   },
 
   tipoPago: {
@@ -75,7 +82,9 @@ buttonTipoPago:{
     marginRight: 5
   },
   text: {
-    marginBottom: 18
+    marginBottom: 18,
+    color:'#00000080'
+
   },
   total: {
     
@@ -85,12 +94,12 @@ buttonTipoPago:{
   },
   precio: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '700',
     marginRight:180
   },
   valor:{
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '800',
     marginRight:18
   },
   confirmarContainer:{
@@ -109,7 +118,11 @@ confirmarButton:{
   },
   confirmarText:{
     color:'#FFFFFF'
-  }
+  },
+  icon:{
+    color:'#00000000'
+  },
+  
 },
 
 )
