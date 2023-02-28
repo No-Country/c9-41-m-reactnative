@@ -36,7 +36,7 @@ const Login = ({ navigation }) => {
                 setError(data.error)
                 window.setTimeout(() => { setError('') }, 3000)
               } else {
-                navigation.navigate('Home')
+                navigation.navigate('Inicio')
               }
               resetForm()
             })
@@ -101,7 +101,7 @@ const Login = ({ navigation }) => {
       <LoginMedia large />
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>¿No tienes cuenta todavía?</Text>
-        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
+        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Registro')}>
           <Text style={{ color: '#fff' }}>Registro</Text>
         </TouchableOpacity>
       </View>
