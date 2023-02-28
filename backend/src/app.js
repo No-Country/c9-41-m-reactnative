@@ -62,7 +62,7 @@ app.use(
     saveUninitialized: true,
     name: "sessionNoCountry",
     cookie: {
-      // httpOnly: true,
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
@@ -78,7 +78,7 @@ passport.deserializeUser(User.deserializeUser());
 // Rutas
 app.use((req, res, next) => {
   console.log("req.user", req.user);
-  console.log("req.session.user", req.session.user);
+  console.log("req.session.user", req.session);
 
   next();
 });
@@ -89,6 +89,21 @@ app.use("/user", userRouter);
 app.use("/admin", adminRoutes);
 app.use("/shop", shopRoutes);
 app.use("/payment", paymentRouter);
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", [
+    `${process.env.PATH_FRONT}`,
+    `${process.env.PATH_FRONT_ADMIN}`,
+    `http://localhost:3000`,
+  ]);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 
 // Manejo errores
 app.use((err, req, res, next) => {
