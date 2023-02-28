@@ -33,7 +33,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: [`${process.env.PATH_FRONT}`, `${process.env.PATH_FRONT_ADMIN}`], //URL DEL FRONT!!
+    origin: [
+      `${process.env.PATH_FRONT}`,
+      `${process.env.PATH_FRONT_ADMIN}`,
+      `http://localhost:3000`,
+    ], //URL DEL FRONT!!
     credentials: true,
     methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
   })
