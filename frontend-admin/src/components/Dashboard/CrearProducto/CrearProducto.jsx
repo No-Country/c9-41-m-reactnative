@@ -54,6 +54,7 @@ function CrearProducto({}) {
   const [nombreImagenes, setNombreImagenes] = useState(Array(5).fill(""));
 
   const [loading, setLoading] = useState(false);
+  const [cargando, setCargando] = useState(false);
 
   const initialValues = {
     name: "",
@@ -155,7 +156,9 @@ function CrearProducto({}) {
 
   useEffect(() => {
     (async () => {
+      setCargando(true);
       await dispatch(getCategories());
+      setCargando(false);
     })();
 
     return () => {
@@ -165,188 +168,194 @@ function CrearProducto({}) {
 
   return (
     <div className={s.contenedorCrearProducto}>
-      <form
-        className={s.formularioCrearProducto}
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <InputFormulario
-          placeholder="Máximo 20 carácteres"
-          tipo="text"
-          name="name"
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          estiloError={touched.name && errors.name && true}
-          mostrarError={touched.name && errors.name && true}
-          msjError={errors.name}
-          estilos={s.inputFormCrear}
-          id={"name"}
-          label={"Nombre"}
-        />
-        <InputFormulario
-          placeholder="Entre $0,01 y $100.000.000"
-          tipo="number"
-          name="price"
-          value={values.price}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          estiloError={touched.price && errors.price && true}
-          mostrarError={touched.price && errors.price && true}
-          msjError={errors.price}
-          estilos={s.inputFormCrear}
-          id={"price"}
-          label={"Precio"}
-        />
-
-        <label
-          className={`${s.textareaLabelCrear} ${
-            touched.description && errors.description && s.error
-          }`}
-          htmlFor="descripcion"
+      {cargando ? (
+        <ClipLoader />
+      ) : (
+        <form
+          className={s.formularioCrearProducto}
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
         >
-          Descripción
-        </label>
-        <textarea
-          id="description"
-          placeholder="Máximo 150 caracteres"
-          name="description"
-          rows={5}
-          value={values.description}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className={`${s.input} ${
-            touched.description && errors.description && s.error
-          } ${s.textareaCrear}`}
-        />
-        {touched.description && errors.description && (
-          <p className={`${s.msjError} ${s.error}`}>{errors.description}</p>
-        )}
+          <InputFormulario
+            placeholder="Máximo 20 carácteres"
+            tipo="text"
+            name="name"
+            value={values.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            estiloError={touched.name && errors.name && true}
+            mostrarError={touched.name && errors.name && true}
+            msjError={errors.name}
+            estilos={s.inputFormCrear}
+            id={"name"}
+            label={"Nombre"}
+          />
+          <InputFormulario
+            placeholder="Entre $0,01 y $100.000.000"
+            tipo="number"
+            name="price"
+            value={values.price}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            estiloError={touched.price && errors.price && true}
+            mostrarError={touched.price && errors.price && true}
+            msjError={errors.price}
+            estilos={s.inputFormCrear}
+            id={"price"}
+            label={"Precio"}
+          />
 
-        <InputFormulario
-          placeholder="Minimo 1 unidad"
-          tipo="number"
-          name="stock"
-          value={values.stock}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          estiloError={touched.stock && errors.stock && true}
-          mostrarError={touched.stock && errors.stock && true}
-          msjError={errors.stock}
-          estilos={s.inputFormCrear}
-          id={"stock"}
-          label={"Stock"}
-        />
+          <label
+            className={`${s.textareaLabelCrear} ${
+              touched.description && errors.description && s.error
+            }`}
+            htmlFor="descripcion"
+          >
+            Descripción
+          </label>
+          <textarea
+            id="description"
+            placeholder="Máximo 150 caracteres"
+            name="description"
+            rows={5}
+            value={values.description}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`${s.input} ${
+              touched.description && errors.description && s.error
+            } ${s.textareaCrear}`}
+          />
+          {touched.description && errors.description && (
+            <p className={`${s.msjError} ${s.error}`}>{errors.description}</p>
+          )}
 
-        <div className={s.renglonSelects}>
+          <InputFormulario
+            placeholder="Minimo 1 unidad"
+            tipo="number"
+            name="stock"
+            value={values.stock}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            estiloError={touched.stock && errors.stock && true}
+            mostrarError={touched.stock && errors.stock && true}
+            msjError={errors.stock}
+            estilos={s.inputFormCrear}
+            id={"stock"}
+            label={"Stock"}
+          />
+
+          <div className={s.renglonSelects}>
+            <div
+              className={`${s.contenedorSelect} ${s.inputFormCrear} ${s.inputsRenglon}`}
+            >
+              <label
+                className={touched.onSale && errors.onSale && s.errorSelect}
+                htmlFor="onSale"
+              >
+                En oferta
+              </label>
+              <select
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.onSale}
+                className={`${s.inputSelect} ${
+                  touched.onSale && errors.onSale && s.errorSelect
+                }`}
+                name={"onSale"}
+                id={"onSale"}
+              >
+                <option value="" disabled={values.onSale.length ? true : false}>
+                  Selecciona una opción
+                </option>
+                <option value={true}>En oferta</option>
+                <option value={false}>Sin oferta</option>
+              </select>
+              {touched.onSale && errors.onSale && (
+                <div className={`${s.msjErrorSelect} ${s.errorSelect}`}>
+                  {errors.onSale}
+                </div>
+              )}
+            </div>
+
+            <InputFormulario
+              placeholder="Minimo 1"
+              tipo="number"
+              name="discount"
+              value={values.discount}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              estiloError={touched.discount && errors.discount && true}
+              mostrarError={touched.discount && errors.discount && true}
+              msjError={errors.discount}
+              estilos={s.inputFormCrear}
+              id="discount"
+              label={"% descuento"}
+            />
+          </div>
+
           <div
             className={`${s.contenedorSelect} ${s.inputFormCrear} ${s.inputsRenglon}`}
           >
             <label
-              className={touched.onSale && errors.onSale && s.errorSelect}
-              htmlFor="onSale"
+              className={
+                touched.categories && errors.categories && s.errorSelect
+              }
+              htmlFor="categories"
             >
-              En oferta
+              Categorias
             </label>
             <select
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.onSale}
+              value={values.categories}
               className={`${s.inputSelect} ${
-                touched.onSale && errors.onSale && s.errorSelect
-              }`}
-              name={"onSale"}
-              id={"onSale"}
+                touched.categories && errors.categories && s.errorSelect
+              } ${s.inputSelectCategories}`}
+              name="categories"
+              id="categories"
+              multiple={true}
             >
-              <option value="" disabled={values.onSale.length ? true : false}>
-                Selecciona una opción
+              <option value="" disabled={true}>
+                Puedes seleccionar mas de una opción manteniendo presionando
+                ctrl/cmd
               </option>
-              <option value={true}>En oferta</option>
-              <option value={false}>Sin oferta</option>
+              {categorias?.map((i, idx) => {
+                return (
+                  <option key={idx} value={i._id}>
+                    {i.name}
+                  </option>
+                );
+              })}
             </select>
-            {touched.onSale && errors.onSale && (
+            {touched.categories && errors.categories && (
               <div className={`${s.msjErrorSelect} ${s.errorSelect}`}>
-                {errors.onSale}
+                {errors.categories}
               </div>
             )}
           </div>
 
-          <InputFormulario
-            placeholder="Minimo 1"
-            tipo="number"
-            name="discount"
-            value={values.discount}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            estiloError={touched.discount && errors.discount && true}
-            mostrarError={touched.discount && errors.discount && true}
-            msjError={errors.discount}
-            estilos={s.inputFormCrear}
-            id="discount"
-            label={"% descuento"}
+          <ImagenesVender
+            imagen1={imagen1}
+            imagen2={imagen2}
+            imagen3={imagen3}
+            imagen4={imagen4}
+            imagen5={imagen5}
+            nombreImagenes={nombreImagenes}
+            setImagen1={setImagen1}
+            setImagen2={setImagen2}
+            setImagen3={setImagen3}
+            setImagen4={setImagen4}
+            setImagen5={setImagen5}
+            setNombreImagenes={setNombreImagenes}
           />
-        </div>
 
-        <div
-          className={`${s.contenedorSelect} ${s.inputFormCrear} ${s.inputsRenglon}`}
-        >
-          <label
-            className={touched.categories && errors.categories && s.errorSelect}
-            htmlFor="categories"
-          >
-            Categorias
-          </label>
-          <select
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.categories}
-            className={`${s.inputSelect} ${
-              touched.categories && errors.categories && s.errorSelect
-            } ${s.inputSelectCategories}`}
-            name="categories"
-            id="categories"
-            multiple={true}
-          >
-            <option value="" disabled={true}>
-              Puedes seleccionar mas de una opción manteniendo presionando
-              ctrl/cmd
-            </option>
-            {categorias?.map((i, idx) => {
-              return (
-                <option key={idx} value={i._id}>
-                  {i.name}
-                </option>
-              );
-            })}
-          </select>
-          {touched.categories && errors.categories && (
-            <div className={`${s.msjErrorSelect} ${s.errorSelect}`}>
-              {errors.categories}
-            </div>
+          {!loading ? (
+            <Button type="submit" text="Crear producto" />
+          ) : (
+            <ClipLoader />
           )}
-        </div>
-
-        <ImagenesVender
-          imagen1={imagen1}
-          imagen2={imagen2}
-          imagen3={imagen3}
-          imagen4={imagen4}
-          imagen5={imagen5}
-          nombreImagenes={nombreImagenes}
-          setImagen1={setImagen1}
-          setImagen2={setImagen2}
-          setImagen3={setImagen3}
-          setImagen4={setImagen4}
-          setImagen5={setImagen5}
-          setNombreImagenes={setNombreImagenes}
-        />
-
-        {!loading ? (
-          <Button type="submit" text="Crear producto" />
-        ) : (
-          <ClipLoader />
-        )}
-      </form>
+        </form>
+      )}
     </div>
   );
 }
