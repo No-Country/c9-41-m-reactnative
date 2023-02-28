@@ -6,8 +6,10 @@ import Home from './src/components/Home/Home'
 import Categories from './src/components/Categories'
 import MedioDePago from './src/components/MedioDePago'
 import { Favorites } from './src/components/Favorites/Favorites'
+import NotFound from './src/components/NotFound'
 
 const Stack = createNativeStackNavigator()
+
 export default function App () {
   return (
     <NavigationContainer>
@@ -18,6 +20,7 @@ export default function App () {
         <Stack.Screen name='Carta' component={Categories} />
         <Stack.Screen name='Carrito' component={MedioDePago} />
         <Stack.Screen name='Favoritos' component={Favorites} />
+        <Stack.Screen name='Not Found' component={NotFound} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
