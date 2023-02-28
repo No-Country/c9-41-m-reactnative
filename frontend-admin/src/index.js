@@ -9,9 +9,8 @@ import "./index.css";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-axios.defaults.baseURL = process.env.PATH_BACK || "http://localhost:3001";
-
-console.log("process.env.PATH_BACK", process.env.PATH_BACK);
+// axios.defaults.baseURL = process.env.PATH_BACK || "http://localhost:3001";
+axios.defaults.baseURL = "https://nocountry.onrender.com";
 
 root.render(
   <React.StrictMode>
