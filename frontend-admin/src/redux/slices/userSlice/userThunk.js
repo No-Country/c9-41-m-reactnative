@@ -8,10 +8,6 @@ export function loginUser(user) {
         method: "POST",
         data: user,
         withCredentials: true,
-        // headers: {
-        //   "Access-Control-Allow-Origin": "*",
-        //   "Content-Type": "application/json",
-        // },
         url: "/auth/signin",
       });
       if (

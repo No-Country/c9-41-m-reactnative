@@ -65,8 +65,8 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "none",
-      secure: true,
+      // sameSite: "none",
+      // secure: true,
     },
   })
 );
@@ -81,8 +81,7 @@ passport.deserializeUser(User.deserializeUser());
 // Rutas
 app.use((req, res, next) => {
   console.log("req.user", req.user);
-  console.log("req.session", req.session);
-  console.log("req.cookies", req.cookies);
+  console.log("req.session.user", req.session);
   next();
 });
 app.use("/auth", authRoutes);
