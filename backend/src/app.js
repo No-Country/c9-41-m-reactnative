@@ -53,23 +53,44 @@ app.use((req, res, next) => {
 });
 
 // SESSION
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl: DB_URI,
-    }),
-    secret: `${SESSION_SECRET}`,
-    resave: false,
-    saveUninitialized: true,
-    name: "sessionNoCountry",
-    cookie: {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "none",
-      secure: true,
-    },
-  })
-);
+
+const sessionConfig = {
+  store: MongoStore.create({
+    mongoUrl: DB_URI,
+  }),
+  secret: `${SESSION_SECRET}`,
+  name: "sessionNoCountry",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    sameSite: "strict", // THIS is the config you are looing for.
+  },
+};
+
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1); // trust first proxy
+  sessionConfig.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sessionConfig));
+
+// app.use(
+//   session({
+//     store: MongoStore.create({
+//       mongoUrl: DB_URI,
+//     }),
+//     secret: `${SESSION_SECRET}`,
+//     name: "sessionNoCountry",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       httpOnly: true,
+//       maxAge: 1000 * 60 * 60 * 24,
+//       sameSite: "none",
+//       secure: true,
+//     },
+//   })
+// );
 
 // PASSPORT
 app.use(passport.initialize());
