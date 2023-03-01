@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     paddingLeft: 50,
     paddingStart: 50,
-    width: 360,
+    width: 328,
     height: 55,
     marginTop: 20,
     borderRadius: 10,
-    backgroundColor: '#D9D9D9'
+    backgroundColor: '#FB6D3B'
   }
 })

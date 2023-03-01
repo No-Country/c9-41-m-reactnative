@@ -1,13 +1,13 @@
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 
 const Header = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Hola, Claudia.</Text>
-      <Image
+      {/* <Image
         source={require('../../../assets/usuario.png')}
         style={styles.image}
-      />
+      /> */}
     </View>
   )
 }

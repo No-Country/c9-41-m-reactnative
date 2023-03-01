@@ -8,6 +8,7 @@ import { LoginMedia } from './LoginMedia'
 import validationSchemaRegister from '../utils/register/validation'
 import registerSubmit from '../utils/register/registerSubmit'
 import RegisterModal from './RegisterModal'
+import Theme from '../../theme/Theme'
 
 library.add(faSpinner)
 export function Register () {
@@ -96,7 +97,7 @@ export function Register () {
                     secureTextEntry={passwordHidden}
                   />
                   <TouchableOpacity onPress={handlePasswordVisibility} style={styles.passwordInput}>
-                    <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} />
+                    <FontAwesomeIcon icon={passwordHidden ? faEyeSlash : faEye} size={24} color={Theme.colors.colorPrincipal} />
                   </TouchableOpacity>
                 </View>
                 {touched.password && errors.password
@@ -119,7 +120,7 @@ export function Register () {
                 <TouchableOpacity style={styles.button} onPress={handleSubmit} disabled={isSubmitting}>
                   {
                     isSubmitting
-                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin /><Text style={{ marginLeft: 8 }}>Cargando...</Text></View>
+                      ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin color='#fff' /><Text style={{ marginLeft: 8, color: '#fff' }}>Cargando...</Text></View>
                       : <Text style={styles.buttonText}>Registrate</Text>
                   }
                 </TouchableOpacity>
@@ -139,18 +140,18 @@ export function Register () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Theme.colors.colorPrincipal,
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
   formContainer: {
-    backgroundColor: '#eee',
+    backgroundColor: Theme.colors.colorTerciario,
     alignItems: 'center',
     paddingTop: 48,
-    height: '90%',
+    height: '85%',
     width: '100%',
-    borderTopLeftRadius: 80,
-    borderTopRightRadius: 80
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40
   },
   input: {
     width: '90%',
@@ -165,13 +166,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 12,
-    backgroundColor: '#bbb',
-    paddingVertical: 8,
-    borderRadius: 9999
+    backgroundColor: Theme.colors.colorPrincipal,
+    paddingVertical: 12,
+    borderRadius: 10
   },
   buttonText: {
     textAlign: 'center',
-    color: '#555'
+    color: '#fff'
   },
   text: {
     color: '#888'
