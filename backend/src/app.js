@@ -63,7 +63,7 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    sameSite: "strict", // THIS is the config you are looing for.
+    sameSite: "none", // THIS is the config you are looing for.
   },
 };
 
@@ -102,7 +102,7 @@ passport.deserializeUser(User.deserializeUser());
 // Rutas
 app.use((req, res, next) => {
   console.log("req.user", req.user);
-  console.log("req.session.user", req.session);
+  console.log("req.session", req.session);
   next();
 });
 app.use("/auth", authRoutes);
