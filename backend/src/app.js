@@ -60,8 +60,8 @@ const sessionConfig = {
   }),
   secret: `${SESSION_SECRET}`,
   name: "sessionNoCountry",
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     sameSite: "none", // THIS is the config you are looing for.
   },
