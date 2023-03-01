@@ -17,9 +17,11 @@ function Categorias() {
 
   const { categories } = useSelector((e) => e.products);
 
-  function handleDeleteCategory(cateogryId) {
+  async function handleDeleteCategory(cateogryId) {
     if (window.confirm("Seguro desea eliminar la categoria?")) {
-      dispatch(deleteCategory(cateogryId));
+      setLoading(true);
+      await dispatch(deleteCategory(cateogryId));
+      setLoading(false);
     }
   }
 

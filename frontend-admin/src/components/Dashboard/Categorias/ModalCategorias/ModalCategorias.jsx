@@ -94,7 +94,7 @@ function ModalCategorias({ categoria, setModal }) {
           text="Cancelar"
           onClick={handleClickCerrar}
           id="botonCerrar"
-          style={s.botonCerrar}
+          style={s.boton}
         />
       </div>
     </div>
