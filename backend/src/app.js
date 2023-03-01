@@ -74,24 +74,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(session(sessionConfig));
 
-// app.use(
-//   session({
-//     store: MongoStore.create({
-//       mongoUrl: DB_URI,
-//     }),
-//     secret: `${SESSION_SECRET}`,
-//     name: "sessionNoCountry",
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       httpOnly: true,
-//       maxAge: 1000 * 60 * 60 * 24,
-//       sameSite: "none",
-//       secure: true,
-//     },
-//   })
-// );
-
 // PASSPORT
 app.use(passport.initialize());
 app.use(passport.session());
@@ -101,8 +83,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // Rutas
 app.use((req, res, next) => {
-  console.log("req.user", req.user);
-  console.log("req.session", req.session);
+  console.log("req.session", req.session.passport);
   next();
 });
 app.use("/auth", authRoutes);
