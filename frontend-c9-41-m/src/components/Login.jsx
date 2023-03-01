@@ -17,7 +17,10 @@ const Login = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/logo-elbuengusto.png')} style={styles.logo} />
+      <Image
+        source={require('../../assets/logo-elbuengusto.png')}
+        style={styles.logo}
+      />
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={Yup.object({
@@ -115,12 +118,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo: {
-    width: 214,
-    height: 150,
-    marginVertical: 32
-
+    marginTop: 50,
+    marginRight: 30,
+    marginBottom: 10
   },
   inputlogin: {
+    marginLeft: 7,
     padding: 10,
     paddingStart: 50,
     width: 330,
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     backgroundColor: Theme.colors.colorPrincipal,
+    fontFamily: Theme.fontWeights.bold,
     color: '#fff'
   },
   inputError: {
@@ -136,11 +140,13 @@ const styles = StyleSheet.create({
   forgotText: {
     marginLeft: 190,
     fontSize: 12,
-    marginTop: -40
+    marginTop: -40,
+    fontFamily: Theme.fontWeights.regular
   },
   loginButton: {
     width: 330,
     height: 50,
+    marginLeft: 7,
     marginTop: 40,
     borderRadius: 10,
     backgroundColor: Theme.colors.colorPrincipal,
@@ -154,17 +160,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     mail: {
       bottom: 37,
-      left: 10,
+      left: 15,
       zIndex: 1
     },
     lock: {
       bottom: 37,
-      left: 10,
+      left: 15,
       zIndex: 1
     },
     eye: {
       bottom: 60,
-      left: 290,
+      left: 300,
       zIndex: 1
     }
   },
