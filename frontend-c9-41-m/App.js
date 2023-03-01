@@ -13,11 +13,11 @@ export default function App () {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='Register' component={Register} />
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Categories' component={Categories} />
-        <Stack.Screen name='MediodePago' component={MedioDePago} />
-        <Stack.Screen name='Favorites' component={Favorites} />
+        <Stack.Screen name='Registro' component={Register} />
+        <Stack.Screen name='Inicio' component={Home} />
+        <Stack.Screen name='Carta' component={Categories} />
+        <Stack.Screen name='Carrito' component={MedioDePago} />
+        <Stack.Screen name='Favoritos' component={Favorites} />
       </Stack.Navigator>
     </NavigationContainer>
   )
