@@ -94,15 +94,13 @@ const MedioDePago = ({ navigation }) => {
         <Text style={styles.precio}> Total a Pagar</Text>
         <Text style={styles.valor}> $1800</Text>
       </View>
-      <View >
+      <View  style = {styles.confirmarContainer}>
         <TouchableOpacity >
         <Button
-        title="Confirm"
+        title="Confirmar"
         disabled={!mercadoPago && !efectivo && !retiroLocal}
         onPress={confirmar}
-        containerStyle={styles.confirmarContainer}
-        buttonStyle={styles.confirmarButton
-        }
+        buttonStyle={styles.confirmarButton}
       />
          <Text style={styles.confirmarText}> Confirmar </Text>
         </TouchableOpacity>
@@ -173,7 +171,7 @@ exit:{
   },
   confirmarContainer:{
   alignItems:'center',
-  marginTop:50
+  marginTop:20
   },  
 confirmarButton:{
   borderColor: 'gray',
