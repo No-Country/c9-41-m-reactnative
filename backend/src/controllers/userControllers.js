@@ -29,12 +29,16 @@ export const removeFavorite = wrapAsync(async (req, res, next) => {
 });
 
 export const getCart = wrapAsync(async (req, res, next) => {
-  const user = await req.user.populate("cart", [
-    "-__v",
-    "-updatedAt",
-    "-createdAt",
-    "-active",
-  ]);
+  const user = await req.user.populate({
+    path: "cart",
+    select: ["-userId", "-__v", "-updatedAt", "-createdAt", "-active"],
+    populate: {
+      path: "productId",
+      model: "Product",
+      select: ["-__v", "-updatedAt", "-createdAt", "-active", "-sales"],
+    },
+  });
+
   return res.status(200).json({ cart: user.cart });
 });
 
