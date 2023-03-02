@@ -4,10 +4,10 @@
     "slug": "El Buen Gusto",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo-elbuengusto.png",
+    "icon": "./assets/elbuengusto.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo-elbuengusto.png",
+      "image": "./assets/elbuengusto.png",
       "resizeMode": "contain",
       "backgroundColor": "hsla(0, 0%, 100%, 1)"
     },
@@ -22,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo-elbuengusto.png",
+        "foregroundImage": "./assets/elbuengusto.png",
         "backgroundColor": "hsla(0, 0%, 100%, 1)"
       }
     },
     "web": {
-      "favicon": "./assets/logo-elbuengusto.png"
+      "favicon": "./assets/elbuengusto.png"
     }
   }
 }

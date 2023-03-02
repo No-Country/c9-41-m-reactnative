@@ -5,15 +5,15 @@ import Theme from '../../../theme/Theme'
 export const ImageSlider = () => {
   return (
     <View>
-      <Text style={styles.title}>Volvé a disfrutarlos</Text>
+      <Text style={styles.title}>Te puede interesar</Text>
       <ScrollView horizontal style={styles.container}>
         <TouchableOpacity>
           <ImagedCarouselCard
-            style={{ marginLeft: 20 }}
+            style={styles.fideos}
             overlayHeight={0}
             width={85}
             height={85}
-            source={require('../../../assets/home-assets/burguer.png')}
+            source={require('../../../assets/home-assets/b.png')}
           />
         </TouchableOpacity>
         <TouchableOpacity>
@@ -76,5 +76,10 @@ const styles = StyleSheet.create({
     color: Theme.colors.colorLetras,
     marginLeft: 25,
     marginBottom: 15
+  },
+  fideos: {
+    backgroundColor: Theme.colors.colorPrincipal,
+    borderRadius: 15,
+    marginLeft: 20
   }
 })

@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native'
+import Theme from '../../../theme/Theme'
 
 export default function CategoryCard ({ name }) {
   return (
@@ -18,7 +19,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 8
   },
   name: {
-    color: '#555',
+    fontFamily: Theme.fontWeights.bold,
+    color: Theme.colors.colorLetras,
     marginTop: 12,
     marginLeft: 12
   }
