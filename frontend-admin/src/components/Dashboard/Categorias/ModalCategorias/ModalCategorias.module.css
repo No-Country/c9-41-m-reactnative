@@ -24,11 +24,11 @@
   margin: 5% 0;
 }
 
-.botonCerrar {
+.boton {
   background-color: red;
   width: fit-content;
 }
 
-.botonCerrar:hover {
+.boton:hover {
   background-color: rgb(184, 32, 32);
 }

@@ -1,4 +1,4 @@
-import { setUsers, modifyUser } from "./usersSlice";
+import { setUsers, modifyUser, setUserDetails } from "./usersSlice";
 import axios from "axios";
 
 export function getUsers() {
@@ -62,3 +62,18 @@ export function banUser(userId) {
   };
 }
 
+export function getUserDetails(userId) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios({
+        method: "GET",
+        withCredentials: true,
+        url: "/admin/user/" + userId,
+      });
+      console.log(data);
+      return dispatch(setUserDetails(data.userDetails));
+    } catch (error) {
+      alert("Hubo un problema al obtener los datos de usuario");
+    }
+  };
+}

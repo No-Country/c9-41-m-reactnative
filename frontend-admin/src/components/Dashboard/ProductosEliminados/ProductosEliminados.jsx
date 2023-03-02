@@ -16,14 +16,12 @@ function ProductosEliminados() {
 
   const { products } = useSelector((e) => e.products);
 
-  function handleRecuperar(productId) {
+  async function handleRecuperar(productId) {
     if (window.confirm("Seguro desea recuperar el producto?")) {
-      dispatch(recoveryProduct(productId));
+      setLoading(true);
+      await dispatch(recoveryProduct(productId));
+      setLoading(false);
     }
-  }
-
-  function handleAbrirModal(cat, accion) {
-    accion === "abrir" ? setModal({}) : setModal(cat);
   }
 
   useEffect(() => {
