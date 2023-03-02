@@ -7,12 +7,15 @@ import Navbar from '../Home/NavBar'
 export default function Categories () {
   const [categories, setCategories] = useState([])
   const [categoriesFilter, setCategoriesFilter] = useState([])
+  const [loader, setLoader] = useState(false)
   useEffect(() => {
+    setLoader(true)
     getCategories()
       .then((data) => {
         setCategories(data)
         setCategoriesFilter(data)
       })
+      .finally(() => setLoader(false))
   }, [])
   const handleSearch = (search) => {
     setCategoriesFilter(
@@ -23,7 +26,8 @@ export default function Categories () {
   return (
     <View style={styles.container}>
       <CategorySearch handleSearch={handleSearch} />
-      {!categoriesFilter.length && <Text>No se encontraron categorías para la búsqueda.</Text>}
+      {loader && <Text>Cargando categorías...</Text>}
+      {!loader && !categoriesFilter.length && <Text>No se encontraron categorías para la búsqueda.</Text>}
       {categoriesFilter.length < categories.length &&
         <TouchableOpacity onPress={resetCategories}>
           <Text style={styles.showAll}>Mostrar Todas las Categorías</Text>
@@ -33,9 +37,9 @@ export default function Categories () {
         numColumns={2}
         data={categoriesFilter}
         renderItem={({ item }) => {
-          return <CategoryCard name={item.name} />
+          return <CategoryCard name={item.name} image={item.image.url} />
         }}
-        keyExtractor={({ id }) => id}
+        keyExtractor={({ _id }) => _id}
         scrollEnabled
       />
       <Navbar />
