@@ -9,12 +9,14 @@ import {
 } from "../../../redux/slices/usersSlice/usersThunk";
 import { BarLoader, PulseLoader } from "react-spinners";
 import { setUsers } from "../../../redux/slices/usersSlice/usersSlice";
+import ModalUsuario from "./ModalUsuario/ModalUsuario";
 
 function Usuarios() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [loadingRol, setLoadingRol] = useState(false);
   const [loadingActive, setLoadingActive] = useState(false);
+  const [detalleUsuario, setDetalleUsuario] = useState(false);
 
   const { users } = useSelector((e) => e.users);
 
@@ -51,7 +53,9 @@ function Usuarios() {
     }
   }
 
-  function handleDetalles(user) {}
+  function handleDetalles(user) {
+    setDetalleUsuario(user);
+  }
 
   useEffect(() => {
     (async () => {
@@ -124,7 +128,10 @@ function Usuarios() {
                       </select>
                     )}
                   </td>
-                  <td onClick={() => handleDetalles(i)} className={s.cursor}>
+                  <td
+                    onClick={() => handleDetalles(i._id)}
+                    className={s.cursor}
+                  >
                     D
                   </td>
                 </tr>
@@ -133,6 +140,12 @@ function Usuarios() {
           </tbody>
         </table>
       )}
+      {detalleUsuario ? (
+        <ModalUsuario
+          detalleUsuario={detalleUsuario}
+          setDetalleUsuario={setDetalleUsuario}
+        />
+      ) : null}
     </div>
   );
 }

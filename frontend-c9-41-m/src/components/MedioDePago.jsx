@@ -1,9 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft, faCircle, faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import { useNavigation } from '@react-navigation/native'
 
 const MedioDePago = ({ route }) => {
   const { total } = route.params
+  const navigation = useNavigation()
+
   return (
     <View>
       <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} />
@@ -33,7 +36,7 @@ const MedioDePago = ({ route }) => {
         <Text style={styles.total}>Total a pagar                                      ${total}</Text>
       </View>
       <View>
-        <Text styel={styles.añadir}>Añadir</Text>
+        <Text style={styles.añadir} onPress={() => navigation.navigate('ViewConfirmation')}>Confirmar</Text>
       </View>
 
     </View>

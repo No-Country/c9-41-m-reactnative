@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo: {
-    marginTop: 50,
-    marginRight: 30,
-    marginBottom: 10
+    right: '2%',
+    resizeMode: 'center',
+    margin: -40
   },
   inputlogin: {
     marginLeft: 7,

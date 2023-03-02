@@ -22,10 +22,12 @@ function Productos({}) {
 
   const { products } = useSelector((e) => e.products);
 
-  function handleDeleteProduct(productId) {
+ async function handleDeleteProduct(productId) {
     console.log("productId", productId);
     if (window.confirm("Seguro desea eliminar el producto?")) {
-      dispatch(deleteProduct(productId));
+      setLoading(true);
+      await dispatch(deleteProduct(productId));
+      setLoading(false);
     }
   }
 

@@ -32,25 +32,31 @@ export default function CategorySearch ({ handleSearch }) {
   )
 }
 const styles = StyleSheet.create({
-  searchContainer: {
-    width: '100%',
-    marginVertical: 16,
-    alignItems: 'center',
-    position: 'relative'
-  },
   searchInput: {
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: Theme.colors.colorPrincipal,
+    bottom: 2,
+    width: '60%',
+    marginRight: 55
+  },
+  searchContainer: {
+    backgroundColor: Theme.colors.colorTerciario,
+    height: 45,
+    margin: 20,
+    padding: 10,
+    borderRadius: 10,
+    borderColor: Theme.colors.colorPrincipal,
+    borderWidth: 2,
+    position: 'relative',
     width: '90%',
-    height: 48,
-    borderRadius: 12,
-    paddingLeft: 8,
-    paddingRight: 40
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row-reverse'
   },
   searchIcon: {
     position: 'absolute',
-    right: '4%',
+    right: '1%',
     padding: 12
   }
 })
