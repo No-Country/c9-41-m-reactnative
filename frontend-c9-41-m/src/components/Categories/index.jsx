@@ -4,6 +4,7 @@ import getCategories from '../../utils/categories/getCategories'
 import CategoryCard from './CategoryCard'
 import CategorySearch from './CategorySearch'
 import Navbar from '../Home/NavBar'
+
 export default function Categories () {
   const [categories, setCategories] = useState([])
   const [categoriesFilter, setCategoriesFilter] = useState([])
@@ -37,7 +38,7 @@ export default function Categories () {
         numColumns={2}
         data={categoriesFilter}
         renderItem={({ item }) => {
-          return <CategoryCard name={item.name} image={item.image.url} />
+          return <CategoryCard name={item.name} image={item.image.url} id={item._id} />
         }}
         keyExtractor={({ _id }) => _id}
         scrollEnabled
