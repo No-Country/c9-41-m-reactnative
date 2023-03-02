@@ -1,9 +1,11 @@
+import { useNavigation } from '@react-navigation/native'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Theme from '../../../theme/Theme'
 
 export default function ProductCard ({ product }) {
+  const navigation = useNavigation()
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => { navigation.navigate('Detalle', { product }) }}>
       <Image source={{ uri: product.images[0].url }} style={{ width: 90, height: 90 }} resizeMode='contain' />
       <View style={styles.cardInfo}>
         <Text style={styles.text}>{product.name.toUpperCase()}</Text>
