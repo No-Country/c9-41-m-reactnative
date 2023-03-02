@@ -9,6 +9,7 @@ import { Favorites } from './src/components/Favorites/Favorites'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import { useFonts } from 'expo-font'
+import NotFound from './src/components/NotFound'
 
 const Stack = createNativeStackNavigator()
 
@@ -40,6 +41,7 @@ export default function App () {
         <Stack.Screen name='Carta' component={Categories} />
         <Stack.Screen name='Carrito' component={MedioDePago} />
         <Stack.Screen name='Favoritos' component={Favorites} />
+        <Stack.Screen name='Not Found' component={NotFound} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

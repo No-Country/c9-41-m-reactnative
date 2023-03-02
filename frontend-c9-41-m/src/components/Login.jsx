@@ -89,7 +89,7 @@ const Login = ({ navigation }) => {
                 {
                     isSubmitting
                       ? <View style={{ flexDirection: 'row' }}><FontAwesomeIcon icon={faSpinner} size={24} spin color='#fff' /><Text style={{ marginLeft: 8, color: '#fff' }}>Cargando...</Text></View>
-                      : <Text style={{ color: '#fff' }}>Iniciar Sesión</Text>
+                      : <Text style={styles.registroText}>Iniciar Sesión</Text>
                   }
               </TouchableOpacity>
             </View>
@@ -105,7 +105,7 @@ const Login = ({ navigation }) => {
       <View style={styles.registerContainer}>
         <Text style={styles.registerText}>¿No tienes cuenta todavía?</Text>
         <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Registro')}>
-          <Text style={{ color: '#fff' }}>Registro</Text>
+          <Text style={styles.registroText}>Registro</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     backgroundColor: Theme.colors.colorPrincipal,
-    fontFamily: Theme.fontWeights.bold,
+    fontFamily: Theme.fontWeights.regular,
     color: '#fff'
   },
   inputError: {
@@ -179,8 +179,13 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   registerText: {
+    fontFamily: Theme.fontWeights.regular,
     fontSize: 10,
     color: '#555'
+  },
+  registroText: {
+    fontFamily: Theme.fontWeights.regular,
+    color: '#fff'
   },
   registerButton: {
     width: 330,

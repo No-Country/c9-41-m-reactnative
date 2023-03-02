@@ -1,30 +1,29 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import NavBar from './NavBar'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import ButtonProfile from './ButtonProfile'
-const buttons = ['Privacidad', 'Métodos de pago', 'Ubicación', 'Ayuda']
+const buttons  = ['Privacidad', 'Métodos de pago', 'Ubicación', 'Ayuda', ]
 const Profile = () => {
   return (
     <View style={styles.container}>
-      <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} />
+      <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24}  color={'#676767A6'}/>
       <View style={styles.header}>
         <Text style={styles.profile}> Perfil </Text>
         <Image
           style={styles.image}
-          source={require('../../assets/profile.png')}
+          source={require('../../assets/Profile.png')}
         />
         <Text style={styles.name}>Claudia Gomez</Text>
       </View>
       <View style={styles.seccion}>
         {
         buttons.map((b, key) => {
-          return <ButtonProfile text={b} key={key} />
+          return <ButtonProfile text={b} key={key} style={styles.boton} />
         })
        }
       </View>
 
-      <NavBar />
+      
 
     </View>
   )
@@ -41,7 +40,8 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   profile: {
-    fontSize: 20,
+    fontSize: 18,
+    color:'#0000009C',
     marginTop: 60,
     display: 'flex',
     textAlign: 'center'
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 17,
+    color:'#0000009C',
     textAlign: 'center'
   },
   secciones: {
