@@ -34,11 +34,11 @@ export default function CategorySearch ({ handleSearch }) {
 const styles = StyleSheet.create({
   searchInput: {
     backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: Theme.colors.colorPrincipal,
     bottom: 2,
-    width: '60%',
-    marginRight: 55
+    width: '90%',
+    height: 36,
+    borderRadius: 10,
+    marginLeft: 55
   },
   searchContainer: {
     backgroundColor: Theme.colors.colorTerciario,
