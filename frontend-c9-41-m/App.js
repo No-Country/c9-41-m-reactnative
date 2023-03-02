@@ -6,11 +6,32 @@ import Home from './src/components/Home/Home'
 import Categories from './src/components/Categories'
 import MedioDePago from './src/components/MedioDePago'
 import { Favorites } from './src/components/Favorites/Favorites'
+import * as SplashScreen from 'expo-splash-screen'
+import { useEffect } from 'react'
+import { useFonts } from 'expo-font'
 import NotFound from './src/components/NotFound'
 
 const Stack = createNativeStackNavigator()
 
 export default function App () {
+  const [fontsLoaded] = useFonts({
+    'Nunito-Regular': require('./assets/fonts/Nunito-Regular.ttf'),
+    'Nunito-Bold': require('./assets/fonts/Nunito-Bold.ttf'),
+    'Nunito-ExtraBold': require('./assets/fonts/Nunito-ExtraBold.ttf')
+  })
+
+  useEffect(() => {
+    async function prepare () {
+      await SplashScreen.preventAutoHideAsync()
+    }
+    prepare()
+  }, [])
+
+  if (!fontsLoaded) {
+    return undefined
+  } else {
+    SplashScreen.hideAsync()
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
