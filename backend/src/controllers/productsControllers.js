@@ -1,11 +1,12 @@
 import wrapAsync from "../../utils/wrapAsync.js";
+import cloudinary from "../cloudinary/cloudinary.js";
 import Product from "../db/models/product.js";
 
 export const getProducts = wrapAsync(async (req, res, next) => {
   let products = [];
   req.user?.role === "admin" || req.user?.role === "superadmin"
-    ? (products = await Product.find())
-    : (products = await Product.find({ active: true }, [
+    ? (products = await Product.find({ active: true }))
+    : (products = await Product.find({ active: true, stock: { $gt: 0 } }, [
         "-active",
         "-createdAt",
         "-updatedAt",
@@ -16,6 +17,11 @@ export const getProducts = wrapAsync(async (req, res, next) => {
 });
 
 export const createProduct = wrapAsync(async (req, res, next) => {
+  let categories = [];
+  if (req.body.categories?.includes(",")) {
+    categories = req.body.categories.split(",");
+    req.body.categories = categories;
+  }
   const product = await Product.create(req.body);
   if (req.files?.length) {
     for (const image of req.files) {
@@ -30,6 +36,12 @@ export const createProduct = wrapAsync(async (req, res, next) => {
 });
 
 export const modifyProduct = wrapAsync(async (req, res, next) => {
+  console.log("req.body", req.body);
+  let categories = [];
+  if (req.body.categories?.includes(",")) {
+    categories = req.body.categories.split(",");
+    req.body.categories = categories;
+  }
   const { id } = req.body;
   const product = await Product.findOneAndUpdate({ _id: id }, req.body, {
     new: true,
@@ -77,14 +89,9 @@ export const deleteProduct = wrapAsync(async (req, res, next) => {
   return res.status(200).json({ message: "Removed successfully" });
 });
 
-// export const findProducts = wrapAsync(async (req, res, next) => {
-//   console.log(req.query);
-//   const products = await Product.find(
-//     {
-//       name: { $regex: `${req.query.find}`, $options: "i" },
-//       active: true,
-//     },
-//     ["-active", "-createdAt", "-updatedAt", "-__v"]
-//   );
-//   res.status(200).json({ products });
-// });
+export const getDeletedProducts = wrapAsync(async (req, res, next) => {
+  const products = await Product.find({
+    active: false,
+  });
+  res.status(200).json({ products });
+});

@@ -5,7 +5,7 @@ export const verificateAdminRole = wrapAsync(async (req, res, next) => {
   let user = await User.findOne({
     email: req.user?.email,
   });
-  if (user.role === "admin" || user.role === "superadmin") {
+  if (user?.role === "admin" || user?.role === "superadmin") {
     next();
   } else {
     return res.status(403).send("Not authorized");
@@ -16,7 +16,7 @@ export const verificateSuperAdminRole = wrapAsync(async (req, res, next) => {
   let user = await User.findOne({
     email: req.user?.username,
   });
-  if (user.role === "superadmin") {
+  if (user?.role === "superadmin") {
     next();
   } else {
     return res.status(403).send("Not authorized");

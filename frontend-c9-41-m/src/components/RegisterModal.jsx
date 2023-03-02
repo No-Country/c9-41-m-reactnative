@@ -1,4 +1,5 @@
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import Theme from '../../theme/Theme'
 
 export default function RegisterModal ({ message, modal, setModal }) {
   return (
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: '#ddd',
+    backgroundColor: Theme.colors.colorPrincipal,
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -54,16 +55,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F194FF'
   },
   buttonClose: {
-    backgroundColor: '#aaa'
+    backgroundColor: '#fff'
   },
   textStyle: {
-    color: 'white',
+    color: '#000',
     fontWeight: 'bold',
     textAlign: 'center'
   },
   modalText: {
     marginBottom: 15,
-    color: '#555',
+    color: '#fff',
     fontSize: 24,
     textAlign: 'center'
   }

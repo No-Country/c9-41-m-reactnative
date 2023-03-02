@@ -1,87 +1,97 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faArrowLeft, faCircle, faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { CheckBox, Button } from 'react-native-elements'
 import { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-
-
-
 
 const MedioDePago = ({ navigation }) => {
-  const navigation = useNavigation()
-  
-  const [mercadoPago, setMercadoPago] = useState(false);
-  const [efectivo, setEfectivo] = useState(false);
-  const [retiroLocal, setRetiroLocal] = useState(false);
+  const [mercadoPago, setMercadoPago] = useState(false)
+  const [efectivo, setEfectivo] = useState(false)
+  const [retiroLocal, setRetiroLocal] = useState(false)
 
-  
-
+  const confirmar = () => {
+    if (mercadoPago) {
+      navigation.navigate('ConfirmationView')
+    } else if (efectivo) {
+      navigation.navigate('ConfirmationView')
+    } else if (retiroLocal) {
+      navigation.navigate('ConfirmationView')
+    }
+  }
   return (
-    <View>
-      <View style={styles.flecha}>
-        <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} />
+    <View style={styles.container}>
+      <View>
+        <View style={styles.flecha}>
+          <TouchableOpacity style={styles.exit}>
+            <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} color='#676767A6' />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.title}> Elige medio de pago </Text>
       </View>
-      <Text style={styles.title}> Elige medio de pago </Text>
       <View style={styles.medios}>
         <View style={styles.tipoPago}>
-        <CheckBox 
-        style={styles.check}
-        checked={mercadoPago}
-        checkedColor={'#FB6D3B'}
-        checkedIcon={"dot-circle-o"}
-        uncheckedIcon="circle-o"
-        onPress={() => {
-          setMercadoPago(!mercadoPago);
-          setEfectivo (false);
-          setRetiroLocal (false);
-        }}
-      />
-          <FontAwesomeIcon style={styles.icon} icon={faCircle} size={15} />
+          <CheckBox
+            style={styles.check}
+            checked={mercadoPago}
+            checkedColor='#FB6D3B'
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            onPress={() => {
+              setMercadoPago(!mercadoPago)
+              setEfectivo(false)
+              setRetiroLocal(false)
+            }}
+          />
+
           <Text style={styles.text}> Mercado Pago </Text>
-          <FontAwesomeIcon style={styles.icon} icon={faCreditCard} size={15} />
+          <Image style={styles.image} source={require('../../assets/mercadopago.png')} />
         </View>
         <View style={styles.tipoPago}>
-        <CheckBox
-        style={styles.check}
-        checkedColor={'#FB6D3B'}
-        checked={efectivo}
-        checkedIcon={"dot-circle-o"}
-        uncheckedIcon="circle-o"
-        onPress={() => {
-          setEfectivo(!efectivo);
-          setMercadoPago(false);
-          setRetiroLocal(false);
-        }}
-      />
-          <FontAwesomeIcon style={styles.icon} icon={faCircle} size={15} />
+          <CheckBox
+            style={styles.check}
+            checkedColor='#FB6D3B'
+            checked={efectivo}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            onPress={() => {
+              setEfectivo(!efectivo)
+              setMercadoPago(false)
+              setRetiroLocal(false)
+            }}
+          />
           <Text style={styles.text}> Efectivo </Text>
         </View>
         <View style={styles.tipoPago}>
-        <CheckBox
-        style={styles.check}
-        checkedColor={'#FB6D3B'}
-        checked={retiroLocal}
-        checkedIcon={"dot-circle-o"}
-        uncheckedIcon="circle-o"
-        onPress={() => {
-          setRetiroLocal(!retiroLocal);
-          setMercadoPago(false);
-          setEfectivo(false)
-        }}
-      />
-          <FontAwesomeIcon style={styles.icon} icon={faCircle} size={15} />
+          <CheckBox
+            style={styles.check}
+            checkedColor='#FB6D3B'
+            checked={retiroLocal}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            onPress={() => {
+              setRetiroLocal(!retiroLocal)
+              setMercadoPago(false)
+              setEfectivo(false)
+            }}
+          />
+
           <Text style={styles.text}> Retiro en el Local </Text>
         </View>
       </View>
       <View style={styles.total}>
         <Text style={styles.precio}> Total a Pagar</Text>
-        <Text style={styles.precio}> $1800</Text>
+        <Text style={styles.valor}> $1800</Text>
       </View>
-      <View style={styles.confirmar}>
-        <TouchableOpacity style={styles.registerButton}>
-          <Text style={styles.textConfirm} 
-           onPress={() => navigation.navigate('ViewConfirmation')}>Confirmar</Text>
+      <View style={styles.confirmarContainer}>
+        <TouchableOpacity>
+          <Button
+            title='Confirmar'
+            disabled={!mercadoPago && !efectivo && !retiroLocal}
+            onPress={confirmar}
+            containerStyle={styles.confirmarContainer}
+            buttonStyle={styles.confirmarButton}
+          />
+          <Text style={styles.confirmarText}> Confirmar </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -89,6 +99,15 @@ const MedioDePago = ({ navigation }) => {
   )
 }
 const styles = StyleSheet.create({
+  check: {
+    alignItems: 'center'
+  },
+  buttonTipoPago: {
+    flexDirection: 'row'
+  },
+  exit: {
+    flexDirection: 'row'
+  },
   flecha: {
     color: '#676767A6',
     marginLeft: 16,
@@ -99,6 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 70
+
   },
 
   tipoPago: {
@@ -107,43 +127,52 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     marginTop: 18,
     borderBottomWidth: 2,
-    borderBottomColor: '#FB6D3B'
+    borderBottomColor: '#FB6D3B',
+    alignItems: 'center',
+    textAlign: 'center'
+
   },
   medios: {
     marginLeft: 5,
     marginRight: 5
   },
   text: {
-    marginBottom: 18
+    marginBottom: 18,
+    color: '#00000080',
+    textAlign: 'center'
+
   },
   total: {
-    alignItems: 'center',
-    justifyContent: 'center',
+
     flexDirection: 'row',
     marginTop: 120,
     marginLeft: 18
   },
   precio: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold'
+    fontSize: 18,
+    fontWeight: '700',
+    marginRight: 180
   },
-  confirmar: {
-    alignItems: 'center',
-    justifyContent: 'center'
+  valor: {
+    fontSize: 18,
+    fontWeight: '800',
+    marginRight: 18
   },
+  confirmarContainer: {
+    alignItems: 'center'
 
-  registerButton: {
+  },
+  confirmarButton: {
     borderColor: 'gray',
-    width: 330,
-    height: 50,
+    width: 328,
+    height: 45,
     marginTop: 16,
     borderRadius: 20,
     backgroundColor: '#FB6D3B',
     alignItems: 'center',
     justifyContent: 'center'
   },
-  textConfirm: {
+  confirmarText: {
     color: '#FFFFFF'
   }
 
