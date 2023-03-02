@@ -1,7 +1,7 @@
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { useState } from 'react'
 
-const Car = () => {
+const Cart = () => {
   const [contador, setContador] = useState(1)
   const decrementar = () => {
     if (contador > 1) {
@@ -186,4 +186,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Car
+export default Cart
