@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft, faCircle, faCreditCard } from '@fortawesome/free-solid-svg-icons'
 
-const MedioDePago = () => {
+const MedioDePago = ({ navigation }) => {
   return (
     <View>
       <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} />
@@ -32,7 +32,7 @@ const MedioDePago = () => {
         <Text style={styles.total}>Total a pagar                                      $1800</Text>
       </View>
       <View>
-        <Text styel={styles.añadir}>Añadir</Text>
+        <Text style={styles.añadir} onPress={() => navigation.navigate('ViewConfirmation')}>Confirmar</Text>
       </View>
 
     </View>
