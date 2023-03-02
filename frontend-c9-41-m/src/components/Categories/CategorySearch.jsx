@@ -21,9 +21,10 @@ export default function CategorySearch ({ handleSearch }) {
             onBlur={handleBlur('search')}
             onSubmitEditing={handleSubmit}
             value={values.search}
+            placeholder='¿Qué estás buscando?'
           />
           <TouchableOpacity style={styles.searchIcon} onPress={handleSubmit}>
-            <FontAwesomeIcon icon={faSearch} size={24} color={Theme.colors.colorSecundario} />
+            <FontAwesomeIcon icon={faSearch} size={24} color='#bbb' />
           </TouchableOpacity>
         </View>
       )}
@@ -32,6 +33,9 @@ export default function CategorySearch ({ handleSearch }) {
 }
 const styles = StyleSheet.create({
   searchInput: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: Theme.colors.colorPrincipal,
     bottom: 2,
     width: '60%',
     marginRight: 55

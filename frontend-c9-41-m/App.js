@@ -4,12 +4,15 @@ import Login from './src/components/Login'
 import { Register } from './src/components/Register'
 import Home from './src/components/Home/Home'
 import Categories from './src/components/Categories'
-import MedioDePago from './src/components/MedioDePago'
+import Products from './src/components/Products'
 import { Favorites } from './src/components/Favorites/Favorites'
+import Cart from './src/components/Cart'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import NotFound from './src/components/NotFound'
+import Dishes from './src/components/Carousel/Dishes'
+import MedioDePago from './src/components/MedioDePago'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,7 +42,10 @@ export default function App () {
         <Stack.Screen name='Registro' component={Register} />
         <Stack.Screen name='Inicio' component={Home} />
         <Stack.Screen name='Carta' component={Categories} />
-        <Stack.Screen name='Carrito' component={MedioDePago} />
+        <Stack.Screen name='Productos' component={Products} />
+        <Stack.Screen name='Detalle' component={Dishes} />
+        <Stack.Screen name='Carrito' component={Cart} />
+        <Stack.Screen name='Medio de pago' component={MedioDePago} />
         <Stack.Screen name='Favoritos' component={Favorites} />
         <Stack.Screen name='Not Found' component={NotFound} options={{ headerShown: false }} />
       </Stack.Navigator>
