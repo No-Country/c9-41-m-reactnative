@@ -1,19 +1,11 @@
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { useState } from 'react'
+import Theme from '../../theme/Theme'
+import useCart from '../hooks/useCart'
+import NavBar from './Home/NavBar'
 
 const Cart = () => {
-  const [contador, setContador] = useState(1)
-  const decrementar = () => {
-    if (contador > 1) {
-      setContador(contador - 1)
-    }
-  }
-
-  const incrementar = () => {
-    setContador(contador + 1)
-  }
-  const Multiplier = 1800
-  const multipliedCount = contador * Multiplier
+  const { cart } = useCart()
+  console.log({ cart })
   return (
     <View style={styles.container}>
       <View style={styles.container_pedido}>
@@ -23,15 +15,13 @@ const Cart = () => {
         <Text style={styles.text_nombre}>Pastas de especialidades</Text>
         <Text style={styles.text_contenido}>Tallarines con salsa de carne o pollo + coca cola de 375 ml</Text>
         <View style={styles.container_contador}>
-          {/* precio */}
-          <Text style={styles.multiplied}>${multipliedCount}</Text>
-          {/* contador */}
+          <Text style={styles.multiplied}>$1800</Text>
           <View style={styles.container_counter}>
-            <TouchableOpacity style={styles.container_buttonminus} onPress={decrementar}>
+            <TouchableOpacity style={styles.container_buttonminus}>
               <Text style={{ fontSize: 20, fontWeight: 'bold' }}>-</Text>
             </TouchableOpacity>
-            <Text style={styles.container_button}>{contador}</Text>
-            <TouchableOpacity onPress={incrementar} style={styles.container_buttonplus}>
+            <Text style={styles.container_button}>1</Text>
+            <TouchableOpacity style={styles.container_buttonplus}>
               <Text style={{ fontSize: 20, fontWeight: 'bold' }}>+</Text>
             </TouchableOpacity>
           </View>
@@ -46,9 +36,10 @@ const Cart = () => {
           </View>
         </View>
         <TouchableOpacity style={styles.add}>
-          <Text style={{ fontSize: 16, fontWeight: 600 }}>Ir a pagar</Text>
+          <Text style={styles.goToPayText}>Ir a pagar</Text>
         </TouchableOpacity>
       </View>
+      <NavBar />
     </View>
   )
 }
@@ -59,21 +50,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 15,
-    marginTop: 50,
-    marginBottom: 30
-
+    justifyContent: 'center'
   },
   container_pedido: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 18
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    flexGrow: 1
   },
   text_pedidos: {
     fontSize: 16,
     fontWeight: 'bold'
-
   },
   text_nombre: {
     fontSize: 16,
@@ -159,10 +146,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#E9E9E9',
+    backgroundColor: Theme.colors.colorPrincipal,
     height: 50,
-    borderRadius: 10
-
+    borderRadius: 10,
+    width: 330
+  },
+  goToPayText: {
+    color: '#fff',
+    fontSize: 16,
+    fontFamily: Theme.fontWeights.regular
   },
   container_algomas: {
     marginTop: 50,
