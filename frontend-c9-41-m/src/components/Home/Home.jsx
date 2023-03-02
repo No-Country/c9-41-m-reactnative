@@ -12,7 +12,7 @@ export default function Home () {
   console.log(user)
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: 'hsla(0, 0%, 100%, 1)' }}>
         <Header />
         <Buscador />
         <OfertaSlider />

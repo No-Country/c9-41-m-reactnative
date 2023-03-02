@@ -1,40 +1,45 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCartShopping, faClipboard, faHeart, faHome } from '@fortawesome/free-solid-svg-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import Theme from '../../../theme/Theme'
 const NavBar = () => {
   const navigation = useNavigation()
+  const route = useRoute()
+  const isActive = (screenName) => {
+    return route.name === screenName
+  }
   return (
     <View style={styles.Container}>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.boton}>
-          <FontAwesomeIcon icon={faHome} size={34} />
-          <Text style={styles.inicio}>
+        <TouchableOpacity onPress={() => navigation.navigate('Inicio')} style={styles.button}>
+          <FontAwesomeIcon icon={faHome} size={24} style={isActive('Inicio') ? [styles.buttonText, styles.activeButton] : styles.buttonText} />
+          <Text style={isActive('Inicio') ? [styles.buttonText, styles.activeButton] : styles.buttonText}>
             Inicio
           </Text>
 
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('MediodePago')} style={styles.boton}>
-          <FontAwesomeIcon icon={faCartShopping} size={34} />
-          <Text style={styles.pedidos}>
+        <TouchableOpacity onPress={() => navigation.navigate('Carrito')} style={styles.button}>
+          <FontAwesomeIcon icon={faCartShopping} size={24} style={isActive('Carrito') ? [styles.buttonText, styles.activeButton] : styles.buttonText} />
+          <Text style={isActive('Carrito') ? [styles.buttonText, styles.activeButton] : styles.buttonText}>
             Pedidos
           </Text>
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('Categories')} style={styles.boton}>
-          <FontAwesomeIcon icon={faClipboard} size={34} />
-          <Text style={styles.carta}>
+        <TouchableOpacity onPress={() => navigation.navigate('Carta')} style={styles.button}>
+          <FontAwesomeIcon icon={faClipboard} size={24} style={isActive('Carta') ? [styles.buttonText, styles.activeButton] : styles.buttonText} />
+          <Text style={isActive('Carta') ? [styles.buttonText, styles.activeButton] : styles.buttonText}>
             Carta
           </Text>
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('Favorites')} style={styles.boton}>
-          <FontAwesomeIcon icon={faHeart} size={34} />
-          <Text style={styles.favoritos}>
+        <TouchableOpacity onPress={() => navigation.navigate('Favoritos')} style={styles.button}>
+          <FontAwesomeIcon icon={faHeart} size={24} style={isActive('Favoritos') ? [styles.buttonText, styles.activeButton] : styles.buttonText} />
+          <Text style={isActive('Favoritos') ? [styles.buttonText, styles.activeButton] : styles.buttonText}>
             Favoritos
           </Text>
         </TouchableOpacity>
@@ -45,36 +50,27 @@ const NavBar = () => {
 
 const styles = StyleSheet.create({
   Container: {
-    flex: 1,
+    backgroundColor: 'hsla(0, 0%, 100%, 1)',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 60,
-    paddingTop: 5,
-    marginLeft: -4,
-    width: '93%'
+    width: '100%',
+    paddingVertical: 4,
+    marginTop: 4
   },
-  boton: {
-    position: 'absolute'
+  button: {
+    alignItems: 'center'
   },
-  inicio: {
-    top: 5,
-    left: 3,
-    fontSize: 10
+  buttonText: {
+    fontFamily: Theme.fontWeights.regular,
+    color: '#BBB',
+    fontSize: 12
   },
-  pedidos: {
-    top: 5,
-    left: -3,
-    fontSize: 10
+  buttonIcon: {
+    fontFamily: Theme.fontWeights.regular,
+    color: '#BBB'
   },
-  carta: {
-    top: 5,
-    left: 1,
-    fontSize: 10
-  },
-  favoritos: {
-    top: 5,
-    left: -8,
-    fontSize: 10
+  activeButton: {
+    color: Theme.colors.colorPrincipal
   }
 })
 

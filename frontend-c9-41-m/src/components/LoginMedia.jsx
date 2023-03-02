@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { SvgUri } from 'react-native-svg'
 import Theme from '../../theme/Theme'
+
 export function LoginMedia ({ large }) {
   return (
     <View style={styles.buttonsContainer}>
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#555',
-    paddingLeft: 16
+    paddingLeft: 16,
+    fontFamily: Theme.fontWeights.regular
   }
 })

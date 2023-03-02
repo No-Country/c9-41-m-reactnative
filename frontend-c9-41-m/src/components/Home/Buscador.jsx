@@ -8,18 +8,20 @@ const Buscador = () => {
   const [text, onChangeText] = useState('¿Qué estás buscando?')
 
   return (
-    <View style={styles.InputContainer}>
+    <View style={styles.searchContainer}>
       <TextInput
-        style={styles.input}
+        style={styles.searchInput}
         onChangeText={onChangeText}
         value={text}
+        color={Theme.colors.colorSecundario}
       />
       <TouchableOpacity
-        style={styles.button}
+        style={styles.searchIcon}
       >
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
           size={24}
+          color={Theme.colors.colorSecundario}
         />
       </TouchableOpacity>
     </View>
@@ -27,26 +29,28 @@ const Buscador = () => {
 }
 
 const styles = StyleSheet.create({
-  input: {
+  searchInput: {
+    bottom: 2,
+    width: '60%',
+    marginRight: 55
+  },
+  searchContainer: {
+    backgroundColor: Theme.colors.colorTerciario,
     height: 45,
-    margin: 12,
-    borderWidth: 1,
+    margin: 20,
     padding: 10,
-    backgroundColor: Theme.colors.colorPrincipal,
-    borderRadius: 15,
-    width: '90%',
-    alignSelf: 'center'
-  },
-  InputContainer: {
+    borderRadius: 10,
+    borderColor: Theme.colors.colorPrincipal,
+    borderWidth: 2,
     position: 'relative',
-    width: '100%',
+    width: '90%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row-reverse'
   },
-  button: {
+  searchIcon: {
     position: 'absolute',
-    right: 35,
-    bottom: 16,
+    right: 5,
     padding: 8
   }
 })

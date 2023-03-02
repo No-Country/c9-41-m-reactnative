@@ -9,10 +9,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import NavBar from '../Home/NavBar'
+import Theme from '../../../theme/Theme'
 
 export const Favorites = (props) => {
   return (
-    <View styles={{ flex: 1 }}>
+    <View style={{ backgroundColor: 'hsla(0, 0%, 100%, 1)' }}>
       <ScrollView>
         <View>
           <Text style={styles.text}>Mis Favoritos</Text>
@@ -26,12 +27,13 @@ export const Favorites = (props) => {
                 />
               </TouchableOpacity>
               <View style={styles.container}>
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: 'https://www.recetaslamasia.es/wp-content/uploads/2012/10/foto_plato-equilibrado-scaled.jpg'
-                  }}
-                />
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={styles.image}
+                    source={require('../../../assets/carneroja.png')}
+                  />
+                </View>
+
                 <View style={styles.textContainer}>
                   <Text style={styles.title}>Carnes</Text>
                   <Text style={styles.description}>
@@ -64,8 +66,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   text: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    color: Theme.colors.colorLetras,
+    fontFamily: Theme.fontWeights.bold,
     marginLeft: 25,
     marginBottom: 5,
     marginTop: 10
@@ -77,8 +80,10 @@ const styles = StyleSheet.create({
     width: '90%'
   },
   title: {
-    fontSize: 14,
-    margin: 10
+    fontFamily: Theme.fontWeights.bold,
+    color: Theme.colors.colorLetras,
+    fontSize: 15,
+    margin: 15
   },
   heart: {
     alignSelf: 'flex-end',
@@ -87,14 +92,23 @@ const styles = StyleSheet.create({
     right: 7
   },
   description: {
+    fontFamily: Theme.fontWeights.regular,
     fontSize: 12,
-    margin: 5,
+    margin: 15,
+    marginTop: -15,
     width: '60%'
   },
   image: {
-    width: 80,
-    height: 80,
-    margin: 10
+    width: 60,
+    height: 60,
+    margin: 5
+  },
+  imageContainer: {
+    borderRadius: 10,
+    backgroundColor: Theme.colors.colorPrincipal,
+    width: 70,
+    height: 70,
+    marginTop: 10
   },
   line: {
     position: 'absolute',

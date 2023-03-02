@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "frontend-c9-41-m",
-    "slug": "frontend-c9-41-m",
+    "name": "El Buen Gusto",
+    "slug": "El Buen Gusto",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/elbuengusto.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/elbuengusto.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "hsla(0, 0%, 100%, 1)"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/elbuengusto.png",
+        "backgroundColor": "hsla(0, 0%, 100%, 1)"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/elbuengusto.png"
     }
   }
 }

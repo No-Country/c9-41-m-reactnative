@@ -1,23 +1,17 @@
+
 const Theme = {
-  fonts: {
-    titulo: 'Nunito',
-    subtitulo: 'Nunito',
-    botones: 'Nunito'
-  },
+
   fontWeights: {
-    little: 200,
-    regular: 300,
-    normal: 400,
-    medium: 500,
-    semibold: 600,
-    bold: 700,
-    extrabold: 800
+    regular: 'Nunito-Regular',
+    bold: 'Nunito-Bold',
+    extrabold: 'Nunito-ExtraBold'
   },
   colors: {
-    colorPrincipal: '#FB6D3B',
-    colorSecundario: '#676767 36%',
-    colorTerciario: '#FDFDFD',
-    colorLetras: '#000000'
+    colorPrincipal: 'hsla(16, 96%, 61%, 1)',
+    colorSecundario: 'hsla(0, 0%, 40%, 0.36)',
+    colorTerciario: 'hsla(0, 0%, 99%, 1)',
+    colorLetras: 'hsla(0, 0%, 0%, 0.61)'
   }
 }
+
 export default Theme

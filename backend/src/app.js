@@ -10,6 +10,7 @@ import MongoStore from "connect-mongo";
 // PASSPORT
 import passport from "passport";
 import LocalStrategy from "passport-local";
+import "./auth/auth.js";
 
 // MODELOS
 import User from "./db/models/user.js";
@@ -33,7 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: [`${process.env.PATH_FRONT}`, `${process.env.PATH_FRONT_ADMIN}`], //URL DEL FRONT!!
+    origin: [
+      `${process.env.PATH_FRONT}`,
+      `${process.env.PATH_FRONT_ADMIN}`,
+      `http://localhost:3000`,
+    ], //URL DEL FRONT!!
     credentials: true,
     methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
   })
@@ -48,21 +53,26 @@ app.use((req, res, next) => {
 });
 
 // SESSION
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl: DB_URI,
-    }),
-    secret: `${SESSION_SECRET}`,
-    resave: false,
-    saveUninitialized: true,
-    name: "sessionNoCountry",
-    cookie: {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  })
-);
+
+const sessionConfig = {
+  store: MongoStore.create({
+    mongoUrl: DB_URI,
+  }),
+  secret: `${SESSION_SECRET}`,
+  name: "sessionNoCountry",
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    sameSite: "none", // THIS is the config you are looing for.
+  },
+};
+
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1); // trust first proxy
+  sessionConfig.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sessionConfig));
 
 // PASSPORT
 app.use(passport.initialize());
@@ -72,6 +82,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Rutas
+app.use((req, res, next) => {
+  console.log("req.session", req.session.passport);
+  next();
+});
 app.use("/auth", authRoutes);
 app.use("/categories", categoryRouter);
 app.use("/products", productsRouter);
