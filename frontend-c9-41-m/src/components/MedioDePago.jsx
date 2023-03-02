@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft, faCircle, faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import { useNavigation } from '@react-navigation/native'
 
-const MedioDePago = ({ navigation }) => {
+const MedioDePago = () => {
+  const navigation = useNavigation()
   return (
     <View>
       <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} />
