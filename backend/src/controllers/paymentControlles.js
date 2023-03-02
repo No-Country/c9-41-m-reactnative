@@ -5,6 +5,9 @@ import Order from "../db/models/order.js";
 import OrderItem from "../db/models/orderItem.js";
 import CartItem from "../db/models/cartItem.js";
 import Product from "../db/models/product.js";
+import { respuestaPago } from "../../utils/email.js";
+
+const { ACCESS_TOKEN_MP } = process.env;
 
 export const convertirCarritoEnOrden = wrapAsync(async (req, res, next) => {
   const cart = await User.getCart(req.user._id);
@@ -93,10 +96,59 @@ export const convertirCarritoEnOrden = wrapAsync(async (req, res, next) => {
   req.user.cart = [];
   req.user.orders.push(order._id);
   await req.user.save();
-  return res.status(200).json({ message: "todo bien" });
+  // return res.status(200).json({ message: "todo bien" });
 
-  // req.body.productos = productoParaReq;
-  // req.body.idOrder = order.id;
+  req.body.productos = productoParaReq;
+  req.body.idOrder = order._id;
 
-  // next();
+  next();
 });
+
+export async function cambiarEstadoPagoOrden(body) {
+  const infoPago = await axios.get(
+    "https://api.mercadopago.com/v1/payments/" + body.data.id,
+    {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN_MP}`,
+      },
+    }
+  );
+
+  if (
+    infoPago.data.status === "approved" ||
+    infoPago.data.status === "cancel"
+  ) {
+    if (infoPago.data.status === "cancel") {
+      const orden = await Order.findOne({
+        _id: parseInt(infoPago.data.external_reference),
+      }).populate({
+        path: "orderItems",
+        populate: {
+          path: "productId",
+          model: "Product",
+        },
+      });
+      if (!orden) {
+        console.log("error con numero de orden");
+        return res.status(400).send("Problema con el numero de orden");
+      }
+      // if (orden.paymentStatus === "pending") {
+      //   for (const itemOrden of orden.orderItems) {
+      //     await Stock.increment("quantity", {
+      //       by: parseInt(itemOrden.quantity),
+      //       where: { id: itemOrden.Stock.id },
+      //     });
+      //   }
+      // }
+    }
+    await Order.findByIdAndUpdate(parseInt(infoPago.data.external_reference), {
+      paymentStatus: infoPago.data.status,
+      // , paymentId: body.data.id
+    });
+    if (infoPago.data.status === "approved") {
+      respuestaPago(infoPago.data.external_reference, "approved");
+    } else {
+      respuestaPago(infoPago.data.external_reference, "cancel");
+    }
+  }
+}
