@@ -82,10 +82,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Rutas
-app.use((req, res, next) => {
-  console.log("req.session", req.session.passport);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log("req.session", req.session.passport);
+//   next();
+// });
 app.use("/auth", authRoutes);
 app.use("/categories", categoryRouter);
 app.use("/products", productsRouter);

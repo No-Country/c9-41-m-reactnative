@@ -24,6 +24,16 @@
   margin: 5% 0;
 }
 
+.contenedorImagen {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .boton {
   background-color: red;
   width: fit-content;
@@ -31,4 +41,11 @@
 
 .boton:hover {
   background-color: rgb(184, 32, 32);
+}
+
+.loadingBoton {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

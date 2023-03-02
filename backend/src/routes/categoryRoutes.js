@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { verificateAdminRole } from "../auth/authMiddlewares.js";
+import { upload } from "../cloudinary/cloudinary.js";
 
 import {
   getCategories,
@@ -14,8 +15,8 @@ const categoryRouter = Router();
 categoryRouter
   .route("/")
   .get(getCategories)
-  .post(verificateAdminRole, createCategory)
-  .put(verificateAdminRole, modifyCategory)
+  .post(verificateAdminRole, upload.array("image", 1), createCategory)
+  .put(verificateAdminRole, upload.array("image", 1), modifyCategory)
   .delete(verificateAdminRole, deleteCategory);
 
 export default categoryRouter;

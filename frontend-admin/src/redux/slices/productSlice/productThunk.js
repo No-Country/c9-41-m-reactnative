@@ -70,7 +70,6 @@ export function createProduct(producto) {
       });
       return;
     } catch (error) {
-      console.log("error: ", error);
       throw new Error(error);
     }
   };
@@ -101,7 +100,6 @@ export function modifyProduct(product) {
         data: product,
         url: "/products",
       });
-      console.log(res.data);
       return dispatch(setModifyProduct(res.data.product));
     } catch (error) {
       // alert("Hubo un problema al modificar el producto");
@@ -154,7 +152,6 @@ export function modifyCategory(cat) {
       });
       return dispatch(setModifyCategory(res.data.category));
     } catch (error) {
-      console.log("error", error);
       alert("Hubo un problema al modificar la categoria");
     }
   };

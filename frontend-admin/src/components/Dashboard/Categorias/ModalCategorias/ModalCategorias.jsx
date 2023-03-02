@@ -8,16 +8,28 @@ import {
   createCategory,
   modifyCategory,
 } from "../../../../redux/slices/productSlice/productThunk";
+import ImagenCrearCategoria from "./ImagenCrearCategoria/ImagenCrearCategoria";
+import ImagenModificarCategoria from "./ImagenModificarCategoria/ImagenModificarCategoria";
+import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 function ModalCategorias({ categoria, setModal }) {
   const dispatch = useDispatch();
+  const [cargando, setCargando] = useState(false);
+
+  const [imagen, setImagen] = useState(categoria.image ? categoria.image : {});
+
+  const [nombreImagen, setNombreImagen] = useState(
+    categoria.image?.url ? categoria.image?.url : ""
+  );
+  const [imagenABorrar, setImagenABorrar] = useState("");
 
   function handleClickCerrar(e) {
     if (e.target.id === "cerrar" || e.target.id === "botonCerrar") {
       if (
         window.confirm(
           `Cancelar ${
-            categoria.nombre ? "modificación" : "creación"
+            categoria.name ? "modificación" : "creación"
           } de categoria?`
         )
       ) {
@@ -35,14 +47,25 @@ function ModalCategorias({ categoria, setModal }) {
   });
 
   async function onSubmit(e) {
+    if (cargando) return;
     if (
       window.confirm(
         `Confirma ${categoria.name ? "modificar" : "crear"} categoria`
       )
     ) {
-      categoria.name
-        ? await dispatch(modifyCategory({ id: categoria._id, name: e.name }))
-        : await dispatch(createCategory(e));
+      const formData = new FormData();
+      formData.append("name", e.name);
+      if (imagen instanceof Blob) formData.append("image", imagen);
+      setCargando(true);
+      if (categoria.name) {
+        formData.append("id", categoria._id);
+        if (imagenABorrar.length)
+          formData.append("imageToDelete", imagenABorrar);
+        await dispatch(modifyCategory(formData));
+      } else {
+        await dispatch(createCategory(formData));
+      }
+      setCargando(false);
       alert(`Categoria ${categoria.name ? "modificada" : "creada"}`);
       setModal(false);
     }
@@ -65,7 +88,7 @@ function ModalCategorias({ categoria, setModal }) {
       <div className={s.contenedorForm}>
         <form onSubmit={handleSubmit}>
           <div className={s.tituloCategoria}>{`${
-            categoria.nombre ? "Modificación categoria" : "Creación categoria"
+            categoria.name ? "Modificación categoria" : "Creación categoria"
           }`}</div>
           <InputFormulario
             placeholder="Máximo 20 carácteres"
@@ -81,12 +104,35 @@ function ModalCategorias({ categoria, setModal }) {
             id={"name"}
             label={"Nombre"}
           />
+          <div className={s.contenedorImagen}>
+            <div>Seleccionar imagen</div>
+            {categoria.name ? (
+              <ImagenModificarCategoria
+                imagen={imagen}
+                setImagen={setImagen}
+                nombreImagen={nombreImagen}
+                setNombreImagen={setNombreImagen}
+                setImagenABorrar={setImagenABorrar}
+              />
+            ) : (
+              <ImagenCrearCategoria
+                imagen={imagen}
+                setImagen={setImagen}
+                nombreImagen={nombreImagen}
+                setNombreImagen={setNombreImagen}
+              />
+            )}
+          </div>
 
           <Button
             type="submit"
-            text={`${
-              categoria.name ? "Modificar categoria" : "Crear categoria"
-            }`}
+            text={
+              cargando ? (
+                <ClipLoader />
+              ) : (
+                `${categoria.name ? "Modificar categoria" : "Crear categoria"}`
+              )
+            }
           />
         </form>
         <Button

@@ -23,7 +23,6 @@ function Productos({}) {
   const { products } = useSelector((e) => e.products);
 
  async function handleDeleteProduct(productId) {
-    console.log("productId", productId);
     if (window.confirm("Seguro desea eliminar el producto?")) {
       setLoading(true);
       await dispatch(deleteProduct(productId));

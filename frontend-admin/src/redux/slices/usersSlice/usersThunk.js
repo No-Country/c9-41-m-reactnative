@@ -70,7 +70,6 @@ export function getUserDetails(userId) {
         withCredentials: true,
         url: "/admin/user/" + userId,
       });
-      console.log(data);
       return dispatch(setUserDetails(data.userDetails));
     } catch (error) {
       alert("Hubo un problema al obtener los datos de usuario");

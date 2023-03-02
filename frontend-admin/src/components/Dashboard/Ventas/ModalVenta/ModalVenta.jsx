@@ -13,7 +13,6 @@ function ModalVenta({ venta, setVenta }) {
 
   useEffect(() => {
     (async () => {
-      console.log("hola");
       setCargandoProducto(true);
       await dispatch(getSaleDetails(venta._id));
       setCargandoProducto(false);

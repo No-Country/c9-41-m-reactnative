@@ -49,7 +49,7 @@ export function refreshUser() {
       });
       dispatch(setUser(usuario.data.user));
     } catch (error) {
-      console.log("error", error);
+      console.log("refreshUser", error);
     }
   };
 }

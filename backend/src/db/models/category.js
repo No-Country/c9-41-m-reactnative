@@ -10,6 +10,10 @@ const categorySchema = new mongoose.Schema(
       unique: true,
       required: "A name is required",
     },
+    image: {
+      url: { type: String },
+      name: { type: String },
+    },
   },
   {
     timestamps: true,
