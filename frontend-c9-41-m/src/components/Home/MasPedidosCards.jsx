@@ -28,13 +28,10 @@ export const MasPedidosCards = (props) => {
             <Text style={styles.price}>$1800</Text>
             <View style={styles.review}>
               <TouchableOpacity>
-                <FontAwesomeIcon style={styles.star} icon={faStar} size={14} />
+                <FontAwesomeIcon style={styles.star} icon={faStar} size={18} />
               </TouchableOpacity>
               <Text style={styles.point}>4.7</Text>
             </View>
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.añadir}>Añadir</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -59,40 +56,27 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 1
   },
-  btn: {
-    borderRadius: 15,
-    backgroundColor: Theme.colors.colorPrincipal,
-    width: '70%',
-    height: 20,
-    alignSelf: 'center',
-    marginBottom: 10
-  },
-  añadir: {
-    fontSize: 8,
-    color: Theme.colors.colorTerciario,
-    fontFamily: Theme.fontWeights.bold,
-    alignSelf: 'center',
-    marginTop: 3
-  },
   title: {
-    fontSize: 9,
+    fontSize: 14,
     color: Theme.colors.colorLetras,
     fontFamily: Theme.fontWeights.bold,
     alignSelf: 'center',
     marginTop: 6
   },
   price: {
-    fontSize: 10,
+    fontSize: 12,
     color: Theme.colors.colorLetras,
     fontFamily: Theme.fontWeights.bold,
     margin: 5,
-    marginLeft: 10
+    marginLeft: 10,
+    verticalAlign: 'flex-start',
+    position: 'absolute'
   },
   heart: {
     color: Theme.colors.colorPrincipal,
     alignSelf: 'flex-end',
     position: 'absolute',
-    top: 10,
+    top: 30,
     right: 7
   },
   star: {
@@ -101,8 +85,9 @@ const styles = StyleSheet.create({
   point: {
     color: Theme.colors.colorLetras,
     fontFamily: Theme.fontWeights.bold,
-    fontSize: 8,
-    marginLeft: 4
+    fontSize: 10,
+    marginLeft: 4,
+    marginTop: 2
   },
   review: {
     flexDirection: 'row',
