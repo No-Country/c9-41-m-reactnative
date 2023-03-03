@@ -28,7 +28,7 @@ export default function Address () {
           city: address?.city || '',
           zipCode: address?.zipCode || '',
           province: address?.province || '',
-          number: address?.number || ''
+          number: String(address?.number) || ''
         }}
         validationSchema={Yup.object({
           street: Yup.string()
@@ -50,7 +50,7 @@ export default function Address () {
               .finally(() => setSubmitting(false))
           } else {
             addAddress({ ...values, userId: user.id })
-              .then(() => { navigation.navigate('Medio de pago', { total, update: true }) })
+              .then(() => { navigation.navigate('Medio de pago', { total }) })
               .finally(() => setSubmitting(false))
           }
         }}

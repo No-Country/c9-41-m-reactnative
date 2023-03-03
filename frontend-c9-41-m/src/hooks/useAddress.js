@@ -12,8 +12,15 @@ const useAddress = () => {
       })
       .finally(() => { isLoading(false) })
   }, [])
-
-  return { address: addresses[0], loadingAddress: loading }
+  const updateAddress = () => {
+    isLoading(true)
+    getAddresses()
+      .then((data) => {
+        setAddresses(data.addresses)
+      })
+      .finally(() => { isLoading(false) })
+  }
+  return { address: addresses[0], loadingAddress: loading, updateAddress }
 }
 
 export default useAddress

@@ -11,7 +11,6 @@ const MedioDePago = ({ route }) => {
   const [mercadoPago, setMercadoPago] = useState(false)
   const [efectivo, setEfectivo] = useState(false)
   const [retiroLocal, setRetiroLocal] = useState(false)
-
   const confirmar = () => {
     if (mercadoPago) {
       navigation.navigate('ConfirmationView')
