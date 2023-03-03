@@ -11,7 +11,7 @@ export default function Home () {
   const { user } = useLogin()
   console.log(user)
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingTop: 20 }}>
       <ScrollView style={{ backgroundColor: 'hsla(0, 0%, 100%, 1)' }}>
         <Header />
         <Buscador />
