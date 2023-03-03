@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { CheckBox, Button } from 'react-native-elements'
 import { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
-const MedioDePago = ({ navigation }) => {
+const MedioDePago = ({ route }) => {
+  const { total } = route.params
+  const navigation = useNavigation()
   const [mercadoPago, setMercadoPago] = useState(false)
   const [efectivo, setEfectivo] = useState(false)
   const [retiroLocal, setRetiroLocal] = useState(false)
@@ -21,11 +22,6 @@ const MedioDePago = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View>
-        <View style={styles.flecha}>
-          <TouchableOpacity style={styles.exit}>
-            <FontAwesomeIcon style={styles.icon} icon={faArrowLeft} size={24} color='#676767A6' />
-          </TouchableOpacity>
-        </View>
         <Text style={styles.title}> Elige medio de pago </Text>
       </View>
       <View style={styles.medios}>
@@ -80,7 +76,7 @@ const MedioDePago = ({ navigation }) => {
       </View>
       <View style={styles.total}>
         <Text style={styles.precio}> Total a Pagar</Text>
-        <Text style={styles.valor}> $1800</Text>
+        <Text style={styles.valor}> ${total}</Text>
       </View>
       <View style={styles.confirmarContainer}>
         <TouchableOpacity>
@@ -99,6 +95,10 @@ const MedioDePago = ({ navigation }) => {
   )
 }
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
   check: {
     alignItems: 'center'
   },
@@ -108,16 +108,11 @@ const styles = StyleSheet.create({
   exit: {
     flexDirection: 'row'
   },
-  flecha: {
-    color: '#676767A6',
-    marginLeft: 16,
-    marginTop: 32
-  },
   title: {
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 70
+    marginVertical: 35
 
   },
 
@@ -143,9 +138,8 @@ const styles = StyleSheet.create({
 
   },
   total: {
-
     flexDirection: 'row',
-    marginTop: 120,
+    marginTop: 80,
     marginLeft: 18
   },
   precio: {

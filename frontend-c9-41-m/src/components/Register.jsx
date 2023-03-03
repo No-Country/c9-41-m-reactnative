@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40
   },
   input: {
+    fontFamily: Theme.fontWeights.regular,
     width: '90%',
     height: 36,
     margin: 12,
@@ -171,13 +172,16 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   buttonText: {
+    fontFamily: Theme.fontWeights.regular,
     textAlign: 'center',
     color: '#fff'
   },
   text: {
+    fontFamily: Theme.fontWeights.regular,
     color: '#888'
   },
   terms: {
+    fontFamily: Theme.fontWeights.regular,
     color: '#888',
     fontSize: 10,
     alignSelf: 'flex-start',

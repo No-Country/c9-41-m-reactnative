@@ -50,6 +50,7 @@ const NavBar = () => {
 
 const styles = StyleSheet.create({
   Container: {
+    backgroundColor: 'hsla(0, 0%, 100%, 1)',
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
@@ -60,10 +61,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonText: {
+    fontFamily: Theme.fontWeights.regular,
     color: '#BBB',
     fontSize: 12
   },
   buttonIcon: {
+    fontFamily: Theme.fontWeights.regular,
     color: '#BBB'
   },
   activeButton: {

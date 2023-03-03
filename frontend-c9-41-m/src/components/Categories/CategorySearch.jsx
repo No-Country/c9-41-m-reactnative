@@ -2,6 +2,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { Formik } from 'formik'
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
+import Theme from '../../../theme/Theme'
 
 export default function CategorySearch ({ handleSearch }) {
   return (
@@ -20,9 +21,10 @@ export default function CategorySearch ({ handleSearch }) {
             onBlur={handleBlur('search')}
             onSubmitEditing={handleSubmit}
             value={values.search}
+            placeholder='¿Qué estás buscando?'
           />
           <TouchableOpacity style={styles.searchIcon} onPress={handleSubmit}>
-            <FontAwesomeIcon icon={faSearch} size={24} color='#999' />
+            <FontAwesomeIcon icon={faSearch} size={24} color='#bbb' />
           </TouchableOpacity>
         </View>
       )}
@@ -30,23 +32,31 @@ export default function CategorySearch ({ handleSearch }) {
   )
 }
 const styles = StyleSheet.create({
-  searchContainer: {
-    width: '100%',
-    marginVertical: 16,
-    alignItems: 'center',
-    position: 'relative'
-  },
   searchInput: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#fff',
+    bottom: 2,
     width: '90%',
-    height: 48,
-    borderRadius: 12,
-    paddingLeft: 8,
-    paddingRight: 40
+    height: 36,
+    borderRadius: 10,
+    marginLeft: 55
+  },
+  searchContainer: {
+    backgroundColor: Theme.colors.colorTerciario,
+    height: 45,
+    margin: 20,
+    padding: 10,
+    borderRadius: 10,
+    borderColor: Theme.colors.colorPrincipal,
+    borderWidth: 2,
+    position: 'relative',
+    width: '90%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row-reverse'
   },
   searchIcon: {
     position: 'absolute',
-    right: '4%',
+    right: '1%',
     padding: 12
   }
 })
