@@ -13,7 +13,8 @@ import { useFonts } from 'expo-font'
 import NotFound from './src/components/NotFound'
 import Dishes from './src/components/Carousel/Dishes'
 import MedioDePago from './src/components/MedioDePago'
-import ViewConfirmation from './src/components/ViewConfirmation'
+import ConfirmationView from './src/components/ConfirmationView'
+import Address from './src/components/Address'
 
 const Stack = createNativeStackNavigator()
 
@@ -46,7 +47,8 @@ export default function App () {
         <Stack.Screen name='Detalle' component={Dishes} />
         <Stack.Screen name='Carrito' component={Cart} />
         <Stack.Screen name='Medio de pago' component={MedioDePago} />
-        <Stack.Screen name='ViewConfirmation' component={ViewConfirmation} />
+        <Stack.Screen name='ConfirmationView' component={ConfirmationView} options={{ headerShown: false }} />
+        <Stack.Screen name='Dirección' component={Address} />
         <Stack.Screen name='Favoritos' component={Favorites} />
         <Stack.Screen name='Not Found' component={NotFound} options={{ headerShown: false }} />
       </Stack.Navigator>
