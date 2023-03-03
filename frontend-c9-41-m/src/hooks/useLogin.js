@@ -11,10 +11,11 @@ const useLogin = () => {
   useEffect(() => {
     getToken()
       .then(token => {
-        console.log({ token })
         if (token) {
           getUserProfile()
-            .then(setUser)
+            .then((data) => {
+              setUser(data.user)
+            })
         }
       })
   }, [])
