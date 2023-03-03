@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "El Buen Gusto",
-    "slug": "El Buen Gusto",
+    "slug": "el-buen-gusto",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/elbuengusto.png",
@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/elbuengusto.png",
         "backgroundColor": "hsla(0, 0%, 100%, 1)"
-      }
+      },
+      "package": "com.c941m.elbuengusto"
     },
     "web": {
       "favicon": "./assets/elbuengusto.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a944a8d5-8ad7-4c05-b18e-a32adf14b046"
+      }
     }
   }
 }
