@@ -2,10 +2,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { CheckBox, Button } from 'react-native-elements'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import useAddress from '../hooks/useAddress'
 
 const MedioDePago = ({ route }) => {
   const { total } = route.params
   const navigation = useNavigation()
+  const { address, loadingAddress } = useAddress()
   const [mercadoPago, setMercadoPago] = useState(false)
   const [efectivo, setEfectivo] = useState(false)
   const [retiroLocal, setRetiroLocal] = useState(false)
@@ -42,6 +44,17 @@ const MedioDePago = ({ route }) => {
           <Text style={styles.text}> Mercado Pago </Text>
           <Image style={styles.image} source={require('../../assets/mercadopago.png')} />
         </View>
+        <View style={styles.addressContainer}>
+          {mercadoPago && address && <Text>{address.street.toUpperCase()} - {address.number}</Text>}
+          {mercadoPago && address &&
+            <TouchableOpacity onPress={() => { navigation.navigate('Dirección') }}>
+              <Text style={styles.addressAnchor}>O cambia tu dirección</Text>
+            </TouchableOpacity>}
+          {mercadoPago && !address && !loadingAddress &&
+            <TouchableOpacity onPress={() => { navigation.navigate('Dirección') }}>
+              <Text style={styles.addressAnchor}>Antes de continuar agrega una dirección</Text>
+            </TouchableOpacity>}
+        </View>
         <View style={styles.tipoPago}>
           <CheckBox
             style={styles.check}
@@ -56,6 +69,17 @@ const MedioDePago = ({ route }) => {
             }}
           />
           <Text style={styles.text}> Efectivo </Text>
+        </View>
+        <View style={styles.addressContainer}>
+          {efectivo && address && <Text>{address.street.toUpperCase()} - {address.number}</Text>}
+          {efectivo && address &&
+            <TouchableOpacity onPress={() => { navigation.navigate('Dirección') }}>
+              <Text style={styles.addressAnchor}>O cambia tu dirección</Text>
+            </TouchableOpacity>}
+          {efectivo && !address && !loadingAddress &&
+            <TouchableOpacity onPress={() => { navigation.navigate('Dirección') }}>
+              <Text style={styles.addressAnchor}>Antes de continuar agrega una dirección</Text>
+            </TouchableOpacity>}
         </View>
         <View style={styles.tipoPago}>
           <CheckBox
@@ -82,7 +106,7 @@ const MedioDePago = ({ route }) => {
         <TouchableOpacity>
           <Button
             title='Confirmar'
-            disabled={!mercadoPago && !efectivo && !retiroLocal}
+            disabled={(!mercadoPago || !address) && (!efectivo || !address) && !retiroLocal}
             onPress={confirmar}
             containerStyle={styles.confirmarContainer}
             buttonStyle={styles.confirmarButton}
@@ -115,12 +139,17 @@ const styles = StyleSheet.create({
     marginVertical: 35
 
   },
-
+  addressContainer: {
+    paddingHorizontal: 16
+  },
+  addressAnchor: {
+    color: '#09f',
+    textDecorationLine: 'underline'
+  },
   tipoPago: {
     flexDirection: 'row',
-    margin: 52,
-    marginLeft: 18,
-    marginTop: 18,
+    margin: 16,
+    marginTop: 24,
     borderBottomWidth: 2,
     borderBottomColor: '#FB6D3B',
     alignItems: 'center',
