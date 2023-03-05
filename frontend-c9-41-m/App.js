@@ -40,7 +40,14 @@ export default function App () {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='Registro' component={Register} />
+        <Stack.Screen
+          name='Registro' component={Register} options={{
+            headerStyle: {
+              backgroundColor: 'hsla(16, 96%, 61%, 1)'
+            },
+            headerTintColor: '#fff'
+          }}
+        />
         <Stack.Screen name='Inicio' component={Home} options={{ headerShown: false }} />
         <Stack.Screen name='Carta' component={Categories} />
         <Stack.Screen name='Productos' component={Products} />
