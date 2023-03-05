@@ -13,8 +13,8 @@ import Theme from '../../../theme/Theme'
 
 export const Favorites = (props) => {
   return (
-    <View style={{ backgroundColor: 'hsla(0, 0%, 100%, 1)' }}>
-      <ScrollView>
+    <View style={styles.componentContainer}>
+      <ScrollView style={styles.favoritesContainer}>
         <View>
           <Text style={styles.text}>Mis Favoritos</Text>
           <View>
@@ -64,6 +64,13 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flexDirection: 'column'
+  },
+  componentContainer: {
+    flex: 1,
+    backgroundColor: 'hsla(0, 0%, 100%, 1)'
+  },
+  favoritesContainer: {
+    flexGrow: 1
   },
   text: {
     fontSize: 16,
